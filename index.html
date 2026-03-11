@@ -36,22 +36,14 @@
     flex-shrink: 0;
     z-index: 100;
   }
-  .topbar-logo {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--white);
-    letter-spacing: 1px;
-  }
+  .topbar-logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 1px; }
   .topbar-logo span { font-weight: 300; }
   .topbar-spacer { flex: 1; }
   .topbar-icon {
-    width: 32px; height: 32px;
-    border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background: rgba(255,255,255,.18);
     display: flex; align-items: center; justify-content: center;
-    color: var(--white);
-    font-size: 16px;
-    cursor: pointer;
+    color: var(--white); font-size: 16px; cursor: pointer;
   }
 
   /* ── LAYOUT ──────────────────────────────── */
@@ -62,21 +54,11 @@
     width: var(--sidebar-w);
     background: #1A1A2E;
     color: #B0BEC5;
-    display: flex;
-    flex-direction: column;
-    padding: 16px 0;
-    flex-shrink: 0;
-    overflow-y: auto;
+    display: flex; flex-direction: column;
+    padding: 16px 0; flex-shrink: 0; overflow-y: auto;
   }
   .sidebar-section { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: #546E7A; padding: 12px 20px 4px; }
-  .sidebar-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background .15s;
-    border-left: 3px solid transparent;
-  }
+  .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 13px; cursor: pointer; transition: background .15s; border-left: 3px solid transparent; }
   .sidebar-item:hover { background: rgba(255,255,255,.06); }
   .sidebar-item.active { background: rgba(211,47,47,.18); border-left-color: var(--red); color: var(--white); }
   .sidebar-item .si { font-size: 16px; }
@@ -84,40 +66,22 @@
   /* ── MAIN CONTENT ────────────────────────── */
   .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-  /* breadcrumb */
   .breadcrumb {
-    padding: 10px 24px;
-    font-size: 12px;
-    color: var(--grey-txt);
-    background: var(--white);
-    border-bottom: 1px solid var(--grey-bdr);
-    flex-shrink: 0;
+    padding: 10px 24px; font-size: 12px; color: var(--grey-txt);
+    background: var(--white); border-bottom: 1px solid var(--grey-bdr); flex-shrink: 0;
   }
   .breadcrumb a { color: var(--blue); text-decoration: none; }
   .breadcrumb a:hover { text-decoration: underline; }
   .breadcrumb span { margin: 0 6px; }
 
-  /* machine header */
-  .machine-header {
-    background: var(--white);
-    padding: 16px 24px 0;
-    border-bottom: 1px solid var(--grey-bdr);
-    flex-shrink: 0;
-  }
+  /* ── MACHINE HEADER ──────────────────────── */
+  .machine-header { background: var(--white); padding: 16px 24px 0; border-bottom: 1px solid var(--grey-bdr); flex-shrink: 0; }
   .machine-header-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
-  .machine-icon {
-    width: 44px; height: 44px; border-radius: 8px;
-    background: var(--red);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--white); font-size: 22px; flex-shrink: 0;
-  }
+  .machine-icon { width: 44px; height: 44px; border-radius: 8px; background: var(--red); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 22px; flex-shrink: 0; }
   .machine-title { font-size: 20px; font-weight: 700; }
-  .machine-sub { font-size: 13px; color: var(--grey-txt); margin-top: 2px; }
-  .machine-badges { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600;
-  }
+  .machine-sub { font-size: 12px; color: var(--grey-txt); margin-top: 3px; }
+  .machine-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
   .badge-green  { background: #E8F5E9; color: var(--green); }
   .badge-grey   { background: #EEEEEE; color: #616161; }
   .badge-blue   { background: #E3F2FD; color: var(--blue); }
@@ -125,55 +89,32 @@
   .badge-amber  { background: #FFF3E0; color: var(--amber); }
   .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
   .dot-green { background: var(--green); }
-  .dot-grey  { background: #9E9E9E; }
-  .dot-red   { background: var(--red); }
-  .machine-header-right { margin-left: auto; display: flex; gap: 8px; align-items: flex-start; }
+  .machine-header-right { margin-left: auto; display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
 
   /* ── TAB NAV ─────────────────────────────── */
-  .tab-nav {
-    display: flex;
-    gap: 0;
-    padding: 0 24px;
-    overflow-x: auto;
-  }
+  .tab-nav { display: flex; gap: 0; padding: 0 24px; overflow-x: auto; }
   .tab-nav::-webkit-scrollbar { display: none; }
   .tab-btn {
-    padding: 10px 16px;
-    font-size: 13px;
-    font-family: var(--font);
-    font-weight: 500;
-    color: var(--grey-txt);
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    white-space: nowrap;
+    padding: 10px 16px; font-size: 13px; font-family: var(--font); font-weight: 500;
+    color: var(--grey-txt); background: none; border: none;
+    border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap;
     transition: color .15s, border-color .15s;
   }
   .tab-btn:hover { color: var(--dark); }
   .tab-btn.active { color: var(--red); border-bottom-color: var(--red); font-weight: 600; }
-  .tab-btn .tab-badge {
+  .tab-badge {
     display: inline-flex; align-items: center; justify-content: center;
-    background: var(--red); color: #fff;
-    font-size: 10px; font-weight: 700;
-    min-width: 16px; height: 16px; border-radius: 8px; padding: 0 4px;
-    margin-left: 5px;
+    background: var(--red); color: #fff; font-size: 10px; font-weight: 700;
+    min-width: 16px; height: 16px; border-radius: 8px; padding: 0 4px; margin-left: 5px;
   }
 
   /* ── PANEL ───────────────────────────────── */
   .tab-panel { display: none; flex: 1; overflow-y: auto; padding: 20px 24px 40px; }
   .tab-panel.active { display: block; }
 
-  /* ── SECTION HEADER ROW ──────────────────── */
-  .section-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 14px;
-  }
-  .section-icon {
-    width: 34px; height: 34px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
+  /* ── SECTION HEADER ──────────────────────── */
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .section-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
   .section-icon-red   { background: #FFEBEE; color: var(--red); }
   .section-icon-green { background: #E8F5E9; color: var(--green); }
   .section-title { font-size: 16px; font-weight: 700; }
@@ -183,7 +124,7 @@
   /* ── BUTTONS ─────────────────────────────── */
   .btn {
     display: inline-flex; align-items: center; gap: 5px;
-    padding: 6px 14px; border-radius: 4px; font-size: 13px; font-family: var(--font);
+    padding: 6px 14px; border-radius: 6px; font-size: 13px; font-family: var(--font);
     font-weight: 500; cursor: pointer; border: 1px solid var(--grey-bdr);
     background: var(--white); color: var(--dark); transition: background .15s;
     white-space: nowrap;
@@ -196,173 +137,183 @@
   .btn-ghost:hover { background: var(--grey-bg); color: var(--dark); }
   .btn-sm { padding: 4px 10px; font-size: 12px; }
 
-  /* ── FILTER CHIPS ────────────────────────── */
-  .chip-row {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 10px; flex-wrap: wrap;
-  }
+  /* ── CHIP TYPE FILTERS ───────────────────── */
+  .chip-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
   .chip {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
-    cursor: pointer; border: 2px solid transparent; transition: opacity .15s, box-shadow .15s;
+    cursor: pointer; border: 2px solid transparent; transition: opacity .15s;
     user-select: none;
   }
-  .chip.dimmed { opacity: .45; }
-  .chip-info    { background: #E3F2FD; color: var(--blue);   border-color: var(--blue); }
-  .chip-warn    { background: #FFF3E0; color: var(--amber);  border-color: var(--amber); }
-  .chip-alarm   { background: #FFEBEE; color: var(--red);    border-color: var(--red); }
-  .chip-reset   { background: var(--grey-bg); color: var(--grey-txt); border-color: var(--grey-bdr); font-weight: 500; }
-  .chip-count   { background: rgba(0,0,0,.1); border-radius: 8px; padding: 0 5px; font-size: 11px; }
-  .chip-info .chip-count   { background: var(--blue);  color: #fff; }
-  .chip-warn .chip-count   { background: var(--amber); color: #fff; }
-  .chip-alarm .chip-count  { background: var(--red);   color: #fff; }
+  .chip.dimmed { opacity: .3; }
+  .chip-info    { background: #E3F2FD; color: var(--blue);  border-color: var(--blue); }
+  .chip-warn    { background: #FFF3E0; color: var(--amber); border-color: var(--amber); }
+  .chip-alarm   { background: #FFEBEE; color: var(--red);   border-color: var(--red); }
+  .chip-count   { border-radius: 8px; padding: 0 5px; font-size: 11px; }
+  .chip-info .chip-count  { background: var(--blue);  color: #fff; }
+  .chip-warn .chip-count  { background: var(--amber); color: #fff; }
+  .chip-alarm .chip-count { background: var(--red);   color: #fff; }
 
-  /* ── DROPDOWN FILTER ROW ─────────────────── */
-  .dropdown-row {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 14px; flex-wrap: wrap;
+  /* ── LIVE / TEST TOGGLE ──────────────────── */
+  .toggle-group { display: inline-flex; border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; }
+  .toggle-btn {
+    padding: 5px 14px; height: 32px; font-size: 13px; font-family: var(--font);
+    font-weight: 500; background: var(--white); border: none;
+    border-right: 1px solid var(--grey-bdr); cursor: pointer;
+    color: var(--grey-txt); transition: background .15s, color .15s; white-space: nowrap;
   }
+  .toggle-btn:last-child { border-right: none; }
+  .toggle-btn.active { background: var(--red); color: var(--white); font-weight: 600; }
+  .toggle-btn:not(.active):hover { background: var(--grey-bg); color: var(--dark); }
+
+  /* ── FILTER BAR ──────────────────────────── */
+  .filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .dropdown-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
   .dropdown-wrap { position: relative; }
   .dropdown-btn {
     display: inline-flex; align-items: center; gap: 4px;
-    padding: 5px 12px; border-radius: 4px; font-size: 13px; font-family: var(--font);
+    padding: 5px 12px; height: 32px; border-radius: 6px; font-size: 13px; font-family: var(--font);
     background: var(--white); border: 1px solid var(--grey-bdr); cursor: pointer;
-    color: var(--dark); white-space: nowrap;
+    color: var(--dark); white-space: nowrap; transition: background .15s;
   }
   .dropdown-btn.active-filter { font-weight: 700; border-color: var(--red); color: var(--red); }
   .dropdown-btn:hover { background: var(--grey-bg); }
   .dropdown-menu {
     display: none; position: absolute; top: calc(100% + 4px); left: 0;
     background: var(--white); border: 1px solid var(--grey-bdr);
-    border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
     min-width: 160px; z-index: 50; padding: 4px 0;
   }
   .dropdown-menu.open { display: block; }
-  .dropdown-item {
-    padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--dark);
-  }
+  .dropdown-item { padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--dark); }
   .dropdown-item:hover { background: var(--grey-bg); }
   .dropdown-item.selected { color: var(--blue); font-weight: 600; }
 
-  /* search input */
+  /* search */
   .search-input {
-    padding: 6px 12px 6px 32px; border: 1px solid var(--grey-bdr); border-radius: 4px;
-    font-size: 13px; font-family: var(--font); width: 220px; outline: none;
+    padding: 6px 12px 6px 32px; border: 1px solid var(--grey-bdr); border-radius: 6px;
+    font-size: 13px; font-family: var(--font); width: 220px; outline: none; height: 32px;
     background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
   }
   .search-input:focus { border-color: var(--blue); }
 
   /* ── TABLE ───────────────────────────────── */
   .table-wrap { border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
+  .table-scroll { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead tr { background: var(--grey-bg); }
   th {
     padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px;
     color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px;
-    border-bottom: 1px solid var(--grey-bdr); white-space: nowrap;
+    border-bottom: 1px solid var(--grey-bdr); white-space: nowrap; position: sticky; top: 0;
+    background: var(--grey-bg);
   }
   th.sortable { cursor: pointer; user-select: none; }
   th.sortable:hover { color: var(--dark); }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--grey-bdr); vertical-align: middle; }
+  td { padding: 10px 12px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
   tbody tr:last-child td { border-bottom: none; }
   tbody tr:hover { background: #FAFAFA; }
 
-  /* type chip in table */
+  /* type chips in table */
   .type-chip {
     display: inline-flex; align-items: center; gap: 4px;
-    padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;
-    white-space: nowrap;
+    padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap;
   }
   .chip-type-info  { background: #E3F2FD; color: var(--blue); }
   .chip-type-warn  { background: #FFF3E0; color: var(--amber); }
   .chip-type-alarm { background: #FFEBEE; color: var(--red); }
 
-  /* status pill */
-  .status-pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600;
-  }
-  .status-resolved   { background: #E8F5E9; color: var(--green); }
-  .status-unresolved { background: #FFEBEE; color: var(--red); }
-  .status-ack        { background: #FFF3E0; color: var(--amber); }
-  .status-ok         { background: #E8F5E9; color: var(--green); }
+  /* status pills */
+  .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .status-resolved     { background: #E8F5E9; color: var(--green); }
+  .status-not-resolved { background: #FFEBEE; color: var(--red); }
+  .resolved-meta { font-size: 11px; color: var(--grey-txt); margin-top: 3px; display: block; }
 
   /* 3-dot action menu */
   .action-wrap { position: relative; display: inline-block; }
-  .dots-btn {
-    background: none; border: none; cursor: pointer; font-size: 18px; line-height: 1;
-    color: var(--grey-txt); padding: 2px 6px; border-radius: 4px;
-  }
+  .dots-btn { background: none; border: none; cursor: pointer; font-size: 18px; line-height: 1; color: var(--grey-txt); padding: 2px 6px; border-radius: 4px; }
   .dots-btn:hover { background: var(--grey-bg); color: var(--dark); }
   .action-menu {
     display: none; position: absolute; right: 0; top: 100%;
     background: var(--white); border: 1px solid var(--grey-bdr);
-    border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
     min-width: 140px; z-index: 60; padding: 4px 0;
   }
   .action-menu.open { display: block; }
-  .action-menu-item {
-    padding: 8px 14px; cursor: pointer; font-size: 13px; color: var(--dark);
-  }
+  .action-menu-item { padding: 8px 14px; cursor: pointer; font-size: 13px; color: var(--dark); }
   .action-menu-item:hover { background: var(--grey-bg); }
-  .action-menu-item.danger { color: var(--red); }
+  .action-menu-item.resolve { color: var(--green); font-weight: 600; }
 
-  /* ── PROGRESS BAR ────────────────────────── */
+  /* ── PROGRESS BARS ───────────────────────── */
   .progress-wrap { display: flex; align-items: center; gap: 8px; }
-  .progress-bar-bg {
-    flex: 1; height: 8px; background: #EEEEEE; border-radius: 4px; overflow: hidden; min-width: 60px;
-  }
+  .progress-bar-bg { flex: 1; height: 8px; background: #EEEEEE; border-radius: 4px; overflow: hidden; min-width: 60px; }
   .progress-bar-fill { height: 100%; border-radius: 4px; }
-  .progress-bar-fill.ok    { background: var(--green); }
-  .progress-bar-fill.low   { background: var(--amber); }
-  .progress-bar-fill.crit  { background: var(--red); }
+  .progress-bar-fill.ok   { background: var(--green); }
+  .progress-bar-fill.low  { background: var(--amber); }
+  .progress-bar-fill.crit { background: var(--red); }
   .progress-val { font-size: 12px; font-weight: 600; color: var(--dark); white-space: nowrap; }
 
   /* tags */
-  .tag-pill {
-    display: inline-block; padding: 1px 7px; border-radius: 8px;
-    font-size: 11px; font-weight: 600; margin-right: 3px;
-  }
+  .tag-pill { display: inline-block; padding: 1px 7px; border-radius: 8px; font-size: 11px; font-weight: 600; margin-right: 3px; }
   .tag-blue   { background: #E3F2FD; color: var(--blue); }
   .tag-green  { background: #E8F5E9; color: var(--green); }
   .tag-purple { background: #F3E5F5; color: #7B1FA2; }
   .tag-amber  { background: #FFF3E0; color: var(--amber); }
 
   /* ── PAGINATION ──────────────────────────── */
-  .pagination {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--grey-txt); flex-wrap: wrap;
-  }
+  .pagination { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--grey-txt); flex-wrap: wrap; }
   .pg-label { margin-right: 4px; }
-  .pg-size {
-    padding: 3px 9px; border-radius: 4px; cursor: pointer;
-    border: 1px solid transparent; transition: background .12s;
-  }
+  .pg-size { padding: 3px 9px; border-radius: 4px; cursor: pointer; border: 1px solid transparent; transition: background .12s; }
   .pg-size:hover { background: var(--grey-bg); }
   .pg-size.active { font-weight: 700; color: var(--dark); border-color: var(--grey-bdr); background: var(--white); }
   .pg-sep { color: var(--grey-bdr); }
   .pg-total { margin-left: 8px; }
-  .pg-nav {
-    display: flex; align-items: center; gap: 4px; margin-left: 8px;
-  }
-  .pg-nav-btn {
-    width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--grey-bdr);
-    background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center;
-    font-size: 13px; color: var(--grey-txt);
-  }
+  .pg-nav { display: flex; align-items: center; gap: 4px; margin-left: 8px; }
+  .pg-nav-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--grey-bdr); background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--grey-txt); }
   .pg-nav-btn:hover { background: var(--grey-bg); }
-  .pg-num {
-    width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--blue);
-    background: var(--blue); color: var(--white); display: flex; align-items: center;
-    justify-content: center; font-size: 13px; font-weight: 600;
-  }
+  .pg-num { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--blue); background: var(--blue); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
 
-  /* divider */
   .divider { border: none; border-top: 1px solid var(--grey-bdr); margin: 18px 0; }
-
-  /* utility */
   .text-muted { color: var(--grey-txt); }
   .fw6 { font-weight: 600; }
+
+  /* ── MODALS ──────────────────────────────── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.5); z-index: 300;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 10px;
+    box-shadow: 0 12px 48px rgba(0,0,0,.22);
+    width: 100%; max-width: 460px;
+    display: flex; flex-direction: column; animation: modal-in .15s ease-out;
+  }
+  @keyframes modal-in { from { opacity:0; transform: scale(.96) translateY(8px); } to { opacity:1; transform: none; } }
+  .modal-header { padding: 18px 20px 14px; border-bottom: 1px solid var(--grey-bdr); display: flex; align-items: center; justify-content: space-between; }
+  .modal-title { font-size: 16px; font-weight: 700; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 16px; color: var(--grey-txt); padding: 2px 6px; border-radius: 4px; }
+  .modal-close:hover { background: var(--grey-bg); color: var(--dark); }
+  .modal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .modal-footer { padding: 14px 20px; border-top: 1px solid var(--grey-bdr); display: flex; justify-content: flex-end; gap: 8px; }
+  .modal-label { display: block; font-size: 11px; font-weight: 700; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .modal-select, .modal-textarea, .modal-input {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--grey-bdr); border-radius: 6px;
+    font-size: 13px; font-family: var(--font); color: var(--dark); outline: none; background: var(--white);
+  }
+  .modal-select:focus, .modal-textarea:focus { border-color: var(--blue); }
+  .modal-textarea { resize: vertical; min-height: 80px; }
+  .modal-field { display: flex; flex-direction: column; }
+  .modal-info { font-size: 13px; color: #555; line-height: 1.6; }
+  .user-check-list { display: flex; flex-direction: column; gap: 8px; }
+  .user-check-item { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; padding: 6px 8px; border-radius: 6px; transition: background .1s; }
+  .user-check-item:hover { background: var(--grey-bg); }
+  .user-check-item input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--red); cursor: pointer; flex-shrink: 0; }
+  .user-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+  .ua-blue  { background: var(--blue); }
+  .ua-green { background: var(--green); }
+  .ua-amber { background: var(--amber); }
 </style>
 </head>
 <body>
@@ -371,9 +322,9 @@
 <div class="topbar">
   <div class="topbar-logo">TELE<span>VEND</span></div>
   <div class="topbar-spacer"></div>
-  <div class="topbar-icon">🔔</div>
-  <div class="topbar-icon">⚙</div>
-  <div class="topbar-icon">👤</div>
+  <div class="topbar-icon" title="Notifications">🔔</div>
+  <div class="topbar-icon" title="Settings">⚙</div>
+  <div class="topbar-icon" title="Profile">👤</div>
 </div>
 
 <!-- ══ LAYOUT ════════════════════════════════════════════════════════════ -->
@@ -413,12 +364,13 @@
         <div class="machine-icon">🖥</div>
         <div>
           <div class="machine-title">WM-001 · Nescafé Alegria 550</div>
-          <div class="machine-sub">City Center Plaza, Zagreb · Route: RT-04</div>
+          <div class="machine-sub">City Center Plaza, Zagreb · Route: RT-04 · Last seen: 11.03.2026 08:22</div>
           <div class="machine-badges">
             <span class="badge badge-green"><span class="dot dot-green"></span> Online</span>
             <span class="badge badge-blue">Hot beverages</span>
             <span class="badge badge-grey">SN: ALE-20250112</span>
-            <span class="badge badge-amber">⚠ 3 active alarms</span>
+            <span class="badge badge-grey">FW: 3.12.1</span>
+            <span class="badge badge-amber">⚠ 2 active alarms</span>
           </div>
         </div>
         <div class="machine-header-right">
@@ -434,7 +386,7 @@
         <button class="tab-btn" onclick="switchTab('sales')">Sales</button>
         <button class="tab-btn" onclick="switchTab('transactions')">Transactions</button>
         <button class="tab-btn active" id="tab-events" onclick="switchTab('events')">
-          Events<span class="tab-badge">3</span>
+          Events<span class="tab-badge" id="events-badge">2</span>
         </button>
         <button class="tab-btn" onclick="switchTab('refill')">Refill</button>
         <button class="tab-btn" id="tab-products" onclick="switchTab('products')">Products</button>
@@ -443,7 +395,7 @@
       </nav>
     </div>
 
-    <!-- ══ EVENTS PANEL ═══════════════════════ -->
+    <!-- ══ EVENTS PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel active" id="panel-events">
 
       <!-- section header -->
@@ -451,7 +403,7 @@
         <div class="section-icon section-icon-red">🔔</div>
         <div>
           <span class="section-title">Events</span>
-          <span class="section-count">· Total events: 247</span>
+          <span class="section-count" id="events-count">· Total events: 8</span>
         </div>
         <div class="section-header-right">
           <div class="dropdown-wrap">
@@ -461,51 +413,50 @@
               <div class="dropdown-item">Export as CSV</div>
             </div>
           </div>
-          <button class="btn btn-primary">+ New Event</button>
+          <button class="btn btn-primary" onclick="openNewEvent()">+ New Event</button>
         </div>
       </div>
 
-      <!-- chip filters -->
+      <!-- chip type filters -->
       <div class="chip-row">
-        <span class="chip chip-info"    id="chip-info"  onclick="toggleChip('chip-info')">
-          Info <span class="chip-count">142</span>
+        <span class="chip chip-info" id="chip-info" onclick="toggleChip('info')">
+          ℹ Info <span class="chip-count" id="count-info">3</span>
         </span>
-        <span class="chip chip-warn"    id="chip-warn"  onclick="toggleChip('chip-warn')">
-          Warning <span class="chip-count">89</span>
+        <span class="chip chip-warn" id="chip-warn" onclick="toggleChip('warn')">
+          ⚡ Warning <span class="chip-count" id="count-warn">2</span>
         </span>
-        <span class="chip chip-alarm"   id="chip-alarm" onclick="toggleChip('chip-alarm')">
-          Alarm <span class="chip-count">16</span>
+        <span class="chip chip-alarm" id="chip-alarm" onclick="toggleChip('alarm')">
+          🔔 Alarm <span class="chip-count" id="count-alarm">2</span>
         </span>
-        <span class="chip chip-reset" onclick="resetChips()">Reset filters</span>
       </div>
 
-      <!-- dropdown filters -->
-      <div class="dropdown-row">
+      <!-- filter bar -->
+      <div class="filter-bar">
         <div class="dropdown-wrap">
-          <button class="dropdown-btn active-filter" onclick="toggleDropdown('dd-period')">Last 7 days ▾</button>
+          <button class="dropdown-btn active-filter" id="btn-period" onclick="toggleDropdown('dd-period')">Last 7 days ▾</button>
           <div class="dropdown-menu" id="dd-period">
-            <div class="dropdown-item selected">Last 7 days</div>
-            <div class="dropdown-item">Today</div>
-            <div class="dropdown-item">Last 30 days</div>
-            <div class="dropdown-item">Custom range…</div>
+            <div class="dropdown-item selected" onclick="selectPeriod(this,'Last 7 days')">Last 7 days</div>
+            <div class="dropdown-item" onclick="selectPeriod(this,'Today')">Today</div>
+            <div class="dropdown-item" onclick="selectPeriod(this,'Last 30 days')">Last 30 days</div>
+            <div class="dropdown-item" onclick="selectPeriod(this,'Custom range…')">Custom range…</div>
           </div>
         </div>
         <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-status')">Status ▾</button>
+          <button class="dropdown-btn" id="btn-status" onclick="toggleDropdown('dd-status')">Status ▾</button>
           <div class="dropdown-menu" id="dd-status">
-            <div class="dropdown-item selected">All statuses</div>
-            <div class="dropdown-item">Resolved</div>
-            <div class="dropdown-item">Unresolved</div>
-            <div class="dropdown-item">Acknowledged</div>
+            <div class="dropdown-item selected" onclick="selectStatus(this,'all')">All</div>
+            <div class="dropdown-item" onclick="selectStatus(this,'resolved')">Resolved</div>
+            <div class="dropdown-item" onclick="selectStatus(this,'not-resolved')">Not resolved</div>
           </div>
         </div>
         <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-source')">Source ▾</button>
+          <button class="dropdown-btn" id="btn-source" onclick="toggleDropdown('dd-source')">Source ▾</button>
           <div class="dropdown-menu" id="dd-source">
-            <div class="dropdown-item selected">All sources</div>
-            <div class="dropdown-item">Machine</div>
-            <div class="dropdown-item">Payment</div>
-            <div class="dropdown-item">Network</div>
+            <div class="dropdown-item selected" onclick="selectSource(this,'all')">All sources</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Machine')">Machine</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Payment')">Payment</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Network')">Network</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Web')">Web</div>
           </div>
         </div>
         <div class="dropdown-wrap">
@@ -517,132 +468,35 @@
             <div class="dropdown-item">Temperature</div>
           </div>
         </div>
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-market')">Market operations ▾</button>
-          <div class="dropdown-menu" id="dd-market">
-            <div class="dropdown-item selected">All operations</div>
-            <div class="dropdown-item">Vend</div>
-            <div class="dropdown-item">Refill</div>
-            <div class="dropdown-item">Maintenance</div>
-          </div>
+        <!-- Live / Test mode toggle (US2) -->
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="toggle-live" onclick="setMarketMode('live')">Live</button>
+          <button class="toggle-btn" id="toggle-test" onclick="setMarketMode('test')">Test mode</button>
         </div>
+        <button class="btn btn-ghost btn-sm" onclick="resetAllFilters()">✕ Reset filters</button>
       </div>
 
       <!-- events table -->
       <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Definition</th>
-              <th>Counter</th>
-              <th class="sortable">Start ↕</th>
-              <th>Source</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="type-chip chip-type-alarm">⬤ ALARM</span></td>
-              <td class="fw6">Motor error</td>
-              <td class="text-muted">Column 3 motor fault – no vend response</td>
-              <td>7</td>
-              <td>10.03.2026 08:14</td>
-              <td>Machine</td>
-              <td><span class="status-pill status-unresolved">● Unresolved</span></td>
-              <td>
-                <div class="action-wrap">
-                  <button class="dots-btn" onclick="toggleMenu('menu1')">⋮</button>
-                  <div class="action-menu" id="menu1">
-                    <div class="action-menu-item">View details</div>
-                    <div class="action-menu-item">Acknowledge</div>
-                    <div class="action-menu-item danger">Mark resolved</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-alarm">⬤ ALARM</span></td>
-              <td class="fw6">Temperature alarm</td>
-              <td class="text-muted">Internal temperature 62 °C – threshold exceeded</td>
-              <td>2</td>
-              <td>10.03.2026 07:55</td>
-              <td>Machine</td>
-              <td><span class="status-pill status-ack">● Acknowledged</span></td>
-              <td>
-                <div class="action-wrap">
-                  <button class="dots-btn" onclick="toggleMenu('menu2')">⋮</button>
-                  <div class="action-menu" id="menu2">
-                    <div class="action-menu-item">View details</div>
-                    <div class="action-menu-item">Acknowledge</div>
-                    <div class="action-menu-item danger">Mark resolved</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-warn">⬤ WARNING</span></td>
-              <td class="fw6">Low stock – Col 5</td>
-              <td class="text-muted">Espresso beans below reorder threshold (3 units)</td>
-              <td>1</td>
-              <td>10.03.2026 06:30</td>
-              <td>Machine</td>
-              <td><span class="status-pill status-unresolved">● Unresolved</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-warn">⬤ WARNING</span></td>
-              <td class="fw6">Payment timeout</td>
-              <td class="text-muted">Card reader did not respond within 30 s</td>
-              <td>4</td>
-              <td>09.03.2026 22:11</td>
-              <td>Payment</td>
-              <td><span class="status-pill status-resolved">● Resolved</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-info">⬤ INFO</span></td>
-              <td class="fw6">Door opened</td>
-              <td class="text-muted">Service door opened by technician John D.</td>
-              <td>1</td>
-              <td>09.03.2026 14:05</td>
-              <td>Machine</td>
-              <td><span class="status-pill status-resolved">● Resolved</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-info">⬤ INFO</span></td>
-              <td class="fw6">Refill completed</td>
-              <td class="text-muted">Products refilled – 12 columns updated</td>
-              <td>1</td>
-              <td>09.03.2026 13:58</td>
-              <td>Machine</td>
-              <td><span class="status-pill status-resolved">● Resolved</span></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="type-chip chip-type-alarm">⬤ ALARM</span></td>
-              <td class="fw6">Cash jam</td>
-              <td class="text-muted">Banknote stuck in acceptor – manual clear needed</td>
-              <td>1</td>
-              <td>08.03.2026 18:42</td>
-              <td>Payment</td>
-              <td><span class="status-pill status-resolved">● Resolved</span></td>
-              <td>
-                <div class="action-wrap">
-                  <button class="dots-btn" onclick="toggleMenu('menu3')">⋮</button>
-                  <div class="action-menu" id="menu3">
-                    <div class="action-menu-item">View details</div>
-                    <div class="action-menu-item">Acknowledge</div>
-                    <div class="action-menu-item danger">Mark resolved</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Definition</th>
+                <th style="text-align:center">Counter</th>
+                <th class="sortable" id="th-start" onclick="toggleSort()">Start <span id="sort-arrow">↓</span></th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="events-tbody">
+              <!-- rendered by JS -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- pagination -->
@@ -655,7 +509,7 @@
         <span class="pg-size" onclick="setPgSize(this)">50</span>
         <span class="pg-sep">|</span>
         <span class="pg-size" onclick="setPgSize(this)">100</span>
-        <span class="pg-total text-muted">Total items: <strong>247</strong></span>
+        <span class="pg-total text-muted">Total items: <strong id="events-total">8</strong></span>
         <div class="pg-nav">
           <button class="pg-nav-btn">‹</button>
           <div class="pg-num">1</div>
@@ -664,10 +518,9 @@
       </div>
     </div><!-- /panel-events -->
 
-    <!-- ══ PRODUCTS PANEL ═════════════════════ -->
+    <!-- ══ PRODUCTS PANEL ═════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- section header -->
       <div class="section-header">
         <div class="section-icon section-icon-green">📦</div>
         <div>
@@ -681,7 +534,6 @@
         </div>
       </div>
 
-      <!-- filter row -->
       <div class="dropdown-row">
         <input class="search-input" type="text" placeholder="Search products…">
         <div class="dropdown-wrap">
@@ -714,7 +566,6 @@
         <button class="btn btn-ghost btn-sm">Clear all</button>
       </div>
 
-      <!-- products table -->
       <div class="table-wrap">
         <table>
           <thead>
@@ -733,193 +584,80 @@
           <tbody>
             <tr>
               <td class="fw6">01</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div>
-                  <span>Espresso Single</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
               <td class="text-muted">Espresso</td>
               <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td>Front</td>
-              <td>20</td>
-              <td>20</td>
+              <td>Front</td><td>20</td><td>20</td>
               <td class="fw6">€1.20</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill ok" style="width:85%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--green)">17/20</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:85%"></div></div><span class="progress-val" style="color:var(--green)">17/20</span></div></td>
             </tr>
             <tr>
               <td class="fw6">02</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div>
-                  <span>Americano</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
               <td class="text-muted">Americano</td>
               <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td>Front</td>
-              <td>20</td>
-              <td>20</td>
+              <td>Front</td><td>20</td><td>20</td>
               <td class="fw6">€1.00</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill low" style="width:30%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--amber)">6/20</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:30%"></div></div><span class="progress-val" style="color:var(--amber)">6/20</span></div></td>
             </tr>
             <tr>
               <td class="fw6">03</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div>
-                  <span>Cappuccino</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
               <td class="text-muted">Cappuccino</td>
               <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
-              <td>Front</td>
-              <td>15</td>
-              <td>15</td>
+              <td>Front</td><td>15</td><td>15</td>
               <td class="fw6">€1.50</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill crit" style="width:13%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--red)">2/15</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:13%"></div></div><span class="progress-val" style="color:var(--red)">2/15</span></div></td>
             </tr>
             <tr>
               <td class="fw6">04</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div>
-                  <span>Orange Juice 330ml</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
               <td class="text-muted">Cold drink</td>
               <td><span class="tag-pill tag-blue">Cold</span></td>
-              <td>Side</td>
-              <td>12</td>
-              <td>12</td>
+              <td>Side</td><td>12</td><td>12</td>
               <td class="fw6">€1.80</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill ok" style="width:75%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--green)">9/12</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:75%"></div></div><span class="progress-val" style="color:var(--green)">9/12</span></div></td>
             </tr>
             <tr>
               <td class="fw6">05</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div>
-                  <span>Chocolate Bar</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
               <td class="text-muted">Snack</td>
               <td><span class="tag-pill tag-purple">Snack</span></td>
-              <td>Front</td>
-              <td>10</td>
-              <td>10</td>
+              <td>Front</td><td>10</td><td>10</td>
               <td class="fw6">€1.30</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill low" style="width:40%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--amber)">4/10</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:40%"></div></div><span class="progress-val" style="color:var(--amber)">4/10</span></div></td>
             </tr>
             <tr>
               <td class="fw6">06</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div>
-                  <span>Still Water 500ml</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
               <td class="text-muted">Cold drink</td>
               <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
-              <td>Front</td>
-              <td>24</td>
-              <td>24</td>
+              <td>Front</td><td>24</td><td>24</td>
               <td class="fw6">€0.90</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill ok" style="width:96%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--green)">23/24</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:96%"></div></div><span class="progress-val" style="color:var(--green)">23/24</span></div></td>
             </tr>
             <tr>
               <td class="fw6">07</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div>
-                  <span>Croissant</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
               <td class="text-muted">Snack</td>
               <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
-              <td>Front</td>
-              <td>8</td>
-              <td>8</td>
+              <td>Front</td><td>8</td><td>8</td>
               <td class="fw6">€2.10</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill crit" style="width:12%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--red)">1/8</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:12%"></div></div><span class="progress-val" style="color:var(--red)">1/8</span></div></td>
             </tr>
             <tr>
               <td class="fw6">08</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div>
-                  <span>Green Tea</span>
-                </div>
-              </td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
               <td class="text-muted">Tea</td>
               <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
-              <td>Front</td>
-              <td>20</td>
-              <td>20</td>
+              <td>Front</td><td>20</td><td>20</td>
               <td class="fw6">€1.10</td>
-              <td>
-                <div class="progress-wrap">
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill ok" style="width:60%"></div>
-                  </div>
-                  <span class="progress-val" style="color:var(--green)">12/20</span>
-                </div>
-              </td>
+              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:60%"></div></div><span class="progress-val" style="color:var(--green)">12/20</span></div></td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- pagination -->
       <div class="pagination">
         <span class="pg-label text-muted">Rows per page:</span>
         <span class="pg-size" onclick="setPgSize(this)">10</span>
@@ -961,71 +699,362 @@
   </div><!-- /main -->
 </div><!-- /layout -->
 
+<!-- ══ ASSIGN MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="assign-modal" onclick="if(event.target===this)closeModal('assign-modal')">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Assign Event</span>
+      <button class="modal-close" onclick="closeModal('assign-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Assign to</label>
+        <select class="modal-select" id="assign-user">
+          <option value="">Select user…</option>
+          <option value="a.kovac">A. Kovač</option>
+          <option value="j.doe">J. Doe</option>
+          <option value="m.novak">M. Novak</option>
+          <option value="i.babic">I. Babić</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('assign-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAssign()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESOLVE MODAL ═════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="resolve-modal" onclick="if(event.target===this)closeModal('resolve-modal')">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Resolve Event</span>
+      <button class="modal-close" onclick="closeModal('resolve-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info">Mark this event as <strong>Resolved</strong>?<br>Your name and the current timestamp will be recorded on the event.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('resolve-modal')">Cancel</button>
+      <button class="btn btn-primary" style="background:var(--green);border-color:var(--green)" onclick="saveResolve()">✓ Resolve</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NEW EVENT MODAL ═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="new-event-modal" onclick="if(event.target===this)closeModal('new-event-modal')">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">New Event</span>
+      <button class="modal-close" onclick="closeModal('new-event-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Type</label>
+        <select class="modal-select" id="new-type">
+          <option value="info">ℹ Info</option>
+          <option value="warn">⚡ Warning</option>
+          <option value="alarm">🔔 Alarm</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Description</label>
+        <textarea class="modal-textarea" id="new-desc" placeholder="Describe the event…"></textarea>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Assigned to (max 3)</label>
+        <div class="user-check-list">
+          <label class="user-check-item">
+            <input type="checkbox" class="new-assignee" value="a.kovac">
+            <span class="user-avatar">AK</span> A. Kovač
+          </label>
+          <label class="user-check-item">
+            <input type="checkbox" class="new-assignee" value="j.doe">
+            <span class="user-avatar ua-blue">JD</span> J. Doe
+          </label>
+          <label class="user-check-item">
+            <input type="checkbox" class="new-assignee" value="m.novak">
+            <span class="user-avatar ua-green">MN</span> M. Novak
+          </label>
+          <label class="user-check-item">
+            <input type="checkbox" class="new-assignee" value="i.babic">
+            <span class="user-avatar ua-amber">IB</span> I. Babić
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('new-event-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveNewEvent()">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── TAB SWITCHING ───────────────────────────────────
-  function switchTab(name) {
-    // hide all panels
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    // deactivate all buttons
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    // show target panel
-    const panel = document.getElementById('panel-' + name);
-    if (panel) panel.classList.add('active');
-    // activate button
-    const tabBtn = document.getElementById('tab-' + name);
-    if (tabBtn) {
-      tabBtn.classList.add('active');
-    } else {
-      // fallback: find by onclick text
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        if (b.getAttribute('onclick') === "switchTab('" + name + "')") b.classList.add('active');
-      });
-    }
-    closeAllMenus();
-  }
+// ══ EVENTS DATA ══════════════════════════════════════════════════════════
+let eventsData = [
+  { id:1, type:'alarm', name:'Motor error',        def:'Column 3 motor fault – no vend response',              counter:7, start:'10.03.2026 08:14', startSort:'20260310-0814', source:'Machine', status:'not-resolved', assignedTo:null,    resolvedBy:null },
+  { id:2, type:'alarm', name:'Temperature alarm',  def:'Internal temperature 62 °C – threshold exceeded',      counter:2, start:'10.03.2026 07:55', startSort:'20260310-0755', source:'Machine', status:'not-resolved', assignedTo:'j.doe', resolvedBy:null },
+  { id:3, type:'warn',  name:'Low stock – Col 5',  def:'Espresso beans below reorder threshold (3 units)',     counter:1, start:'10.03.2026 06:30', startSort:'20260310-0630', source:'Machine', status:'not-resolved', assignedTo:null,    resolvedBy:null },
+  { id:4, type:'warn',  name:'Payment timeout',    def:'Card reader did not respond within 30 s',              counter:4, start:'09.03.2026 22:11', startSort:'20260309-2211', source:'Payment', status:'resolved',     assignedTo:'j.doe', resolvedBy:'a.kovac · 11.03.2026 10:22' },
+  { id:5, type:'info',  name:'Door opened',        def:'Service door opened by technician John D.',            counter:1, start:'09.03.2026 14:05', startSort:'20260309-1405', source:'Machine', status:'resolved',     assignedTo:'j.doe', resolvedBy:'j.doe · 09.03.2026 15:30' },
+  { id:6, type:'info',  name:'Refill completed',   def:'Products refilled – 12 columns updated',               counter:1, start:'09.03.2026 13:58', startSort:'20260309-1358', source:'Machine', status:'resolved',     assignedTo:null,    resolvedBy:'a.kovac · 09.03.2026 14:00' },
+  { id:7, type:'alarm', name:'Cash jam',           def:'Banknote stuck in acceptor – manual clear needed',     counter:1, start:'08.03.2026 18:42', startSort:'20260308-1842', source:'Payment', status:'resolved',     assignedTo:null,    resolvedBy:'j.doe · 08.03.2026 20:00' },
+  { id:8, type:'info',  name:'Config update',      def:'Remote configuration successfully applied',            counter:1, start:'08.03.2026 11:00', startSort:'20260308-1100', source:'Network', status:'resolved',     assignedTo:null,    resolvedBy:'system · 08.03.2026 11:01' },
+];
 
-  // ── CHIP FILTER TOGGLE ──────────────────────────────
-  function toggleChip(id) {
-    document.getElementById(id).classList.toggle('dimmed');
-  }
-  function resetChips() {
-    ['chip-info','chip-warn','chip-alarm'].forEach(id =>
-      document.getElementById(id).classList.remove('dimmed'));
-  }
+// ══ FILTER STATE ═════════════════════════════════════════════════════════
+let chipState   = { info: true, warn: true, alarm: true };
+let sortAsc     = false;   // false = newest first
+let statusFilter = 'all';
+let sourceFilter = 'all';
+let activeEventId = null;
 
-  // ── DROPDOWNS ───────────────────────────────────────
-  function toggleDropdown(id) {
-    const menu = document.getElementById(id);
-    const isOpen = menu.classList.contains('open');
-    closeAllMenus();
-    if (!isOpen) menu.classList.add('open');
-  }
-
-  // ── ACTION MENUS ────────────────────────────────────
-  function toggleMenu(id) {
-    const menu = document.getElementById(id);
-    const isOpen = menu.classList.contains('open');
-    closeAllMenus();
-    if (!isOpen) menu.classList.add('open');
-  }
-
-  function closeAllMenus() {
-    document.querySelectorAll('.dropdown-menu, .action-menu').forEach(m => m.classList.remove('open'));
-  }
-
-  // close menus on outside click
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown-wrap') && !e.target.closest('.action-wrap')) {
-      closeAllMenus();
-    }
+// ══ RENDER ════════════════════════════════════════════════════════════════
+function renderEvents() {
+  let rows = eventsData.filter(r => chipState[r.type]);
+  if (statusFilter === 'resolved')     rows = rows.filter(r => r.status === 'resolved');
+  if (statusFilter === 'not-resolved') rows = rows.filter(r => r.status !== 'resolved');
+  if (sourceFilter !== 'all')          rows = rows.filter(r => r.source === sourceFilter);
+  rows.sort((a, b) => {
+    const c = a.startSort.localeCompare(b.startSort);
+    return sortAsc ? c : -c;
   });
 
-  // ── PAGINATION SIZE ─────────────────────────────────
-  function setPgSize(el) {
-    const siblings = el.closest('.pagination').querySelectorAll('.pg-size');
-    siblings.forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
+  const tbody = document.getElementById('events-tbody');
+  tbody.innerHTML = rows.length === 0
+    ? '<tr><td colspan="8" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No events match the current filters.</td></tr>'
+    : rows.map(renderRow).join('');
+
+  // counts
+  document.getElementById('events-count').textContent = `· Total events: ${rows.length}`;
+  document.getElementById('events-total').textContent = rows.length;
+  document.getElementById('count-info').textContent  = eventsData.filter(r => r.type === 'info').length;
+  document.getElementById('count-warn').textContent  = eventsData.filter(r => r.type === 'warn').length;
+  document.getElementById('count-alarm').textContent = eventsData.filter(r => r.type === 'alarm').length;
+  document.getElementById('sort-arrow').textContent  = sortAsc ? '↑' : '↓';
+
+  // tab badge: active (not-resolved) alarms
+  const active = eventsData.filter(r => r.type === 'alarm' && r.status === 'not-resolved').length;
+  const badge = document.getElementById('events-badge');
+  badge.textContent = active;
+  badge.style.display = active > 0 ? '' : 'none';
+  document.querySelector('.badge-amber').textContent = active > 0 ? `⚠ ${active} active alarm${active > 1 ? 's' : ''}` : '';
+}
+
+function renderRow(r) {
+  const labels = { alarm: '⬤ ALARM', warn: '⬤ WARNING', info: '⬤ INFO' };
+  const cls    = { alarm: 'chip-type-alarm', warn: 'chip-type-warn', info: 'chip-type-info' };
+  const typeChip = `<span class="type-chip ${cls[r.type]}">${labels[r.type]}</span>`;
+
+  let statusCell = '';
+  if (r.status === 'resolved') {
+    statusCell = `<span class="status-pill status-resolved">● Resolved</span>`;
+    if (r.resolvedBy) statusCell += `<span class="resolved-meta">${r.resolvedBy}</span>`;
+  } else {
+    statusCell = `<span class="status-pill status-not-resolved">● Not resolved</span>`;
+    if (r.assignedTo) statusCell += `<span class="resolved-meta">→ ${r.assignedTo}</span>`;
   }
+
+  const actionBtn = r.status !== 'resolved'
+    ? `<div class="action-wrap">
+        <button class="dots-btn" onclick="toggleMenu('menu-${r.id}')">⋮</button>
+        <div class="action-menu" id="menu-${r.id}">
+          <div class="action-menu-item" onclick="openAssign(${r.id})">👤 Assign</div>
+          <div class="action-menu-item resolve" onclick="openResolve(${r.id})">✓ Resolve</div>
+        </div>
+      </div>`
+    : '';
+
+  return `<tr>
+    <td>${typeChip}</td>
+    <td class="fw6">${r.name}</td>
+    <td class="text-muted" style="max-width:240px">${r.def}</td>
+    <td style="text-align:center">${r.counter}</td>
+    <td style="white-space:nowrap">${r.start}</td>
+    <td>${r.source}</td>
+    <td>${statusCell}</td>
+    <td>${actionBtn}</td>
+  </tr>`;
+}
+
+// ══ CHIP FILTERS ══════════════════════════════════════════════════════════
+function toggleChip(type) {
+  chipState[type] = !chipState[type];
+  document.getElementById('chip-' + type).classList.toggle('dimmed', !chipState[type]);
+  renderEvents();
+}
+
+// ══ SORT ══════════════════════════════════════════════════════════════════
+function toggleSort() {
+  sortAsc = !sortAsc;
+  renderEvents();
+}
+
+// ══ STATUS FILTER ═════════════════════════════════════════════════════════
+function selectStatus(el, val) {
+  statusFilter = val;
+  document.querySelectorAll('#dd-status .dropdown-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('btn-status');
+  btn.textContent = el.textContent.trim() + ' ▾';
+  btn.classList.toggle('active-filter', val !== 'all');
+  closeAllMenus(); renderEvents();
+}
+
+// ══ SOURCE FILTER ═════════════════════════════════════════════════════════
+function selectSource(el, val) {
+  sourceFilter = val;
+  document.querySelectorAll('#dd-source .dropdown-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('btn-source');
+  btn.textContent = el.textContent.trim() + ' ▾';
+  btn.classList.toggle('active-filter', val !== 'all');
+  closeAllMenus(); renderEvents();
+}
+
+// ══ PERIOD SELECT ═════════════════════════════════════════════════════════
+function selectPeriod(el, val) {
+  document.querySelectorAll('#dd-period .dropdown-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('btn-period').textContent = val + ' ▾';
+  closeAllMenus();
+}
+
+// ══ MARKET MODE TOGGLE ════════════════════════════════════════════════════
+function setMarketMode(mode) {
+  document.getElementById('toggle-live').classList.toggle('active', mode === 'live');
+  document.getElementById('toggle-test').classList.toggle('active', mode === 'test');
+}
+
+// ══ RESET ALL FILTERS ═════════════════════════════════════════════════════
+function resetAllFilters() {
+  chipState = { info: true, warn: true, alarm: true };
+  ['chip-info','chip-warn','chip-alarm'].forEach(id => document.getElementById(id).classList.remove('dimmed'));
+  statusFilter = 'all';
+  document.querySelectorAll('#dd-status .dropdown-item').forEach(i => i.classList.remove('selected'));
+  document.querySelector('#dd-status .dropdown-item').classList.add('selected');
+  const bs = document.getElementById('btn-status');
+  bs.textContent = 'Status ▾'; bs.classList.remove('active-filter');
+  sourceFilter = 'all';
+  document.querySelectorAll('#dd-source .dropdown-item').forEach(i => i.classList.remove('selected'));
+  document.querySelector('#dd-source .dropdown-item').classList.add('selected');
+  const bsr = document.getElementById('btn-source');
+  bsr.textContent = 'Source ▾'; bsr.classList.remove('active-filter');
+  sortAsc = false;
+  setMarketMode('live');
+  renderEvents();
+}
+
+// ══ ASSIGN MODAL ══════════════════════════════════════════════════════════
+function openAssign(id) {
+  activeEventId = id;
+  const ev = eventsData.find(e => e.id === id);
+  document.getElementById('assign-user').value = ev && ev.assignedTo ? ev.assignedTo : '';
+  closeAllMenus();
+  document.getElementById('assign-modal').classList.add('open');
+}
+function saveAssign() {
+  const user = document.getElementById('assign-user').value;
+  if (!user) { alert('Please select a user'); return; }
+  const ev = eventsData.find(e => e.id === activeEventId);
+  if (ev) ev.assignedTo = user;
+  closeModal('assign-modal'); renderEvents();
+}
+
+// ══ RESOLVE MODAL ═════════════════════════════════════════════════════════
+function openResolve(id) {
+  activeEventId = id;
+  closeAllMenus();
+  document.getElementById('resolve-modal').classList.add('open');
+}
+function saveResolve() {
+  const ev = eventsData.find(e => e.id === activeEventId);
+  if (ev) {
+    ev.status = 'resolved';
+    const n = new Date();
+    const pad = v => String(v).padStart(2,'0');
+    ev.resolvedBy = `a.kovac · ${pad(n.getDate())}.${pad(n.getMonth()+1)}.${n.getFullYear()} ${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  }
+  closeModal('resolve-modal'); renderEvents();
+}
+
+// ══ NEW EVENT MODAL ═══════════════════════════════════════════════════════
+function openNewEvent() {
+  document.getElementById('new-type').value = 'info';
+  document.getElementById('new-desc').value = '';
+  document.querySelectorAll('.new-assignee').forEach(cb => cb.checked = false);
+  document.getElementById('new-event-modal').classList.add('open');
+}
+function saveNewEvent() {
+  const type = document.getElementById('new-type').value;
+  const desc = document.getElementById('new-desc').value.trim();
+  if (!desc) { alert('Please enter a description'); return; }
+  const selected = Array.from(document.querySelectorAll('.new-assignee:checked')).map(cb => cb.value);
+  if (selected.length > 3) { alert('Maximum 3 users can be assigned'); return; }
+  const n = new Date();
+  const pad = v => String(v).padStart(2,'0');
+  const ts = `${pad(n.getDate())}.${pad(n.getMonth()+1)}.${n.getFullYear()} ${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  const tsSort = `${n.getFullYear()}${pad(n.getMonth()+1)}${pad(n.getDate())}-${pad(n.getHours())}${pad(n.getMinutes())}`;
+  eventsData.unshift({
+    id: Date.now(), type, name: 'Web note', def: desc, counter: 1,
+    start: ts, startSort: tsSort, source: 'Web', status: 'not-resolved',
+    assignedTo: selected.length > 0 ? selected.join(', ') : null, resolvedBy: null
+  });
+  closeModal('new-event-modal'); renderEvents();
+}
+
+// ══ MODAL / MENU HELPERS ══════════════════════════════════════════════════
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function toggleDropdown(id) {
+  const menu = document.getElementById(id);
+  const isOpen = menu.classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) menu.classList.add('open');
+}
+function toggleMenu(id) {
+  const menu = document.getElementById(id);
+  const isOpen = menu.classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) menu.classList.add('open');
+}
+function closeAllMenus() {
+  document.querySelectorAll('.dropdown-menu, .action-menu').forEach(m => m.classList.remove('open'));
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.dropdown-wrap') && !e.target.closest('.action-wrap') && !e.target.closest('.modal')) {
+    closeAllMenus();
+  }
+});
+
+// ══ TAB SWITCHING ═════════════════════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('panel-' + name);
+  if (panel) panel.classList.add('active');
+  const tabBtn = document.getElementById('tab-' + name);
+  if (tabBtn) {
+    tabBtn.classList.add('active');
+  } else {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      if (b.getAttribute('onclick') === "switchTab('" + name + "')") b.classList.add('active');
+    });
+  }
+  closeAllMenus();
+}
+
+// ══ PAGINATION SIZE ═══════════════════════════════════════════════════════
+function setPgSize(el) {
+  const siblings = el.closest('.pagination').querySelectorAll('.pg-size');
+  siblings.forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ══ INIT ══════════════════════════════════════════════════════════════════
+renderEvents();
 </script>
 </body>
 </html>
