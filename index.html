@@ -37,26 +37,48 @@
 
   body { font-family: var(--font); font-size: 14px; color: var(--dark); background: #FAFAFA; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-  /* ── TOP BAR ─────────────────────────────── */
+  /* ── TOP BAR (Figma: Top bar, 52px) ─────────── */
   .topbar {
-    height: var(--topbar-h);
+    height: 52px;
     background: var(--red);
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    gap: 12px;
+    padding: 0 15px 0 0;
+    gap: 0;
     flex-shrink: 0;
     z-index: 100;
   }
-  .topbar-logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 1px; }
-  .topbar-logo span { font-weight: 300; }
-  .topbar-spacer { flex: 1; }
-  .topbar-icon {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: rgba(255,255,255,.18);
+  .topbar-menu-btn {
+    width: 52px; height: 52px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    color: var(--white); font-size: 16px; cursor: pointer;
+    cursor: pointer; transition: background .15s;
   }
+  .topbar-menu-btn:hover { background: rgba(0,0,0,.12); }
+  .topbar-logo {
+    font-weight: 700; font-size: 17px; color: var(--white);
+    letter-spacing: .5px; padding: 0 14px 0 2px; flex-shrink: 0;
+  }
+  .topbar-logo span { font-weight: 300; }
+  .topbar-breadcrumbs {
+    flex: 1; display: flex; align-items: center; gap: 0;
+    font-size: 12px; color: rgba(255,255,255,.75); overflow: hidden;
+  }
+  .topbar-bc-sep { margin: 0 6px; color: rgba(255,255,255,.5); }
+  .topbar-bc-item { color: rgba(255,255,255,.75); white-space: nowrap; cursor: pointer; transition: color .15s; }
+  .topbar-bc-item:hover { color: #fff; }
+  .topbar-bc-item.current { color: #fff; font-weight: 500; }
+  .topbar-right {
+    display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+  }
+  .topbar-action-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 12px; border-radius: 6px; cursor: pointer;
+    font-size: 14px; font-weight: 500; color: var(--white);
+    background: none; border: none; font-family: var(--font);
+    transition: background .15s; white-space: nowrap;
+  }
+  .topbar-action-btn:hover { background: rgba(0,0,0,.12); }
+  .topbar-action-btn svg { flex-shrink: 0; }
 
   /* ── LAYOUT ──────────────────────────────── */
   .layout { display: flex; flex: 1; overflow: hidden; }
@@ -164,21 +186,66 @@
   /* ── MAIN CONTENT ────────────────────────── */
   .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-  .breadcrumb {
-    padding: 10px 24px; font-size: 12px; color: var(--grey-txt);
-    background: var(--white); border-bottom: 1px solid var(--grey-bdr); flex-shrink: 0;
+  /* ── MACHINE HEADER (Figma: Market Overview) ─ */
+  .machine-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--grey-bdr);
+    flex-shrink: 0;
   }
-  .breadcrumb a { color: var(--blue); text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
-  .breadcrumb span { margin: 0 6px; }
-
-  /* ── MACHINE HEADER ──────────────────────── */
-  .machine-header { background: var(--white); padding: 16px 24px 0; border-bottom: 1px solid var(--grey-bdr); flex-shrink: 0; }
-  .machine-header-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
-  .machine-icon { width: 44px; height: 44px; border-radius: 8px; background: var(--red); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 22px; flex-shrink: 0; }
-  .machine-title { font-size: 20px; font-weight: 700; }
-  .machine-sub { font-size: 12px; color: var(--grey-txt); margin-top: 3px; }
-  .machine-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .mkt-hdr-top {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 24px 10px;
+  }
+  /* "← Back to list" button */
+  .mkt-back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 6px;
+    background: #DEE2E6; border: none; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: #181B1E;
+    font-family: var(--font); transition: background .15s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .mkt-back-btn:hover { background: #CED4DA; }
+  /* title + status block */
+  .mkt-title-block { flex: 1; overflow: hidden; }
+  .mkt-title { font-size: 24px; font-weight: 700; color: #181B1E; line-height: 1.2; }
+  .mkt-status-row {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+    margin-top: 5px; font-size: 13px; color: #6C7580;
+  }
+  .mkt-sep { color: #ADB5BD; margin: 0 2px; }
+  .mkt-badge-green {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 10px; border-radius: 12px;
+    background: #DFFFF4; color: #00A871;
+    font-size: 12px; font-weight: 600;
+  }
+  .mkt-badge-grey {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 10px; border-radius: 12px;
+    background: #E9ECEF; color: #495057;
+    font-size: 12px; font-weight: 600;
+  }
+  .mkt-badge-amber { color: #EE991B; font-size: 12px; font-weight: 600; }
+  /* action buttons on right */
+  .mkt-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .mkt-btn-grey {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 6px;
+    background: #DEE2E6; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 500; color: #181B1E;
+    font-family: var(--font); transition: background .15s; white-space: nowrap;
+  }
+  .mkt-btn-grey:hover { background: #CED4DA; }
+  .mkt-btn-dark {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 6px;
+    background: #343A40; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 500; color: #FFFFFF;
+    font-family: var(--font); transition: background .15s; white-space: nowrap;
+  }
+  .mkt-btn-dark:hover { background: #23272B; }
+  /* keep badge classes for use in tab content */
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
   .badge-green  { background: #E8F5E9; color: var(--green); }
   .badge-grey   { background: #EEEEEE; color: #616161; }
@@ -187,13 +254,12 @@
   .badge-amber  { background: #FFF3E0; color: var(--amber); }
   .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
   .dot-green { background: var(--green); }
-  .machine-header-right { margin-left: auto; display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
 
-  /* ── TAB NAV ─────────────────────────────── */
-  .tab-nav { display: flex; gap: 0; padding: 0 24px; overflow-x: auto; }
+  /* ── TAB NAV (Figma: 44px, white bg) ────── */
+  .tab-nav { display: flex; gap: 0; padding: 0 24px; overflow-x: auto; border-top: 1px solid var(--grey-bdr); }
   .tab-nav::-webkit-scrollbar { display: none; }
   .tab-btn {
-    padding: 10px 16px; font-size: 13px; font-family: var(--font); font-weight: 500;
+    height: 44px; padding: 0 16px; font-size: 13px; font-family: var(--font); font-weight: 500;
     color: var(--grey-txt); background: none; border: none;
     border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap;
     transition: color .15s, border-color .15s;
@@ -418,11 +484,43 @@
 
 <!-- ══ TOP BAR ══════════════════════════════════════════════════════════ -->
 <div class="topbar">
+  <!-- hamburger menu button -->
+  <button class="topbar-menu-btn" title="Menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <rect x="2" y="4.5" width="16" height="2" rx="1" fill="white"/>
+      <rect x="2" y="9"   width="16" height="2" rx="1" fill="white"/>
+      <rect x="2" y="13.5" width="16" height="2" rx="1" fill="white"/>
+    </svg>
+  </button>
   <div class="topbar-logo">TELE<span>VEND</span></div>
-  <div class="topbar-spacer"></div>
-  <div class="topbar-icon" title="Notifications">🔔</div>
-  <div class="topbar-icon" title="Settings">⚙</div>
-  <div class="topbar-icon" title="Profile">👤</div>
+  <!-- breadcrumbs -->
+  <div class="topbar-breadcrumbs">
+    <span class="topbar-bc-sep">/</span>
+    <span class="topbar-bc-item">Micro market</span>
+    <span class="topbar-bc-sep">/</span>
+    <span class="topbar-bc-item current">Intis Nutrico: Bani 73a</span>
+  </div>
+  <!-- right: language + user -->
+  <div class="topbar-right">
+    <button class="topbar-action-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/>
+        <ellipse cx="8" cy="8" rx="2.8" ry="6.5" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/>
+        <line x1="2" y1="6" x2="14" y2="6" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/>
+        <line x1="2" y1="10" x2="14" y2="10" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/>
+      </svg>
+      ENG
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="rgba(255,255,255,.75)" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </button>
+    <button class="topbar-action-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="5.5" r="3" stroke="rgba(255,255,255,.75)" stroke-width="1.3"/>
+        <path d="M2.5 13.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="rgba(255,255,255,.75)" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      name@mail.com
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="rgba(255,255,255,.75)" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </button>
+  </div>
 </div>
 
 <!-- ══ LAYOUT ════════════════════════════════════════════════════════════ -->
@@ -560,32 +658,45 @@
   <!-- ── MAIN AREA ─────────────────────────── -->
   <div class="main">
 
-    <!-- breadcrumb -->
-    <div class="breadcrumb">
-      <a href="#">Machines</a>
-      <span>›</span>
-      <strong>WM-001 · City Center Plaza</strong>
-    </div>
-
-    <!-- machine header -->
+    <!-- machine header (Figma: Market Overview header) -->
     <div class="machine-header">
-      <div class="machine-header-top">
-        <div class="machine-icon">🖥</div>
-        <div>
-          <div class="machine-title">WM-001 · Nescafé Alegria 550</div>
-          <div class="machine-sub">City Center Plaza, Zagreb · Route: RT-04 · Last seen: 11.03.2026 08:22</div>
-          <div class="machine-badges">
-            <span class="badge badge-green"><span class="dot dot-green"></span> Online</span>
-            <span class="badge badge-blue">Hot beverages</span>
-            <span class="badge badge-grey">SN: ALE-20250112</span>
-            <span class="badge badge-grey">FW: 3.12.1</span>
-            <span class="badge badge-amber">⚠ 2 active alarms</span>
+      <div class="mkt-hdr-top">
+        <!-- back button -->
+        <button class="mkt-back-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8l5 5" stroke="#181B1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to list
+        </button>
+        <!-- title + status row -->
+        <div class="mkt-title-block">
+          <div class="mkt-title">Intis Nutrico: Bani 73a</div>
+          <div class="mkt-status-row">
+            <span>Bani 73, 10010 Zagreb</span>
+            <span class="mkt-sep">•</span>
+            <span class="mkt-badge-green">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#00A871"><circle cx="4" cy="4" r="4"/></svg>
+              Status: OK
+            </span>
+            <span class="mkt-sep">•</span>
+            <span class="mkt-badge-grey">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#ADB5BD"><circle cx="4" cy="4" r="4"/></svg>
+              Signal: Offline
+            </span>
+            <span class="mkt-sep">•</span>
+            <span>Downtime (last 30d): 2h 32sec</span>
+            <span class="mkt-sep">•</span>
+            <span class="mkt-badge-amber">▲ Top 10% of machines</span>
           </div>
         </div>
-        <div class="machine-header-right">
-          <button class="btn btn-outline btn-sm">Restart</button>
-          <button class="btn btn-outline btn-sm">Vend Test</button>
-          <button class="btn btn-primary btn-sm">Edit Machine</button>
+        <!-- action buttons -->
+        <div class="mkt-actions">
+          <button class="mkt-btn-grey">Update firmware</button>
+          <button class="mkt-btn-grey">Market setup</button>
+          <button class="mkt-btn-dark">
+            Send
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
 
