@@ -194,7 +194,7 @@
   }
   .mkt-hdr-top {
     display: flex; align-items: center; gap: 16px;
-    padding: 14px 24px 10px;
+    padding: 12px 24px 12px;
   }
   /* "← Back to list" button */
   .mkt-back-btn {
@@ -273,17 +273,8 @@
   }
 
   /* ── PANEL ───────────────────────────────── */
-  .tab-panel { display: none; flex: 1; overflow-y: auto; padding: 20px 24px 40px; }
+  .tab-panel { display: none; flex: 1; overflow-y: auto; padding: 0 24px 40px; }
   .tab-panel.active { display: block; }
-
-  /* ── SECTION HEADER ──────────────────────── */
-  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-  .section-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .section-icon-red   { background: #FFEBEE; color: var(--red); }
-  .section-icon-green { background: #E8F5E9; color: var(--green); }
-  .section-title { font-size: 16px; font-weight: 700; }
-  .section-count { font-size: 13px; color: var(--grey-txt); margin-left: 2px; }
-  .section-header-right { margin-left: auto; display: flex; gap: 8px; }
 
   /* ── BUTTONS ─────────────────────────────── */
   .btn {
@@ -294,45 +285,44 @@
     white-space: nowrap;
   }
   .btn:hover { background: var(--grey-bg); }
-  .btn-primary { background: var(--red); color: var(--white); border-color: var(--red); }
-  .btn-primary:hover { background: var(--red-dark); }
+  .btn-primary { background: #343A40; color: var(--white); border-color: #343A40; }
+  .btn-primary:hover { background: #23272B; }
   .btn-outline { border-color: var(--grey-bdr); }
   .btn-ghost { border: none; background: none; color: var(--grey-txt); }
   .btn-ghost:hover { background: var(--grey-bg); color: var(--dark); }
   .btn-sm { padding: 4px 10px; font-size: 12px; }
 
-  /* ── CHIP TYPE FILTERS ───────────────────── */
-  .chip-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-  .chip {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
-    cursor: pointer; border: 2px solid transparent; transition: opacity .15s;
-    user-select: none;
+  /* ── EVENTS STATION BAR (Figma) ──────────── */
+  .events-station-bar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0 10px;
+    border-bottom: 1px solid var(--grey-bdr);
+    margin-bottom: 0;
   }
-  .chip.dimmed { opacity: .3; }
-  .chip-info    { background: #E3F2FD; color: var(--blue);  border-color: var(--blue); }
-  .chip-warn    { background: #FFF3E0; color: var(--amber); border-color: var(--amber); }
-  .chip-alarm   { background: #FFEBEE; color: var(--red);   border-color: var(--red); }
-  .chip-count   { border-radius: 8px; padding: 0 5px; font-size: 11px; }
-  .chip-info .chip-count  { background: var(--blue);  color: #fff; }
-  .chip-warn .chip-count  { background: var(--amber); color: #fff; }
-  .chip-alarm .chip-count { background: var(--red);   color: #fff; }
-
-  /* ── LIVE / TEST TOGGLE ──────────────────── */
-  .toggle-group { display: inline-flex; border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; }
-  .toggle-btn {
-    padding: 5px 14px; height: 32px; font-size: 13px; font-family: var(--font);
-    font-weight: 500; background: var(--white); border: none;
-    border-right: 1px solid var(--grey-bdr); cursor: pointer;
-    color: var(--grey-txt); transition: background .15s, color .15s; white-space: nowrap;
+  .station-selector {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; height: 36px; border-radius: 6px;
+    border: 1px solid var(--grey-bdr); background: var(--white);
+    cursor: pointer; font-size: 14px; font-weight: 500; color: #181B1E;
+    font-family: var(--font); transition: background .15s; white-space: nowrap;
   }
-  .toggle-btn:last-child { border-right: none; }
-  .toggle-btn.active { background: var(--red); color: var(--white); font-weight: 600; }
-  .toggle-btn:not(.active):hover { background: var(--grey-bg); color: var(--dark); }
+  .station-selector:hover { background: var(--grey-bg); }
+  .station-selector-icon {
+    width: 22px; height: 22px; border-radius: 4px;
+    background: #EDF4FF; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .events-counts {
+    display: flex; align-items: center; gap: 6px;
+    flex: 1; font-size: 13px; color: #495057; flex-wrap: wrap;
+  }
+  .evt-count-alarm { color: var(--red); font-weight: 600; }
+  .evt-count-warn  { color: var(--amber); font-weight: 600; }
+  .evt-count-info  { color: var(--blue); font-weight: 600; }
+  .evt-count-sep   { color: #ADB5BD; margin: 0 2px; }
 
   /* ── FILTER BAR ──────────────────────────── */
-  .filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .dropdown-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .filter-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 8px 0; flex-wrap: wrap; border-bottom: 1px solid #F0F0F0; }
   .dropdown-wrap { position: relative; }
   .dropdown-btn {
     display: inline-flex; align-items: center; gap: 4px;
@@ -340,7 +330,7 @@
     background: var(--white); border: 1px solid var(--grey-bdr); cursor: pointer;
     color: var(--dark); white-space: nowrap; transition: background .15s;
   }
-  .dropdown-btn.active-filter { font-weight: 700; border-color: var(--red); color: var(--red); }
+  .dropdown-btn.active-filter { border-color: #CED4DA; }
   .dropdown-btn:hover { background: var(--grey-bg); }
   .dropdown-menu {
     display: none; position: absolute; top: calc(100% + 4px); left: 0;
@@ -352,6 +342,33 @@
   .dropdown-item { padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--dark); }
   .dropdown-item:hover { background: var(--grey-bg); }
   .dropdown-item.selected { color: var(--blue); font-weight: 600; }
+  /* clear all + download icon buttons */
+  .btn-clear-all {
+    padding: 5px 12px; height: 32px; border: none; background: none; cursor: pointer;
+    font-size: 13px; color: #6C7580; font-family: var(--font);
+    transition: color .15s;
+  }
+  .btn-clear-all:hover { color: var(--dark); }
+  .btn-icon-dl {
+    width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--grey-bdr);
+    background: var(--white); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .15s; margin-left: auto;
+  }
+  .btn-icon-dl:hover { background: var(--grey-bg); }
+
+  /* ── PLANOGRAMS HEADER ROW (Figma: Products header) ─ */
+  .plan-header-row {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 12px 0 10px; border-bottom: 1px solid var(--grey-bdr);
+    margin-bottom: 0;
+  }
+  .plan-title-block {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; flex: 1;
+  }
+  .plan-title { font-size: 18px; font-weight: 700; color: #181B1E; margin-right: 4px; }
+  .plan-meta { font-size: 12px; color: #6C7580; }
+  .plan-meta-sep { font-size: 12px; color: #ADB5BD; }
+  .plan-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
   /* search */
   .search-input {
@@ -378,20 +395,27 @@
   tbody tr:last-child td { border-bottom: none; }
   tbody tr:hover { background: #FAFAFA; }
 
-  /* type chips in table */
+  /* type chips in table (Figma: colored dot + label) */
   .type-chip {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
   }
-  .chip-type-info  { background: #E3F2FD; color: var(--blue); }
-  .chip-type-warn  { background: #FFF3E0; color: var(--amber); }
-  .chip-type-alarm { background: #FFEBEE; color: var(--red); }
+  .type-chip::before {
+    content: ''; display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+  .chip-type-info::before  { background: var(--blue); border-radius: 50%; }
+  .chip-type-warn::before  { background: var(--amber); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border-radius: 0; }
+  .chip-type-alarm::before { background: var(--red); border-radius: 50%; }
+  .chip-type-info  { color: var(--blue); }
+  .chip-type-warn  { color: var(--amber); }
+  .chip-type-alarm { color: var(--red); }
 
-  /* status pills */
-  .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-  .status-resolved     { background: #E8F5E9; color: var(--green); }
-  .status-not-resolved { background: #FFEBEE; color: var(--red); }
-  .resolved-meta { font-size: 11px; color: var(--grey-txt); margin-top: 3px; display: block; }
+  /* status pills (Figma) */
+  .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .status-resolved     { background: #DFFFF4; color: #00A871; }
+  .status-not-resolved { background: transparent; color: #495057; border: 1px solid #CED4DA; }
+  .resolved-meta { font-size: 11px; color: var(--grey-txt); margin-top: 2px; display: block; }
 
   /* 3-dot action menu */
   .action-wrap { position: relative; display: inline-block; }
@@ -666,28 +690,11 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M10 3L5 8l5 5" stroke="#181B1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Back to list
+          Back to Machine list
         </button>
-        <!-- title + status row -->
+        <!-- title block -->
         <div class="mkt-title-block">
           <div class="mkt-title">Intis Nutrico: Bani 73a</div>
-          <div class="mkt-status-row">
-            <span>Bani 73, 10010 Zagreb</span>
-            <span class="mkt-sep">•</span>
-            <span class="mkt-badge-green">
-              <svg width="8" height="8" viewBox="0 0 8 8" fill="#00A871"><circle cx="4" cy="4" r="4"/></svg>
-              Status: OK
-            </span>
-            <span class="mkt-sep">•</span>
-            <span class="mkt-badge-grey">
-              <svg width="8" height="8" viewBox="0 0 8 8" fill="#ADB5BD"><circle cx="4" cy="4" r="4"/></svg>
-              Signal: Offline
-            </span>
-            <span class="mkt-sep">•</span>
-            <span>Downtime (last 30d): 2h 32sec</span>
-            <span class="mkt-sep">•</span>
-            <span class="mkt-badge-amber">▲ Top 10% of machines</span>
-          </div>
         </div>
         <!-- action buttons -->
         <div class="mkt-actions">
@@ -700,63 +707,64 @@
         </div>
       </div>
 
-      <!-- tab nav -->
+      <!-- tab nav (Figma: 44px, Events + Planograms) -->
       <nav class="tab-nav">
-        <button class="tab-btn" onclick="switchTab('overview')">Overview</button>
-        <button class="tab-btn" onclick="switchTab('sales')">Sales</button>
-        <button class="tab-btn" onclick="switchTab('transactions')">Transactions</button>
         <button class="tab-btn active" id="tab-events" onclick="switchTab('events')">
           Events<span class="tab-badge" id="events-badge">2</span>
         </button>
-        <button class="tab-btn" onclick="switchTab('refill')">Refill</button>
-        <button class="tab-btn" id="tab-products" onclick="switchTab('products')">Products</button>
-        <button class="tab-btn" onclick="switchTab('analysis')">Analysis</button>
-        <button class="tab-btn" onclick="switchTab('kiosks')">Kiosks and stations</button>
+        <button class="tab-btn" id="tab-products" onclick="switchTab('products')">Planograms</button>
       </nav>
     </div>
 
     <!-- ══ EVENTS PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel active" id="panel-events">
 
-      <!-- section header -->
-      <div class="section-header">
-        <div class="section-icon section-icon-red">🔔</div>
-        <div>
-          <span class="section-title">Events</span>
-          <span class="section-count" id="events-count">· Total events: 8</span>
-        </div>
-        <div class="section-header-right">
-          <div class="dropdown-wrap">
-            <button class="btn btn-outline" onclick="toggleDropdown('export-dd')">Export ▾</button>
-            <div class="dropdown-menu" id="export-dd">
-              <div class="dropdown-item">Export as XLS</div>
-              <div class="dropdown-item">Export as CSV</div>
+      <!-- Figma: station selector bar -->
+      <div class="events-station-bar">
+        <!-- station selector dropdown -->
+        <div class="dropdown-wrap">
+          <button class="station-selector" onclick="toggleDropdown('dd-station')">
+            <div class="station-selector-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <rect x="1" y="1" width="5" height="5" rx="1" fill="#3B7DDD" opacity=".7"/>
+                <rect x="8" y="1" width="5" height="5" rx="1" fill="#3B7DDD" opacity=".7"/>
+                <rect x="1" y="8" width="5" height="5" rx="1" fill="#3B7DDD" opacity=".7"/>
+                <rect x="8" y="8" width="5" height="5" rx="1" fill="#3B7DDD" opacity=".7"/>
+              </svg>
             </div>
+            [Coffee machine] Aristos
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="margin-left:2px"><path d="M3 5l4 4 4-4" stroke="#6C7580" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown-menu" id="dd-station">
+            <div class="dropdown-item selected">[Coffee machine] Aristos</div>
+            <div class="dropdown-item">[Shelves] Voće i povrće</div>
+            <div class="dropdown-item">[Fridge] Salate</div>
+            <div class="dropdown-item">[Freezer] Sladoledi</div>
           </div>
-          <button class="btn btn-primary" onclick="openNewEvent()">+ New Event</button>
         </div>
+        <!-- alarm / warning / info counts -->
+        <div class="events-counts">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="var(--red)"><circle cx="5" cy="5" r="5"/></svg>
+          <span class="evt-count-alarm">Alarm: <span id="count-alarm">2</span></span>
+          <span class="evt-count-sep">•</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1L9.33 8.5H.67L5 1Z" stroke="var(--amber)" stroke-width="1.3" fill="none"/></svg>
+          <span class="evt-count-warn">Warnings: <span id="count-warn">2</span></span>
+          <span class="evt-count-sep">•</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="var(--blue)" stroke-width="1.4"/><line x1="5" y1="4" x2="5" y2="7" stroke="var(--blue)" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="2.8" r=".6" fill="var(--blue)"/></svg>
+          <span class="evt-count-info">Info: <span id="count-info">3</span></span>
+        </div>
+        <!-- add new event button -->
+        <button class="btn btn-primary" onclick="openNewEvent()">+ Add new event</button>
       </div>
 
-      <!-- chip type filters -->
-      <div class="chip-row">
-        <span class="chip chip-info" id="chip-info" onclick="toggleChip('info')">
-          ℹ Info <span class="chip-count" id="count-info">3</span>
-        </span>
-        <span class="chip chip-warn" id="chip-warn" onclick="toggleChip('warn')">
-          ⚡ Warning <span class="chip-count" id="count-warn">2</span>
-        </span>
-        <span class="chip chip-alarm" id="chip-alarm" onclick="toggleChip('alarm')">
-          🔔 Alarm <span class="chip-count" id="count-alarm">2</span>
-        </span>
-      </div>
-
-      <!-- filter bar -->
+      <!-- Figma: filter bar (Period | Status | Assigned | Name | Machine mode | Clear all | download) -->
       <div class="filter-bar">
         <div class="dropdown-wrap">
-          <button class="dropdown-btn active-filter" id="btn-period" onclick="toggleDropdown('dd-period')">Last 7 days ▾</button>
+          <button class="dropdown-btn active-filter" id="btn-period" onclick="toggleDropdown('dd-period')">Period ▾</button>
           <div class="dropdown-menu" id="dd-period">
-            <div class="dropdown-item selected" onclick="selectPeriod(this,'Last 7 days')">Last 7 days</div>
+            <div class="dropdown-item selected" onclick="selectPeriod(this,'Period')">All time</div>
             <div class="dropdown-item" onclick="selectPeriod(this,'Today')">Today</div>
+            <div class="dropdown-item" onclick="selectPeriod(this,'Last 7 days')">Last 7 days</div>
             <div class="dropdown-item" onclick="selectPeriod(this,'Last 30 days')">Last 30 days</div>
             <div class="dropdown-item" onclick="selectPeriod(this,'Custom range…')">Custom range…</div>
           </div>
@@ -770,13 +778,12 @@
           </div>
         </div>
         <div class="dropdown-wrap">
-          <button class="dropdown-btn" id="btn-source" onclick="toggleDropdown('dd-source')">Source ▾</button>
-          <div class="dropdown-menu" id="dd-source">
-            <div class="dropdown-item selected" onclick="selectSource(this,'all')">All sources</div>
-            <div class="dropdown-item" onclick="selectSource(this,'Machine')">Machine</div>
-            <div class="dropdown-item" onclick="selectSource(this,'Payment')">Payment</div>
-            <div class="dropdown-item" onclick="selectSource(this,'Network')">Network</div>
-            <div class="dropdown-item" onclick="selectSource(this,'Web')">Web</div>
+          <button class="dropdown-btn" onclick="toggleDropdown('dd-assigned')">Assigned ▾</button>
+          <div class="dropdown-menu" id="dd-assigned">
+            <div class="dropdown-item selected">All</div>
+            <div class="dropdown-item">A. Kovač</div>
+            <div class="dropdown-item">J. Doe</div>
+            <div class="dropdown-item">M. Novak</div>
           </div>
         </div>
         <div class="dropdown-wrap">
@@ -788,12 +795,22 @@
             <div class="dropdown-item">Temperature</div>
           </div>
         </div>
-        <!-- Live / Test mode toggle (US2) -->
-        <div class="toggle-group">
-          <button class="toggle-btn active" id="toggle-live" onclick="setMarketMode('live')">Live</button>
-          <button class="toggle-btn" id="toggle-test" onclick="setMarketMode('test')">Test mode</button>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="btn-source" onclick="toggleDropdown('dd-source')">Machine mode ▾</button>
+          <div class="dropdown-menu" id="dd-source">
+            <div class="dropdown-item selected" onclick="selectSource(this,'all')">All</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Machine')">Live</div>
+            <div class="dropdown-item" onclick="selectSource(this,'Web')">Test mode</div>
+          </div>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="resetAllFilters()">✕ Reset filters</button>
+        <button class="btn-clear-all" onclick="resetAllFilters()">Clear all</button>
+        <!-- download icon -->
+        <button class="btn-icon-dl" title="Download report">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2v9m0 0l-3-3m3 3l3-3" stroke="#6C7580" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 13h10" stroke="#6C7580" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
 
       <!-- events table -->
@@ -802,14 +819,13 @@
           <table>
             <thead>
               <tr>
-                <th>Type</th>
+                <th style="width:46px">Typ</th>
                 <th>Name</th>
                 <th>Definition</th>
-                <th style="text-align:center">Counter</th>
+                <th style="text-align:center;width:50px">Cou</th>
                 <th class="sortable" id="th-start" onclick="toggleSort()">Start <span id="sort-arrow">↓</span></th>
                 <th>Source</th>
                 <th>Status</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="events-tbody">
@@ -838,140 +854,151 @@
       </div>
     </div><!-- /panel-events -->
 
-    <!-- ══ PRODUCTS PANEL ═════════════════════════════════════════════ -->
+    <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <div class="section-header">
-        <div class="section-icon section-icon-green">📦</div>
-        <div>
-          <span class="section-title">Products</span>
-          <span class="section-count">· Total products: 8</span>
+      <!-- Figma: Products header row -->
+      <div class="plan-header-row">
+        <div class="plan-title-block">
+          <span class="plan-title">Products</span>
+          <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
+          <span class="plan-meta-sep">•</span>
+          <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
+          <span class="plan-meta-sep">•</span>
+          <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
+          </span>
         </div>
-        <div class="section-header-right">
-          <button class="btn btn-outline">Inventory</button>
-          <button class="btn btn-outline">Refill</button>
-          <button class="btn btn-outline">Edit Qty</button>
+        <div class="plan-actions">
+          <button class="mkt-btn-grey">Setup</button>
+          <button class="mkt-btn-grey">
+            Layout preview
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-wrap">
+            <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
+              Planogram
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </button>
+            <div class="dropdown-menu" id="dd-planogram">
+              <div class="dropdown-item">View planogram</div>
+              <div class="dropdown-item">Export planogram</div>
+              <div class="dropdown-item">Import planogram</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="dropdown-row">
-        <input class="search-input" type="text" placeholder="Search products…">
+      <!-- Figma: filter bar -->
+      <div class="filter-bar" style="margin-top:8px">
         <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-col')">Column ▾</button>
-          <div class="dropdown-menu" id="dd-col">
-            <div class="dropdown-item">All columns</div>
-            <div class="dropdown-item">Col 1</div>
-            <div class="dropdown-item">Col 2</div>
-            <div class="dropdown-item">Col 3</div>
+          <button class="dropdown-btn active-filter" onclick="toggleDropdown('dd-plan-period')">Period ▾</button>
+          <div class="dropdown-menu" id="dd-plan-period">
+            <div class="dropdown-item selected">All time</div>
+            <div class="dropdown-item">Last 7 days</div>
+            <div class="dropdown-item">Last 30 days</div>
           </div>
         </div>
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-recipe')">Recipe ▾</button>
-          <div class="dropdown-menu" id="dd-recipe">
-            <div class="dropdown-item">All recipes</div>
-            <div class="dropdown-item">Espresso</div>
-            <div class="dropdown-item">Americano</div>
-            <div class="dropdown-item">Cappuccino</div>
-          </div>
-        </div>
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn" onclick="toggleDropdown('dd-tags')">Tags ▾</button>
-          <div class="dropdown-menu" id="dd-tags">
-            <div class="dropdown-item">All tags</div>
-            <div class="dropdown-item">Hot</div>
-            <div class="dropdown-item">Cold</div>
-            <div class="dropdown-item">Snack</div>
-          </div>
-        </div>
-        <button class="btn btn-ghost btn-sm">Clear all</button>
+        <button class="btn-clear-all">Clear all</button>
+        <div style="flex:1"></div>
+        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th class="sortable">Col ↕</th>
+              <th>Category</th>
               <th>Product</th>
-              <th>Recipe</th>
+              <th class="sortable" onclick="">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M3 7l3 3 3-3M3 5l3-3 3 3" stroke="#9E9E9E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </th>
+              <th>Fill Qty/Cap</th>
+              <th>Column</th>
+              <th>Price</th>
               <th>Tags</th>
-              <th>Pickup</th>
-              <th>Cap</th>
-              <th>Fill Qty</th>
-              <th>Price 1</th>
               <th>Current Qty</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="fw6">01</td>
+              <td class="text-muted">Hot beverage</td>
               <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
-              <td class="text-muted">Espresso</td>
-              <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td>Front</td><td>20</td><td>20</td>
+              <td></td>
+              <td>17/20</td>
+              <td class="fw6">01</td>
               <td class="fw6">€1.20</td>
+              <td><span class="tag-pill tag-amber">Hot</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:85%"></div></div><span class="progress-val" style="color:var(--green)">17/20</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">02</td>
+              <td class="text-muted">Hot beverage</td>
               <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
-              <td class="text-muted">Americano</td>
-              <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td>Front</td><td>20</td><td>20</td>
+              <td></td>
+              <td>6/20</td>
+              <td class="fw6">02</td>
               <td class="fw6">€1.00</td>
+              <td><span class="tag-pill tag-amber">Hot</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:30%"></div></div><span class="progress-val" style="color:var(--amber)">6/20</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">03</td>
+              <td class="text-muted">Hot beverage</td>
               <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
-              <td class="text-muted">Cappuccino</td>
-              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
-              <td>Front</td><td>15</td><td>15</td>
+              <td></td>
+              <td>2/15</td>
+              <td class="fw6">03</td>
               <td class="fw6">€1.50</td>
+              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:13%"></div></div><span class="progress-val" style="color:var(--red)">2/15</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">04</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
               <td class="text-muted">Cold drink</td>
-              <td><span class="tag-pill tag-blue">Cold</span></td>
-              <td>Side</td><td>12</td><td>12</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
+              <td></td>
+              <td>9/12</td>
+              <td class="fw6">04</td>
               <td class="fw6">€1.80</td>
+              <td><span class="tag-pill tag-blue">Cold</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:75%"></div></div><span class="progress-val" style="color:var(--green)">9/12</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">05</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
               <td class="text-muted">Snack</td>
-              <td><span class="tag-pill tag-purple">Snack</span></td>
-              <td>Front</td><td>10</td><td>10</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
+              <td></td>
+              <td>4/10</td>
+              <td class="fw6">05</td>
               <td class="fw6">€1.30</td>
+              <td><span class="tag-pill tag-purple">Snack</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:40%"></div></div><span class="progress-val" style="color:var(--amber)">4/10</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">06</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
               <td class="text-muted">Cold drink</td>
-              <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
-              <td>Front</td><td>24</td><td>24</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
+              <td></td>
+              <td>23/24</td>
+              <td class="fw6">06</td>
               <td class="fw6">€0.90</td>
+              <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:96%"></div></div><span class="progress-val" style="color:var(--green)">23/24</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">07</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
               <td class="text-muted">Snack</td>
-              <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
-              <td>Front</td><td>8</td><td>8</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
+              <td></td>
+              <td>1/8</td>
+              <td class="fw6">07</td>
               <td class="fw6">€2.10</td>
+              <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:12%"></div></div><span class="progress-val" style="color:var(--red)">1/8</span></div></td>
             </tr>
             <tr>
-              <td class="fw6">08</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
               <td class="text-muted">Tea</td>
-              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
-              <td>Front</td><td>20</td><td>20</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
+              <td></td>
+              <td>12/20</td>
+              <td class="fw6">08</td>
               <td class="fw6">€1.10</td>
+              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
               <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:60%"></div></div><span class="progress-val" style="color:var(--green)">12/20</span></div></td>
             </tr>
           </tbody>
@@ -996,25 +1023,6 @@
       </div>
     </div><!-- /panel-products -->
 
-    <!-- placeholder panels -->
-    <div class="tab-panel" id="panel-overview">
-      <p class="text-muted" style="padding:40px;text-align:center">Overview panel – not part of this prototype</p>
-    </div>
-    <div class="tab-panel" id="panel-sales">
-      <p class="text-muted" style="padding:40px;text-align:center">Sales panel – not part of this prototype</p>
-    </div>
-    <div class="tab-panel" id="panel-transactions">
-      <p class="text-muted" style="padding:40px;text-align:center">Transactions panel – not part of this prototype</p>
-    </div>
-    <div class="tab-panel" id="panel-refill">
-      <p class="text-muted" style="padding:40px;text-align:center">Refill panel – not part of this prototype</p>
-    </div>
-    <div class="tab-panel" id="panel-analysis">
-      <p class="text-muted" style="padding:40px;text-align:center">Analysis panel – not part of this prototype</p>
-    </div>
-    <div class="tab-panel" id="panel-kiosks">
-      <p class="text-muted" style="padding:40px;text-align:center">Kiosks and stations panel – not part of this prototype</p>
-    </div>
 
   </div><!-- /main -->
 </div><!-- /layout -->
@@ -1144,41 +1152,40 @@ function renderEvents() {
 
   const tbody = document.getElementById('events-tbody');
   tbody.innerHTML = rows.length === 0
-    ? '<tr><td colspan="8" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No events match the current filters.</td></tr>'
+    ? '<tr><td colspan="7" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No events match the current filters.</td></tr>'
     : rows.map(renderRow).join('');
 
-  // counts
-  document.getElementById('events-count').textContent = `· Total events: ${rows.length}`;
+  // counts (station bar spans)
   document.getElementById('events-total').textContent = rows.length;
   document.getElementById('count-info').textContent  = eventsData.filter(r => r.type === 'info').length;
   document.getElementById('count-warn').textContent  = eventsData.filter(r => r.type === 'warn').length;
   document.getElementById('count-alarm').textContent = eventsData.filter(r => r.type === 'alarm').length;
-  document.getElementById('sort-arrow').textContent  = sortAsc ? '↑' : '↓';
+  const sortArrow = document.getElementById('sort-arrow');
+  if (sortArrow) sortArrow.textContent = sortAsc ? '↑' : '↓';
 
   // tab badge: active (not-resolved) alarms
   const active = eventsData.filter(r => r.type === 'alarm' && r.status === 'not-resolved').length;
   const badge = document.getElementById('events-badge');
   badge.textContent = active;
   badge.style.display = active > 0 ? '' : 'none';
-  document.querySelector('.badge-amber').textContent = active > 0 ? `⚠ ${active} active alarm${active > 1 ? 's' : ''}` : '';
 }
 
 function renderRow(r) {
-  const labels = { alarm: '⬤ ALARM', warn: '⬤ WARNING', info: '⬤ INFO' };
+  const labels = { alarm: 'ALARM', warn: 'WARNING', info: 'INFO' };
   const cls    = { alarm: 'chip-type-alarm', warn: 'chip-type-warn', info: 'chip-type-info' };
   const typeChip = `<span class="type-chip ${cls[r.type]}">${labels[r.type]}</span>`;
 
   let statusCell = '';
   if (r.status === 'resolved') {
-    statusCell = `<span class="status-pill status-resolved">● Resolved</span>`;
+    statusCell = `<span class="status-pill status-resolved">RESOLVED</span>`;
     if (r.resolvedBy) statusCell += `<span class="resolved-meta">${r.resolvedBy}</span>`;
   } else {
-    statusCell = `<span class="status-pill status-not-resolved">● Not resolved</span>`;
+    statusCell = `<span class="status-pill status-not-resolved">UNRESOLVED</span>`;
     if (r.assignedTo) statusCell += `<span class="resolved-meta">→ ${r.assignedTo}</span>`;
   }
 
-  const actionBtn = r.status !== 'resolved'
-    ? `<div class="action-wrap">
+  const actionMenu = r.status !== 'resolved'
+    ? `<div class="action-wrap" style="display:inline-block;margin-left:6px;vertical-align:middle">
         <button class="dots-btn" onclick="toggleMenu('menu-${r.id}')">⋮</button>
         <div class="action-menu" id="menu-${r.id}">
           <div class="action-menu-item" onclick="openAssign(${r.id})">👤 Assign</div>
@@ -1194,16 +1201,8 @@ function renderRow(r) {
     <td style="text-align:center">${r.counter}</td>
     <td style="white-space:nowrap">${r.start}</td>
     <td>${r.source}</td>
-    <td>${statusCell}</td>
-    <td>${actionBtn}</td>
+    <td style="white-space:nowrap">${statusCell}${actionMenu}</td>
   </tr>`;
-}
-
-// ══ CHIP FILTERS ══════════════════════════════════════════════════════════
-function toggleChip(type) {
-  chipState[type] = !chipState[type];
-  document.getElementById('chip-' + type).classList.toggle('dimmed', !chipState[type]);
-  renderEvents();
 }
 
 // ══ SORT ══════════════════════════════════════════════════════════════════
@@ -1242,28 +1241,20 @@ function selectPeriod(el, val) {
   closeAllMenus();
 }
 
-// ══ MARKET MODE TOGGLE ════════════════════════════════════════════════════
-function setMarketMode(mode) {
-  document.getElementById('toggle-live').classList.toggle('active', mode === 'live');
-  document.getElementById('toggle-test').classList.toggle('active', mode === 'test');
-}
-
 // ══ RESET ALL FILTERS ═════════════════════════════════════════════════════
 function resetAllFilters() {
   chipState = { info: true, warn: true, alarm: true };
-  ['chip-info','chip-warn','chip-alarm'].forEach(id => document.getElementById(id).classList.remove('dimmed'));
   statusFilter = 'all';
   document.querySelectorAll('#dd-status .dropdown-item').forEach(i => i.classList.remove('selected'));
   document.querySelector('#dd-status .dropdown-item').classList.add('selected');
   const bs = document.getElementById('btn-status');
-  bs.textContent = 'Status ▾'; bs.classList.remove('active-filter');
+  if (bs) { bs.textContent = 'Status ▾'; bs.classList.remove('active-filter'); }
   sourceFilter = 'all';
   document.querySelectorAll('#dd-source .dropdown-item').forEach(i => i.classList.remove('selected'));
   document.querySelector('#dd-source .dropdown-item').classList.add('selected');
   const bsr = document.getElementById('btn-source');
-  bsr.textContent = 'Source ▾'; bsr.classList.remove('active-filter');
+  if (bsr) { bsr.textContent = 'Machine mode ▾'; bsr.classList.remove('active-filter'); }
   sortAsc = false;
-  setMarketMode('live');
   renderEvents();
 }
 
