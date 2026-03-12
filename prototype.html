@@ -1113,7 +1113,7 @@
       <!-- ── STATION VIEW (shown when a station is selected) ────────────── -->
       <div id="products-station-view" style="display:none">
         <!-- Station toolbar: search + Setup / Layout preview / Add column -->
-        <div class="filter-bar" style="padding:10px 0">
+        <div class="filter-bar" style="padding:10px 0;position:sticky;top:0;background:#fff;z-index:5;margin:0 -24px;padding-left:24px;padding-right:24px">
           <input class="search-input" id="products-search-station" type="text" placeholder="Search products…" oninput="filterStationProducts()" />
           <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
           <div style="flex:1"></div>
@@ -1842,7 +1842,7 @@ function addStationColumn() {
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="3.0000" step="0.01" class="col-edit-input col-edit-num"></td>
-    <td><button class="btn-ok-green" onclick="confirmStationColumn(this)">OK</button></td>`;
+    <td style="white-space:nowrap"><button class="btn-ok-green" onclick="confirmStationColumn(this)">OK</button> <button class="btn-delete" style="padding:4px 12px;font-size:13px;font-weight:500" onclick="this.closest('tr').remove()">Cancel</button></td>`;
   tbody.appendChild(tr);
   tr.scrollIntoView({block:'nearest'});
   tr.querySelector('input').focus();
