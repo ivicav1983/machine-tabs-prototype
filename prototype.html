@@ -505,11 +505,11 @@
 
   /* ── PRODUCTS BOTTOM BAR ─────────────────────────── */
   .products-bottom-bar {
-    display: flex; align-items: center; gap: 24px;
+    display: flex; flex-direction: column; gap: 8px;
     padding: 14px 0 6px; border-top: 1px solid var(--grey-bdr); margin-top: 6px;
   }
-  .products-bottom-btns { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
-  .products-bottom-meta { flex: 1; display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #6C7580; }
+  .products-bottom-row { display: flex; justify-content: space-between; align-items: center; }
+  .products-bottom-meta { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #6C7580; }
   .btn-green {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
@@ -517,6 +517,13 @@
     background: var(--green); color: #fff; transition: background .15s; min-width: 160px;
   }
   .btn-green:hover { background: #2E7D32; }
+  .btn-delete {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; white-space: nowrap;
+    background: #fff; color: var(--red); border: 1.5px solid var(--red); transition: background .15s, color .15s;
+  }
+  .btn-delete:hover { background: var(--red); color: #fff; }
   .btn-grey-solid {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
@@ -1073,40 +1080,24 @@
         </div>
       </div>
 
-      <div class="pagination">
-        <span class="pg-label text-muted">Rows per page:</span>
-        <span class="pg-size" onclick="setPgSize(this)">10</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size active" onclick="setPgSize(this)">20</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">50</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">100</span>
-        <span class="pg-total text-muted">Total items: <strong id="products-total">8</strong></span>
-        <div class="pg-nav">
-          <button class="pg-nav-btn">‹</button>
-          <div class="pg-num">1</div>
-          <button class="pg-nav-btn">›</button>
-        </div>
-      </div>
-
       <div class="products-bottom-bar">
-        <!-- Left buttons -->
-        <div class="products-bottom-btns">
-          <button class="btn-green">Save as Planogram</button>
-          <button class="btn-grey-solid">Load Planogram</button>
+        <!-- Buttons row -->
+        <div class="products-bottom-row">
+          <div style="display:flex;gap:8px">
+            <button class="btn-green">Save as Planogram</button>
+            <button class="btn-grey-solid">Load Planogram</button>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-green">Push product list</button>
+            <button class="btn-delete">Delete Columns</button>
+          </div>
         </div>
-        <!-- Center metadata -->
+        <!-- Metadata row -->
         <div class="products-bottom-meta">
           <span>Product list changed: 06.03.2026 12:25 [Dario Skegro]</span>
           <span>Product list pushed: 06.03.2026 12:25 [Dario Skegro]</span>
           <span>Based on planogram: Opera</span>
           <span>Planogram added: 14.01.2026 12:58 [Dario Skegro]</span>
-        </div>
-        <!-- Right buttons -->
-        <div class="products-bottom-btns">
-          <button class="btn-green">Push product list</button>
-          <button class="btn-green">Delete Columns</button>
         </div>
       </div>
     </div><!-- /panel-products -->
