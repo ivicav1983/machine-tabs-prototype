@@ -1822,6 +1822,15 @@ function selectStation(el, stationId) {
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = 'none';
   document.getElementById('products-station-view').style.display = '';
+  // Hide market-only tabs; switch away if one is active
+  const marketOnlyTabs = ['tab-overview', 'tab-transactions'];
+  marketOnlyTabs.forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.style.display = 'none';
+  });
+  if (marketOnlyTabs.some(id => document.getElementById(id)?.classList.contains('active'))) {
+    switchTab('products');
+  }
 }
 
 function selectMarket(el) {
@@ -1829,6 +1838,11 @@ function selectMarket(el) {
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = '';
   document.getElementById('products-station-view').style.display = 'none';
+  // Restore market-only tabs
+  ['tab-overview', 'tab-transactions'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.style.display = '';
+  });
 }
 
 // ══ PRODUCTS SEARCH ═══════════════════════════════════════════════════════
