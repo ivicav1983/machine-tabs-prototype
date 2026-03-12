@@ -680,6 +680,49 @@
   .ua-blue  { background: var(--blue); }
   .ua-green { background: var(--green); }
   .ua-amber { background: var(--amber); }
+
+/* ── Overview tab ─────────────────────────────────────────────────────────── */
+.ov-top-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 0; }
+.ov-card { border: 1px solid var(--grey-bdr); border-radius: 8px; padding: 16px 20px; background: #fff; }
+.ov-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--grey-txt); margin-bottom: 12px; }
+.ov-status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ov-status-badge { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.ov-status-ok   { color: #388E3C; }
+.ov-status-warn { color: #F57C00; }
+.ov-status-alarm{ color: #D32F2F; }
+.ov-status-offline{ color: #757575; }
+.ov-info-rows { display: flex; flex-direction: column; gap: 8px; }
+.ov-info-row { display: flex; align-items: center; gap: 8px; font-size: 13px; flex-wrap: wrap; }
+.ov-label { color: var(--grey-txt); min-width: 150px; font-size: 13px; flex-shrink: 0; }
+.ov-section-title { font-size: 15px; font-weight: 700; color: #181B1E; margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--grey-bdr); }
+.ov-subsection-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--grey-txt); margin: 14px 0 8px; }
+.ov-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ov-kpi-tile { border: 1px solid var(--grey-bdr); border-radius: 8px; padding: 14px 16px; background: #fff; }
+.ov-kpi-label { font-size: 11px; color: var(--grey-txt); font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 6px; }
+.ov-kpi-value { font-size: 22px; font-weight: 700; color: #181B1E; margin-bottom: 4px; line-height: 1.1; }
+.ov-kpi-delta { font-size: 12px; }
+.ov-kpi-delta.positive { color: #388E3C; }
+.ov-kpi-delta.negative { color: #D32F2F; }
+.ov-kpi-delta.neutral  { color: var(--grey-txt); }
+.ov-kiosk-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ov-kiosk-card { border: 1px solid var(--grey-bdr); border-radius: 8px; padding: 14px 16px; background: #fff; }
+.ov-kiosk-name { font-size: 13px; font-weight: 700; color: #181B1E; margin-bottom: 10px; }
+.ov-station-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.ov-station-card { border: 1px solid var(--grey-bdr); border-radius: 8px; padding: 14px 16px; background: #fff; }
+.ov-station-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ov-station-type { font-size: 11px; font-weight: 700; color: var(--grey-txt); text-transform: uppercase; margin-right: 6px; }
+.ov-station-name { font-size: 13px; font-weight: 700; color: #181B1E; }
+.ov-station-stock-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ov-station-stock-row .ov-label { min-width: 80px; }
+.ov-station-meta { display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap; align-items: center; color: var(--grey-txt); }
+.ov-stock-link { color: var(--red); font-weight: 600; font-size: 12px; cursor: pointer; margin-left: auto; }
+.ov-stock-link:hover { text-decoration: underline; }
+@media (max-width: 900px) {
+  .ov-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .ov-kiosk-row { grid-template-columns: repeat(2, 1fr); }
+  .ov-top-row { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -1293,30 +1336,238 @@
 
     </div><!-- /panel-products -->
 
-    <!-- ══ OVERVIEW PANEL ═════════════════════════════════════════════ -->
+    <!-- ══ OVERVIEW PANEL ════════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-overview">
+
+      <!-- Page header -->
       <div class="fig-page-hdr">
         <div>
           <div class="fig-page-title">Overview</div>
-          <div class="fig-page-desc">Summary metrics, status indicators and quick-action tiles for this micro market</div>
+          <div class="fig-page-desc">Service status, market info, key KPIs and station health</div>
         </div>
         <div class="fig-page-actions">
           <button class="fig-btn-tertiary">Export</button>
-          <button class="fig-btn-secondary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Add widget
-          </button>
+          <button class="fig-btn-secondary">Last 30 days ▾</button>
           <button class="fig-btn-primary">Refresh</button>
         </div>
       </div>
-      <div class="fig-empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/></svg>
-        <h4>No data yet</h4>
-        <p>Summary metrics, status indicators and quick-action tiles will appear here.</p>
-      </div>
-    </div>
 
-    <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
+      <!-- ── Top row: Service status + Market info ── -->
+      <div class="ov-top-row">
+
+        <!-- Service status card -->
+        <div class="ov-card">
+          <div class="ov-card-title">Service status</div>
+          <div class="ov-status-row">
+            <span class="ov-status-badge ov-status-ok">
+              <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#388E3C"/></svg>
+              OK
+            </span>
+            <span class="text-muted" style="font-size:13px">All systems operational</span>
+          </div>
+          <div class="ov-info-rows">
+            <div class="ov-info-row">
+              <span class="ov-label">Connectivity</span>
+              <span class="badge badge-green">Connected</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Signal</span>
+              <span class="fw6">Strong (4G)</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Uptime (30d)</span>
+              <span class="fw6">98.4 %</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Active alarms</span>
+              <span class="badge badge-red">2 Alarm</span>
+              <span class="badge badge-amber" style="margin-left:4px">1 Warning</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market info card -->
+        <div class="ov-card">
+          <div class="ov-card-title">Market info</div>
+          <div class="ov-info-rows">
+            <div class="ov-info-row">
+              <span class="ov-label">Location</span>
+              <span class="fw6">Zagreb, Ilica 42</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Client</span>
+              <span class="fw6">Konzum d.o.o.</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Route</span>
+              <span class="fw6">Route A – Zagreb North</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Filler</span>
+              <span class="fw6">Marko Horvat</span>
+            </div>
+            <div class="ov-info-row" style="border-top:1px solid #F0F0F0;margin-top:4px;padding-top:10px">
+              <span class="ov-label">Last sale</span>
+              <span class="fw6">Today, 11:42</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Last refill</span>
+              <span class="fw6">09.03.2026, 10:15</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Last cash collection</span>
+              <span class="fw6">05.03.2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KPI section ── -->
+      <div class="ov-section-title">KPIs — Last 30 days</div>
+      <div class="ov-kpi-row">
+        <div class="ov-kpi-tile">
+          <div class="ov-kpi-label">Revenue</div>
+          <div class="ov-kpi-value">€ 4,218.50</div>
+          <div class="ov-kpi-delta positive">▲ 8.3 % vs prev. period</div>
+        </div>
+        <div class="ov-kpi-tile">
+          <div class="ov-kpi-label">Items sold</div>
+          <div class="ov-kpi-value">1,847</div>
+          <div class="ov-kpi-delta positive">▲ 5.1 % vs prev. period</div>
+        </div>
+        <div class="ov-kpi-tile">
+          <div class="ov-kpi-label">Transactions</div>
+          <div class="ov-kpi-value">932</div>
+          <div class="ov-kpi-delta neutral">— same as prev. period</div>
+        </div>
+        <div class="ov-kpi-tile">
+          <div class="ov-kpi-label">Downtime</div>
+          <div class="ov-kpi-value">1.6 %</div>
+          <div class="ov-kpi-delta positive">▼ 0.4 pp improvement</div>
+        </div>
+      </div>
+
+      <!-- ── Kiosks & Stations ── -->
+      <div class="ov-section-title">Kiosks &amp; Stations</div>
+
+      <div class="ov-subsection-title">Kiosks</div>
+      <div class="ov-kiosk-row">
+        <div class="ov-kiosk-card">
+          <div class="ov-kiosk-name">[Kiosk 01] Main entrance</div>
+          <div class="ov-info-rows">
+            <div class="ov-info-row">
+              <span class="ov-label">Status</span>
+              <span class="badge badge-green">OK</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Connection</span>
+              <span class="badge badge-green">Connected</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Sales today</span>
+              <span class="fw6">€ 142.30 / 61 items</span>
+            </div>
+          </div>
+        </div>
+        <div class="ov-kiosk-card">
+          <div class="ov-kiosk-name">[Kiosk 02] Side hall</div>
+          <div class="ov-info-rows">
+            <div class="ov-info-row">
+              <span class="ov-label">Status</span>
+              <span class="badge badge-amber">Warning</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Connection</span>
+              <span class="badge badge-green">Connected</span>
+            </div>
+            <div class="ov-info-row">
+              <span class="ov-label">Sales today</span>
+              <span class="fw6">€ 89.10 / 37 items</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ov-subsection-title" style="margin-top:16px">Stations</div>
+      <div class="ov-station-list">
+
+        <!-- Station 1: Shelves – OK -->
+        <div class="ov-station-card">
+          <div class="ov-station-header">
+            <div>
+              <span class="ov-station-type">[SHELVES]</span>
+              <span class="ov-station-name">Fruits &amp; Vegetables</span>
+            </div>
+            <span class="badge badge-green">OK</span>
+          </div>
+          <div class="ov-station-stock-row">
+            <span class="ov-label">Stock level</span>
+            <div class="progress-wrap" style="flex:1">
+              <div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:78%"></div></div>
+              <span class="progress-val">78 %</span>
+            </div>
+          </div>
+          <div class="ov-station-meta">
+            <span>Last refill: 09.03.2026</span>
+            <span>Last sale: Today 11:42</span>
+            <span>Route: Route A – Marko Horvat</span>
+            <a class="ov-stock-link">View stock ›</a>
+          </div>
+        </div>
+
+        <!-- Station 2: Fridge – Low stock -->
+        <div class="ov-station-card">
+          <div class="ov-station-header">
+            <div>
+              <span class="ov-station-type">[FRIDGE]</span>
+              <span class="ov-station-name">Cold drinks</span>
+            </div>
+            <span class="badge badge-amber">Low stock</span>
+          </div>
+          <div class="ov-station-stock-row">
+            <span class="ov-label">Stock level</span>
+            <div class="progress-wrap" style="flex:1">
+              <div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:32%"></div></div>
+              <span class="progress-val">32 %</span>
+            </div>
+          </div>
+          <div class="ov-station-meta">
+            <span>Last refill: 03.03.2026</span>
+            <span>Last sale: Today 10:28</span>
+            <span>Route: Route A – Marko Horvat</span>
+            <a class="ov-stock-link">View stock ›</a>
+          </div>
+        </div>
+
+        <!-- Station 3: Coffee – Out of stock -->
+        <div class="ov-station-card">
+          <div class="ov-station-header">
+            <div>
+              <span class="ov-station-type">[COFFEE]</span>
+              <span class="ov-station-name">Aristos Coffee</span>
+            </div>
+            <span class="badge badge-red">Out of stock</span>
+          </div>
+          <div class="ov-station-stock-row">
+            <span class="ov-label">Stock level</span>
+            <div class="progress-wrap" style="flex:1">
+              <div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:8%"></div></div>
+              <span class="progress-val">8 %</span>
+            </div>
+          </div>
+          <div class="ov-station-meta">
+            <span>Last refill: 28.02.2026</span>
+            <span>Last sale: Yesterday 17:05</span>
+            <span>Not on route</span>
+            <a class="ov-stock-link">View stock ›</a>
+          </div>
+        </div>
+
+      </div><!-- /ov-station-list -->
+
+    </div><!-- /panel-overview -->
+
+        <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-sales">
       <div class="fig-page-hdr">
         <div>
