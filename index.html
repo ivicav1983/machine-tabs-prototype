@@ -465,6 +465,41 @@
   .text-muted { color: var(--grey-txt); }
   .fw6 { font-weight: 600; }
 
+  /* ── PRODUCTS FOOTER (metadata 3 rows, bottom-left) ── */
+  .products-footer {
+    display: flex; flex-direction: column; gap: 3px;
+    font-size: 12px; color: #6C7580;
+    padding: 10px 0 4px;
+  }
+
+  /* ── TYPE CHIP TOGGLES (Events filter bar) ── */
+  .chip-toggle-bar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .chip-toggle {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+    border: 1.5px solid; cursor: pointer; transition: opacity .15s, background .15s;
+    user-select: none;
+  }
+  .chip-toggle::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .chip-alarm { background: #FFEBEE; color: var(--red); border-color: var(--red); }
+  .chip-alarm::before { background: var(--red); }
+  .chip-warn  { background: #FFF3E0; color: var(--amber); border-color: var(--amber); }
+  .chip-warn::before  { background: var(--amber); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border-radius: 0; }
+  .chip-info  { background: #E3F2FD; color: var(--blue); border-color: var(--blue); }
+  .chip-info::before  { background: var(--blue); }
+  .chip-toggle.off { opacity: .38; filter: grayscale(.5); }
+
+  /* ── EMPTY TAB PLACEHOLDER ────────────────── */
+  .tab-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 24px; color: var(--grey-txt); gap: 12px;
+  }
+  .tab-placeholder-icon { opacity: .25; }
+  .tab-placeholder h3 { font-size: 16px; font-weight: 600; color: #9E9E9E; }
+  .tab-placeholder p  { font-size: 13px; color: #BDBDBD; }
+
   /* ── MODALS ──────────────────────────────── */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
@@ -707,12 +742,18 @@
         </div>
       </div>
 
-      <!-- tab nav (Figma: 44px, Events + Planograms) -->
+      <!-- tab nav (Figma: 44px, 8 tabs) -->
       <nav class="tab-nav">
+        <button class="tab-btn" id="tab-overview"   onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" id="tab-sales"      onclick="switchTab('sales')">Sales</button>
+        <button class="tab-btn" id="tab-transactions" onclick="switchTab('transactions')">Transactions</button>
         <button class="tab-btn active" id="tab-events" onclick="switchTab('events')">
           Events<span class="tab-badge" id="events-badge">2</span>
         </button>
-        <button class="tab-btn" id="tab-products" onclick="switchTab('products')">Planograms</button>
+        <button class="tab-btn" id="tab-refill"     onclick="switchTab('refill')">Refill</button>
+        <button class="tab-btn" id="tab-products"   onclick="switchTab('products')">Products</button>
+        <button class="tab-btn" id="tab-analysis"   onclick="switchTab('analysis')">Analysis</button>
+        <button class="tab-btn" id="tab-kiosks"     onclick="switchTab('kiosks')">Kiosks &amp; Stations</button>
       </nav>
     </div>
 
@@ -755,6 +796,13 @@
         </div>
         <!-- add new event button -->
         <button class="btn btn-primary" onclick="openNewEvent()">+ Add new event</button>
+      </div>
+
+      <!-- Figma: chip filter toggles (Info / Warning / Alarm) -->
+      <div class="chip-toggle-bar" style="padding:8px 0 4px">
+        <span class="chip-toggle chip-alarm" id="chip-alarm" onclick="toggleChip('alarm')">ALARM (<span id="chip-count-alarm">2</span>)</span>
+        <span class="chip-toggle chip-warn"  id="chip-warn"  onclick="toggleChip('warn')">WARNING (<span id="chip-count-warn">2</span>)</span>
+        <span class="chip-toggle chip-info"  id="chip-info"  onclick="toggleChip('info')">INFO (<span id="chip-count-info">3</span>)</span>
       </div>
 
       <!-- Figma: filter bar (Period | Status | Assigned | Name | Machine mode | Clear all | download) -->
@@ -861,13 +909,6 @@
       <div class="plan-header-row">
         <div class="plan-title-block">
           <span class="plan-title">Products</span>
-          <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
-          </span>
         </div>
         <div class="plan-actions">
           <button class="mkt-btn-grey">Setup</button>
@@ -891,15 +932,8 @@
 
       <!-- Figma: filter bar -->
       <div class="filter-bar" style="margin-top:8px">
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn active-filter" onclick="toggleDropdown('dd-plan-period')">Period ▾</button>
-          <div class="dropdown-menu" id="dd-plan-period">
-            <div class="dropdown-item selected">All time</div>
-            <div class="dropdown-item">Last 7 days</div>
-            <div class="dropdown-item">Last 30 days</div>
-          </div>
-        </div>
-        <button class="btn-clear-all">Clear all</button>
+        <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
+        <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
         <div style="flex:1"></div>
         <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
       </div>
@@ -917,10 +951,10 @@
               <th>Column</th>
               <th>Price</th>
               <th>Tags</th>
-              <th>Current Qty</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="products-tbody">
+            <tr id="products-noresult" style="display:none"><td colspan="7" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
             <tr>
               <td class="text-muted">Hot beverage</td>
               <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
@@ -929,7 +963,6 @@
               <td class="fw6">01</td>
               <td class="fw6">€1.20</td>
               <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:85%"></div></div><span class="progress-val" style="color:var(--green)">17/20</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Hot beverage</td>
@@ -939,7 +972,6 @@
               <td class="fw6">02</td>
               <td class="fw6">€1.00</td>
               <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:30%"></div></div><span class="progress-val" style="color:var(--amber)">6/20</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Hot beverage</td>
@@ -949,7 +981,6 @@
               <td class="fw6">03</td>
               <td class="fw6">€1.50</td>
               <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:13%"></div></div><span class="progress-val" style="color:var(--red)">2/15</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Cold drink</td>
@@ -959,7 +990,6 @@
               <td class="fw6">04</td>
               <td class="fw6">€1.80</td>
               <td><span class="tag-pill tag-blue">Cold</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:75%"></div></div><span class="progress-val" style="color:var(--green)">9/12</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Snack</td>
@@ -969,7 +999,6 @@
               <td class="fw6">05</td>
               <td class="fw6">€1.30</td>
               <td><span class="tag-pill tag-purple">Snack</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:40%"></div></div><span class="progress-val" style="color:var(--amber)">4/10</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Cold drink</td>
@@ -979,7 +1008,6 @@
               <td class="fw6">06</td>
               <td class="fw6">€0.90</td>
               <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:96%"></div></div><span class="progress-val" style="color:var(--green)">23/24</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Snack</td>
@@ -989,7 +1017,6 @@
               <td class="fw6">07</td>
               <td class="fw6">€2.10</td>
               <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:12%"></div></div><span class="progress-val" style="color:var(--red)">1/8</span></div></td>
             </tr>
             <tr>
               <td class="text-muted">Tea</td>
@@ -999,7 +1026,6 @@
               <td class="fw6">08</td>
               <td class="fw6">€1.10</td>
               <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:60%"></div></div><span class="progress-val" style="color:var(--green)">12/20</span></div></td>
             </tr>
           </tbody>
         </table>
@@ -1014,15 +1040,76 @@
         <span class="pg-size" onclick="setPgSize(this)">50</span>
         <span class="pg-sep">|</span>
         <span class="pg-size" onclick="setPgSize(this)">100</span>
-        <span class="pg-total text-muted">Total items: <strong>8</strong></span>
+        <span class="pg-total text-muted">Total items: <strong id="products-total">8</strong></span>
         <div class="pg-nav">
           <button class="pg-nav-btn">‹</button>
           <div class="pg-num">1</div>
           <button class="pg-nav-btn">›</button>
         </div>
       </div>
+
+      <div class="products-footer">
+        <span>Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
+        <span>Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
+        <span>Stock warning: <strong style="color:var(--red)">30%</strong>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
+        </span>
+      </div>
     </div><!-- /panel-products -->
 
+    <!-- ══ OVERVIEW PANEL ═════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-overview">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h3>Overview</h3>
+        <p>Summary metrics, status indicators and quick-action tiles will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-sales">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Sales</h3>
+        <p>Revenue charts, top-selling products and sales trends will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ TRANSACTIONS PANEL ═════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-transactions">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h3>Transactions</h3>
+        <p>Payment history, transaction details and receipt lookup will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-refill">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0l-3-3m3 3l3-3" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12c0-4.418 3.582-8 8-8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12a8 8 0 01-8 8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h3>Refill</h3>
+        <p>Refill schedule, low-stock alerts and operator assignments will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ ANALYSIS PANEL ═════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-analysis">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4"  stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="6"  y1="20" x2="6"  y2="14" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>Analysis</h3>
+        <p>Performance analytics, consumption patterns and KPI dashboards will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ KIOSKS & STATIONS PANEL ════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-kiosks">
+      <div class="tab-placeholder">
+        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="9" y1="7" x2="15" y2="7" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="11" x2="15" y2="11" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#9E9E9E"/></svg>
+        <h3>Kiosks &amp; Stations</h3>
+        <p>Kiosk device list, station configuration and connectivity status will appear here.</p>
+      </div>
+    </div>
 
   </div><!-- /main -->
 </div><!-- /layout -->
@@ -1157,9 +1244,24 @@ function renderEvents() {
 
   // counts (station bar spans)
   document.getElementById('events-total').textContent = rows.length;
-  document.getElementById('count-info').textContent  = eventsData.filter(r => r.type === 'info').length;
-  document.getElementById('count-warn').textContent  = eventsData.filter(r => r.type === 'warn').length;
-  document.getElementById('count-alarm').textContent = eventsData.filter(r => r.type === 'alarm').length;
+  const totalInfo  = eventsData.filter(r => r.type === 'info').length;
+  const totalWarn  = eventsData.filter(r => r.type === 'warn').length;
+  const totalAlarm = eventsData.filter(r => r.type === 'alarm').length;
+  document.getElementById('count-info').textContent  = totalInfo;
+  document.getElementById('count-warn').textContent  = totalWarn;
+  document.getElementById('count-alarm').textContent = totalAlarm;
+  // chip toggle counts (in chip buttons)
+  const cca = document.getElementById('chip-count-alarm');
+  const ccw = document.getElementById('chip-count-warn');
+  const cci = document.getElementById('chip-count-info');
+  if (cca) cca.textContent = totalAlarm;
+  if (ccw) ccw.textContent = totalWarn;
+  if (cci) cci.textContent = totalInfo;
+  // chip toggle active/off state
+  ['alarm','warn','info'].forEach(type => {
+    const el = document.getElementById('chip-' + type);
+    if (el) el.classList.toggle('off', !chipState[type]);
+  });
   const sortArrow = document.getElementById('sort-arrow');
   if (sortArrow) sortArrow.textContent = sortAsc ? '↑' : '↓';
 
@@ -1205,6 +1307,12 @@ function renderRow(r) {
   </tr>`;
 }
 
+// ══ CHIP TOGGLES ══════════════════════════════════════════════════════════
+function toggleChip(type) {
+  chipState[type] = !chipState[type];
+  renderEvents();
+}
+
 // ══ SORT ══════════════════════════════════════════════════════════════════
 function toggleSort() {
   sortAsc = !sortAsc;
@@ -1244,6 +1352,7 @@ function selectPeriod(el, val) {
 // ══ RESET ALL FILTERS ═════════════════════════════════════════════════════
 function resetAllFilters() {
   chipState = { info: true, warn: true, alarm: true };
+  ['alarm','warn','info'].forEach(t => { const el = document.getElementById('chip-'+t); if(el) el.classList.remove('off'); });
   statusFilter = 'all';
   document.querySelectorAll('#dd-status .dropdown-item').forEach(i => i.classList.remove('selected'));
   document.querySelector('#dd-status .dropdown-item').classList.add('selected');
@@ -1378,6 +1487,27 @@ function toggleSidebarCollapse() {
 function selectStation(el, stationId) {
   document.querySelectorAll('.ss-station-row').forEach(r => r.classList.remove('active'));
   el.classList.add('active');
+}
+
+// ══ PRODUCTS SEARCH ═══════════════════════════════════════════════════════
+function filterProducts() {
+  const q = (document.getElementById('products-search').value || '').toLowerCase();
+  const rows = document.querySelectorAll('#products-tbody tr');
+  let visible = 0;
+  rows.forEach(tr => {
+    const text = tr.textContent.toLowerCase();
+    const show = !q || text.includes(q);
+    tr.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  const noRes = document.getElementById('products-noresult');
+  if (noRes) noRes.style.display = visible === 0 ? '' : 'none';
+  const tot = document.getElementById('products-total');
+  if (tot) tot.textContent = visible;
+}
+function clearProductsSearch() {
+  const inp = document.getElementById('products-search');
+  if (inp) { inp.value = ''; filterProducts(); }
 }
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
