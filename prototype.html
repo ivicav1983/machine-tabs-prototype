@@ -1137,6 +1137,7 @@
                 <th>Cap</th>
                 <th>Fill qty</th>
                 <th>Price 1</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody id="station-tbody">
@@ -1149,6 +1150,7 @@
                 <td class="text-muted">20</td>
                 <td class="fw6">17</td>
                 <td class="fw6">€1.20</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">02</td>
@@ -1159,6 +1161,7 @@
                 <td class="text-muted">20</td>
                 <td class="fw6">6</td>
                 <td class="fw6">€1.00</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">03</td>
@@ -1169,6 +1172,7 @@
                 <td class="text-muted">15</td>
                 <td class="fw6">2</td>
                 <td class="fw6">€1.50</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">04</td>
@@ -1179,6 +1183,7 @@
                 <td class="text-muted">12</td>
                 <td class="fw6">9</td>
                 <td class="fw6">€1.80</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">05</td>
@@ -1189,6 +1194,7 @@
                 <td class="text-muted">10</td>
                 <td class="fw6">4</td>
                 <td class="fw6">€1.30</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">06</td>
@@ -1199,6 +1205,7 @@
                 <td class="text-muted">24</td>
                 <td class="fw6">23</td>
                 <td class="fw6">€0.90</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">07</td>
@@ -1209,6 +1216,7 @@
                 <td class="text-muted">8</td>
                 <td class="fw6">1</td>
                 <td class="fw6">€2.10</td>
+              <td></td>
               </tr>
               <tr>
                 <td class="fw6">08</td>
@@ -1219,6 +1227,7 @@
                 <td class="text-muted">20</td>
                 <td class="fw6">12</td>
                 <td class="fw6">€1.10</td>
+              <td></td>
               </tr>
             </tbody>
           </table>
@@ -1233,7 +1242,7 @@
             </div>
             <div style="display:flex;gap:8px">
               <button class="btn-green">Push product list</button>
-              <button class="btn-delete">Delete Columns</button>
+              <button class="btn-delete" onclick="openDeleteColumnsModal()">Delete Columns</button>
             </div>
           </div>
           <div class="products-bottom-meta">
@@ -1454,6 +1463,40 @@
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('new-event-modal')">Cancel</button>
       <button class="btn btn-primary" onclick="saveNewEvent()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE COLUMNS MODAL ═════════════════════════════════════════════ -->
+<div class="modal-overlay" id="delete-col-modal" onclick="if(event.target===this)closeModal('delete-col-modal')">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <span class="modal-title">Delete Columns</span>
+      <button class="modal-close" onclick="closeModal('delete-col-modal')">✕</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:65vh;gap:12px">
+      <button class="mkt-btn-grey" style="font-size:13px;padding:5px 14px;border:1.5px solid var(--grey-bdr)" onclick="toggleSelectAllDeleteCols(this)">Select all columns</button>
+      <div class="table-wrap" style="margin-bottom:0">
+        <table id="delete-col-table" style="font-size:13px">
+          <thead>
+            <tr>
+              <th style="width:32px"></th>
+              <th>COL</th>
+              <th>MAP COL</th>
+              <th>PRODUCT</th>
+            </tr>
+          </thead>
+          <tbody id="delete-col-tbody"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;background:#FFF8E1;border:1px solid #FFE082;border-radius:6px;padding:12px 14px;font-size:13px;color:#5D4037;line-height:1.5">
+        <span style="font-size:16px;flex-shrink:0">⚠</span>
+        <span>You are about to delete selected columns. This should be done only if you are physically changing columns, otherwise use replace action. Are you sure you want to delete?</span>
+      </div>
+    </div>
+    <div class="modal-footer" style="justify-content:space-between">
+      <button class="btn btn-cancel-red" onclick="closeModal('delete-col-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="confirmDeleteColumns()">Yes</button>
     </div>
   </div>
 </div>
@@ -1842,7 +1885,8 @@ function addStationColumn() {
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="3.0000" step="0.01" class="col-edit-input col-edit-num"></td>
-    <td style="white-space:nowrap"><button class="btn-ok-green" onclick="confirmStationColumn(this)">OK</button> <button class="btn-delete" style="padding:4px 12px;font-size:13px;font-weight:500" onclick="this.closest('tr').remove()">Cancel</button></td>`;
+    <td style="white-space:nowrap"><button class="btn-ok-green" onclick="confirmStationColumn(this)">OK</button> <button class="btn-delete" style="padding:4px 12px;font-size:13px;font-weight:500" onclick="this.closest('tr').remove()">Cancel</button></td>
+    <td></td>`;
   tbody.appendChild(tr);
   tr.scrollIntoView({block:'nearest'});
   tr.querySelector('input').focus();
@@ -1867,7 +1911,43 @@ function confirmStationColumn(btn) {
     <td>${pickup}</td>
     <td class="text-muted">${cap}</td>
     <td class="fw6">${fillQty}</td>
-    <td class="fw6">€${price}</td>`;
+    <td class="fw6">€${price}</td>
+    <td><span class="tag-pill tag-amber">Pending</span></td>`;
+}
+
+function openDeleteColumnsModal() {
+  const tbody = document.getElementById('station-tbody');
+  const delTbody = document.getElementById('delete-col-tbody');
+  delTbody.innerHTML = '';
+  const rows = tbody.querySelectorAll('tr:not(.station-col-edit)');
+  rows.forEach(tr => {
+    const col  = tr.cells[0] ? tr.cells[0].textContent.trim() : '';
+    const prod = tr.cells[1] ? tr.cells[1].textContent.trim() : '';
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td style="text-align:center"><input type="checkbox" class="del-col-chk"></td>
+      <td style="color:var(--blue);font-weight:600">${col}</td>
+      <td style="color:var(--blue)">${col}</td>
+      <td>${prod}</td>`;
+    delTbody.appendChild(row);
+  });
+  document.getElementById('delete-col-modal').classList.add('open');
+}
+function toggleSelectAllDeleteCols(btn) {
+  const chks = document.querySelectorAll('#delete-col-tbody .del-col-chk');
+  const allChecked = [...chks].every(c => c.checked);
+  chks.forEach(c => c.checked = !allChecked);
+}
+function confirmDeleteColumns() {
+  const rows = document.querySelectorAll('#delete-col-tbody tr');
+  const stTbody = document.getElementById('station-tbody');
+  const stRows = stTbody.querySelectorAll('tr:not(.station-col-edit)');
+  rows.forEach((row, i) => {
+    if (row.querySelector('.del-col-chk').checked && stRows[i]) {
+      stRows[i].remove();
+    }
+  });
+  closeModal('delete-col-modal');
 }
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
