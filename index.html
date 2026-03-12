@@ -465,6 +465,44 @@
   .text-muted { color: var(--grey-txt); }
   .fw6 { font-weight: 600; }
 
+  /* ── SETUP MODAL ─────────────────────────────────── */
+  .setup-modal { max-width: 640px; }
+  .setup-section-title {
+    font-size: 13px; font-weight: 700; color: #181B1E;
+    margin: 0 0 10px;
+  }
+  .setup-section { margin-bottom: 22px; }
+  .setup-section:last-child { margin-bottom: 0; }
+  .setup-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .setup-check-label {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; color: #181B1E; cursor: pointer;
+  }
+  .setup-check-label input[type=checkbox] {
+    width: 15px; height: 15px; accent-color: var(--blue); cursor: pointer; flex-shrink: 0;
+  }
+  .setup-divider { border: none; border-top: 1px solid var(--grey-bdr); margin: 18px 0 0; }
+
+  /* quantity warnings table */
+  .setup-table-wrap { border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; margin-top: 10px; max-height: 260px; overflow-y: auto; }
+  .setup-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .setup-table thead tr { background: var(--grey-bg); position: sticky; top: 0; }
+  .setup-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid var(--grey-bdr); white-space: nowrap; }
+  .setup-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
+  .setup-table tbody tr:last-child td { border-bottom: none; }
+  .setup-table tbody tr:hover { background: #FAFAFA; }
+  .setup-name-active { color: var(--amber); font-weight: 600; font-size: 13px; }
+  .setup-name-inactive { color: #181B1E; font-size: 13px; }
+  .setup-amount { font-weight: 600; font-size: 13px; color: #181B1E; }
+  .setup-unit { font-size: 12px; color: var(--grey-txt); white-space: nowrap; }
+  .setup-slider { width: 100%; accent-color: #9C7CD4; cursor: pointer; }
+
+  /* modal footer buttons */
+  .btn-cancel-red { background: var(--red); color: #fff; border-color: var(--red); }
+  .btn-cancel-red:hover { background: var(--red-dark); }
+  .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-submit-green:hover { background: #2E7D32; }
+
   /* ── PRODUCTS FOOTER (metadata 3 rows, bottom-left) ── */
   .products-footer {
     display: flex; flex-direction: column; gap: 3px;
@@ -910,7 +948,7 @@
         <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
         <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
         <div style="flex:1"></div>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">Setup</button>
+        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
         <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
           Layout preview
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1191,6 +1229,138 @@
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('new-event-modal')">Cancel</button>
       <button class="btn btn-primary" onclick="saveNewEvent()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETUP MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="setup-modal" onclick="if(event.target===this)closeModal('setup-modal')">
+  <div class="modal setup-modal">
+    <div class="modal-header">
+      <span class="modal-title">Setup</span>
+      <button class="modal-close" onclick="closeModal('setup-modal')">✕</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:70vh">
+
+      <!-- Multiple price lists -->
+      <div class="setup-section">
+        <p class="setup-section-title">Multiple price lists</p>
+        <select class="modal-select" style="max-width:220px">
+          <option>One price list</option>
+          <option>Two price lists</option>
+          <option>Three price lists</option>
+        </select>
+      </div>
+
+      <hr class="setup-divider">
+
+      <!-- Column mapping -->
+      <div class="setup-section" style="margin-top:18px">
+        <p class="setup-section-title">Column mapping</p>
+        <label class="setup-check-label">
+          <input type="checkbox">
+          Mapping between reported columns and planogram
+        </label>
+      </div>
+
+      <hr class="setup-divider">
+
+      <!-- Shelf life warnings -->
+      <div class="setup-section" style="margin-top:18px">
+        <p class="setup-section-title">Shelf life warnings</p>
+        <div class="setup-row">
+          <label class="setup-check-label">
+            <input type="checkbox" checked>
+            Mail subscription
+          </label>
+          <span style="font-size:13px;color:#181B1E;margin-left:8px">Raise warning event</span>
+          <select class="modal-select" style="max-width:140px">
+            <option>Never</option>
+            <option>Daily</option>
+            <option>Weekly</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="setup-divider">
+
+      <!-- Product quantity warnings -->
+      <div class="setup-section" style="margin-top:18px">
+        <p class="setup-section-title">Product quantity warnings</p>
+        <label class="setup-check-label" style="margin-bottom:10px;display:inline-flex">
+          <input type="checkbox" checked>
+          Mail subscription
+        </label>
+        <div class="setup-table-wrap">
+          <table class="setup-table">
+            <thead>
+              <tr>
+                <th style="width:40px">Check</th>
+                <th>Name</th>
+                <th style="width:130px"></th>
+                <th style="width:70px">Amount</th>
+                <th style="width:80px">Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" checked style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-active">ČAJ U PRAHU BRESKVA 1KG (1/10)</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="3500" value="200"></td>
+                <td><span class="setup-amount">200</span></td>
+                <td><span class="setup-unit">/3500 g</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-inactive">ČAŠE C2GO</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="500" value="0"></td>
+                <td><span class="setup-amount">0</span></td>
+                <td><span class="setup-unit">/500 pcs</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" checked style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-active">ČOKOLADA U PRAHU 1KG (1/10)</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="3200" value="500"></td>
+                <td><span class="setup-amount">500</span></td>
+                <td><span class="setup-unit">/3200 g</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-inactive">DEPURATOR</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="4000" value="0"></td>
+                <td><span class="setup-amount">0</span></td>
+                <td><span class="setup-unit">/4000 pcs</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" checked style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-active">IRISH WHISKEY 1KG (1/10)</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="3200" value="500"></td>
+                <td><span class="setup-amount">500</span></td>
+                <td><span class="setup-unit">/3200 g</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" checked style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-active">KAVA BARCAFFE 1KG (1/8)</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="3000" value="1000"></td>
+                <td><span class="setup-amount">1000</span></td>
+                <td><span class="setup-unit">/3000 g</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" checked style="accent-color:var(--blue)"></td>
+                <td><span class="setup-name-active">MLIJEKO U PRAHU 1KG (1/6)</span></td>
+                <td><input type="range" class="setup-slider" min="0" max="3500" value="1000"></td>
+                <td><span class="setup-amount">1000</span></td>
+                <td><span class="setup-unit">/3500 g</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer" style="justify-content:space-between">
+      <button class="btn btn-cancel-red" onclick="closeModal('setup-modal')">Cancel</button>
+      <button class="btn btn-submit-green">Submit</button>
     </div>
   </div>
 </div>
