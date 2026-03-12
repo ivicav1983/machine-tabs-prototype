@@ -1822,14 +1822,17 @@ function selectStation(el, stationId) {
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = 'none';
   document.getElementById('products-station-view').style.display = '';
-  // Hide market-only tabs; switch away if one is active
+  // Hide market-only tabs; if one is active fall back to first available station tab
   const marketOnlyTabs = ['tab-overview', 'tab-transactions', 'tab-kiosks'];
+  const activeIsMarketOnly = marketOnlyTabs.some(id => document.getElementById(id)?.classList.contains('active'));
   marketOnlyTabs.forEach(id => {
     const btn = document.getElementById(id);
     if (btn) btn.style.display = 'none';
   });
-  if (marketOnlyTabs.some(id => document.getElementById(id)?.classList.contains('active'))) {
-    switchTab('products');
+  if (activeIsMarketOnly) {
+    // First tab still visible in station view
+    const first = document.querySelector('.tab-nav .tab-btn:not([style*="display: none"]):not([style*="display:none"])');
+    if (first) first.click();
   }
 }
 
