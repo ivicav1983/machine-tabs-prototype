@@ -503,12 +503,27 @@
   .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
   .btn-submit-green:hover { background: #2E7D32; }
 
-  /* ── PRODUCTS FOOTER (metadata 3 rows, bottom-left) ── */
-  .products-footer {
-    display: flex; flex-direction: column; gap: 3px;
-    font-size: 12px; color: #6C7580;
-    padding: 10px 0 4px;
+  /* ── PRODUCTS BOTTOM BAR ─────────────────────────── */
+  .products-bottom-bar {
+    display: flex; align-items: center; gap: 24px;
+    padding: 14px 0 6px; border-top: 1px solid var(--grey-bdr); margin-top: 6px;
   }
+  .products-bottom-btns { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+  .products-bottom-meta { flex: 1; display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #6C7580; }
+  .btn-green {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; border: none; white-space: nowrap;
+    background: var(--green); color: #fff; transition: background .15s; min-width: 160px;
+  }
+  .btn-green:hover { background: #2E7D32; }
+  .btn-grey-solid {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; border: none; white-space: nowrap;
+    background: #6C757D; color: #fff; transition: background .15s; min-width: 160px;
+  }
+  .btn-grey-solid:hover { background: #5A6268; }
 
   /* ── TYPE CHIP TOGGLES (Events filter bar) ── */
   .chip-toggle-bar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -1075,12 +1090,24 @@
         </div>
       </div>
 
-      <div class="products-footer">
-        <span>Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
-        <span>Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
-        <span>Stock warning: <strong style="color:var(--red)">30%</strong>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
-        </span>
+      <div class="products-bottom-bar">
+        <!-- Left buttons -->
+        <div class="products-bottom-btns">
+          <button class="btn-green">Save as Planogram</button>
+          <button class="btn-grey-solid">Load Planogram</button>
+        </div>
+        <!-- Center metadata -->
+        <div class="products-bottom-meta">
+          <span>Product list changed: 06.03.2026 12:25 [Dario Skegro]</span>
+          <span>Product list pushed: 06.03.2026 12:25 [Dario Skegro]</span>
+          <span>Based on planogram: Opera</span>
+          <span>Planogram added: 14.01.2026 12:58 [Dario Skegro]</span>
+        </div>
+        <!-- Right buttons -->
+        <div class="products-bottom-btns">
+          <button class="btn-green">Push product list</button>
+          <button class="btn-green">Delete Columns</button>
+        </div>
       </div>
     </div><!-- /panel-products -->
 
