@@ -377,6 +377,14 @@
     background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
   }
   .search-input:focus { border-color: var(--blue); }
+  .dropdown-select {
+    padding: 0 28px 0 10px; height: 32px; border: 1px solid var(--grey-bdr); border-radius: 6px;
+    font-size: 13px; font-family: var(--font); background: var(--white); color: var(--dark);
+    appearance: none; cursor: pointer; outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 9px center;
+  }
+  .dropdown-select:focus { border-color: var(--blue); }
 
   /* ── TABLE ───────────────────────────────── */
   .table-wrap { border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
@@ -965,21 +973,19 @@
     <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- filter bar: search + actions in one row -->
-      <div class="filter-bar" style="padding:10px 0">
-        <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
-        <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
-        <div style="flex:1"></div>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
-          Layout preview
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
-      </div>
-
       <!-- ── MARKET VIEW (default: micro market selected) ─────────────── -->
       <div id="products-market-view">
+        <!-- Market toolbar: search + station filter only -->
+        <div class="filter-bar" style="padding:10px 0">
+          <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
+          <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
+          <select class="dropdown-select" id="station-filter" onchange="filterProducts()" style="min-width:150px">
+            <option value="">All stations</option>
+            <option value="Coffee Station">Coffee Station</option>
+            <option value="Cold Drinks">Cold Drinks</option>
+            <option value="Snack Bar">Snack Bar</option>
+          </select>
+        </div>
         <div class="table-wrap">
           <div class="table-scroll">
           <table>
@@ -1058,6 +1064,18 @@
 
       <!-- ── STATION VIEW (shown when a station is selected) ────────────── -->
       <div id="products-station-view" style="display:none">
+        <!-- Station toolbar: search + Setup / Layout preview / Add column -->
+        <div class="filter-bar" style="padding:10px 0">
+          <input class="search-input" id="products-search-station" type="text" placeholder="Search products…" oninput="filterStationProducts()" />
+          <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
+          <div style="flex:1"></div>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
+            Layout preview
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
+        </div>
         <div class="table-wrap">
           <div class="table-scroll">
           <table>
@@ -1758,22 +1776,40 @@ function selectMarket(el) {
 // ══ PRODUCTS SEARCH ═══════════════════════════════════════════════════════
 function filterProducts() {
   const q = (document.getElementById('products-search').value || '').toLowerCase();
+  const station = (document.getElementById('station-filter').value || '');
   const rows = document.querySelectorAll('#products-tbody tr');
   let visible = 0;
   rows.forEach(tr => {
+    if (tr.id === 'products-noresult') return;
     const text = tr.textContent.toLowerCase();
-    const show = !q || text.includes(q);
+    const stationCell = tr.cells[0] ? tr.cells[0].textContent : '';
+    const matchQ = !q || text.includes(q);
+    const matchStation = !station || stationCell === station;
+    const show = matchQ && matchStation;
     tr.style.display = show ? '' : 'none';
     if (show) visible++;
   });
   const noRes = document.getElementById('products-noresult');
   if (noRes) noRes.style.display = visible === 0 ? '' : 'none';
-  const tot = document.getElementById('products-total');
-  if (tot) tot.textContent = visible;
 }
 function clearProductsSearch() {
   const inp = document.getElementById('products-search');
-  if (inp) { inp.value = ''; filterProducts(); }
+  if (inp) inp.value = '';
+  const sel = document.getElementById('station-filter');
+  if (sel) sel.value = '';
+  filterProducts();
+}
+function filterStationProducts() {
+  const q = (document.getElementById('products-search-station').value || '').toLowerCase();
+  const rows = document.querySelectorAll('#products-station-view tbody tr');
+  rows.forEach(tr => {
+    const text = tr.textContent.toLowerCase();
+    tr.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+}
+function clearStationSearch() {
+  const inp = document.getElementById('products-search-station');
+  if (inp) { inp.value = ''; filterStationProducts(); }
 }
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
