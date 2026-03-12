@@ -511,6 +511,14 @@
   .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
   .btn-submit-green:hover { background: #2E7D32; }
 
+  /* ── ADD COLUMN EDIT ROW ─────────────────────────── */
+  .station-col-edit td { padding: 4px 8px; vertical-align: middle; background: #FFFDE7; }
+  .col-edit-input { border: 1px solid #DEE2E8; border-radius: 4px; padding: 4px 6px; font-size: 13px; font-family: inherit; }
+  .col-edit-wide  { width: 140px; }
+  .col-edit-num   { width: 60px; text-align: right; }
+  .btn-ok-green   { background: #388E3C; color: #fff; border: none; border-radius: 4px; padding: 4px 12px; font-size: 13px; cursor: pointer; }
+  .btn-ok-green:hover { background: #2E7D32; }
+
   /* ── PRODUCTS BOTTOM BAR ─────────────────────────── */
   .products-bottom-bar {
     display: flex; flex-direction: column; gap: 8px;
@@ -1114,7 +1122,7 @@
             Layout preview
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="addStationColumn()">+ Add column</button>
         </div>
         <div class="table-wrap">
           <div class="table-scroll">
@@ -1131,7 +1139,7 @@
                 <th>Price 1</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="station-tbody">
               <tr>
                 <td class="fw6">01</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
@@ -1817,6 +1825,49 @@ function filterStationProducts() {
 function clearStationSearch() {
   const inp = document.getElementById('products-search-station');
   if (inp) { inp.value = ''; filterStationProducts(); }
+}
+function addStationColumn() {
+  const tbody = document.getElementById('station-tbody');
+  if (!tbody) return;
+  const existing = tbody.querySelectorAll('tr:not(.station-col-edit)').length;
+  const num = String(existing + 1).padStart(2, '0');
+  const tr = document.createElement('tr');
+  tr.className = 'station-col-edit';
+  tr.innerHTML = `
+    <td class="fw6">${num}</td>
+    <td><input type="text" class="col-edit-input col-edit-wide" placeholder="Product name"></td>
+    <td><input type="text" class="col-edit-input col-edit-wide"></td>
+    <td><input type="text" class="col-edit-input"></td>
+    <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
+    <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
+    <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
+    <td><input type="number" value="3.0000" step="0.01" class="col-edit-input col-edit-num"></td>
+    <td><button class="btn-ok-green" onclick="confirmStationColumn(this)">OK</button></td>`;
+  tbody.appendChild(tr);
+  tr.scrollIntoView({block:'nearest'});
+  tr.querySelector('input').focus();
+}
+function confirmStationColumn(btn) {
+  const tr = btn.closest('tr');
+  const inputs = tr.querySelectorAll('input');
+  const colNum  = tr.cells[0].textContent;
+  const product = inputs[0].value || '—';
+  const recipe  = inputs[1].value;
+  const tags    = inputs[2].value;
+  const pickup  = inputs[3].value;
+  const cap     = inputs[4].value;
+  const fillQty = inputs[5].value;
+  const price   = parseFloat(inputs[6].value).toFixed(2);
+  tr.className = '';
+  tr.innerHTML = `
+    <td class="fw6">${colNum}</td>
+    <td>${product}</td>
+    <td>${recipe}</td>
+    <td>${tags ? `<span class="tag-pill tag-grey">${tags}</span>` : ''}</td>
+    <td>${pickup}</td>
+    <td class="text-muted">${cap}</td>
+    <td class="fw6">${fillQty}</td>
+    <td class="fw6">€${price}</td>`;
 }
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
