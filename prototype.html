@@ -559,14 +559,44 @@
   .chip-info::before  { background: var(--blue); }
   .chip-toggle.off { opacity: .38; filter: grayscale(.5); }
 
-  /* ── EMPTY TAB PLACEHOLDER ────────────────── */
-  .tab-placeholder {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 80px 24px; color: var(--grey-txt); gap: 12px;
+  /* ── FIGMA PAGE HEADER (Figma: Header/Light) ──────────────────── */
+  .fig-page-hdr {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 20px 0 16px; border-bottom: 1px solid var(--grey-bdr); margin-bottom: 20px;
   }
-  .tab-placeholder-icon { opacity: .25; }
-  .tab-placeholder h3 { font-size: 16px; font-weight: 600; color: #9E9E9E; }
-  .tab-placeholder p  { font-size: 13px; color: #BDBDBD; }
+  .fig-page-title { font-size: 22px; font-weight: 700; color: #181B1E; margin-bottom: 4px; line-height: 1.2; }
+  .fig-page-desc  { font-size: 14px; color: #6C7580; }
+  .fig-page-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; padding-top: 4px; }
+  /* Tertiary – white outlined */
+  .fig-btn-tertiary {
+    padding: 7px 16px; border: 1px solid #DEE2E8; background: #FFFFFF; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #181B1E; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-tertiary:hover { background: #F8F9FA; }
+  /* Secondary – light grey with icon */
+  .fig-btn-secondary {
+    padding: 7px 16px; border: 1px solid #DEE2E8; background: #F1F3F5; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #181B1E; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-secondary:hover { background: #E9ECEF; }
+  /* Primary – dark fill */
+  .fig-btn-primary {
+    padding: 7px 16px; border: none; background: #181B1E; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #FFFFFF; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-primary:hover { background: #2D3035; }
+  /* Empty state inside tab */
+  .fig-empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 24px; gap: 10px;
+    background: #FAFAFA; border-radius: 8px; border: 1px dashed #DEE2E8;
+  }
+  .fig-empty-state svg { opacity: .2; }
+  .fig-empty-state h4 { font-size: 14px; font-weight: 600; color: #9E9E9E; }
+  .fig-empty-state p  { font-size: 13px; color: #BDBDBD; text-align: center; max-width: 320px; }
 
   /* ── MODALS ──────────────────────────────── */
   .modal-overlay {
@@ -798,14 +828,25 @@
         <!-- title block -->
         <div class="mkt-title-block">
           <div class="mkt-title">Intis Nutrico: Bani 73a</div>
+          <div class="mkt-status-row" style="margin-top:3px;font-size:13px;color:#6C7580">
+            Micro market &nbsp;·&nbsp; Zagreb, Bani 73a &nbsp;·&nbsp;
+            <span style="color:var(--ss-green);font-weight:600">● Online</span>
+          </div>
         </div>
-        <!-- action buttons -->
+        <!-- action buttons (Figma: Tertiary / Secondary / Primary) -->
         <div class="mkt-actions">
-          <button class="mkt-btn-grey">Update firmware</button>
-          <button class="mkt-btn-grey">Market setup</button>
-          <button class="mkt-btn-dark">
+          <button class="fig-btn-tertiary">Update firmware</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/>
+              <line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            Market setup
+          </button>
+          <button class="fig-btn-primary">
             Send
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
@@ -1201,54 +1242,138 @@
 
     <!-- ══ OVERVIEW PANEL ═════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-overview">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/></svg>
-        <h3>Overview</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Overview</div>
+          <div class="fig-page-desc">Summary metrics, status indicators and quick-action tiles for this micro market</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Add widget
+          </button>
+          <button class="fig-btn-primary">Refresh</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No data yet</h4>
         <p>Summary metrics, status indicators and quick-action tiles will appear here.</p>
       </div>
     </div>
 
     <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-sales">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Sales</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Sales</div>
+          <div class="fig-page-desc">Revenue charts, top-selling products and sales trends</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Select period
+          </button>
+          <button class="fig-btn-primary">View report</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>No sales data</h4>
         <p>Revenue charts, top-selling products and sales trends will appear here.</p>
       </div>
     </div>
 
     <!-- ══ TRANSACTIONS PANEL ═════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-transactions">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#9E9E9E" stroke-width="1.5"/></svg>
-        <h3>Transactions</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Transactions</div>
+          <div class="fig-page-desc">Payment history, transaction details and receipt lookup</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Filter
+          </button>
+          <button class="fig-btn-primary">Download CSV</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No transactions</h4>
         <p>Payment history, transaction details and receipt lookup will appear here.</p>
       </div>
     </div>
 
     <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-refill">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0l-3-3m3 3l3-3" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12c0-4.418 3.582-8 8-8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12a8 8 0 01-8 8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#9E9E9E" stroke-width="1.5"/></svg>
-        <h3>Refill</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Refill</div>
+          <div class="fig-page-desc">Refill schedule, low-stock alerts and operator assignments</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Schedule
+          </button>
+          <button class="fig-btn-primary">Send task</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0l-3-3m3 3l3-3" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12c0-4.418 3.582-8 8-8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12a8 8 0 01-8 8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No refill tasks</h4>
         <p>Refill schedule, low-stock alerts and operator assignments will appear here.</p>
       </div>
     </div>
 
     <!-- ══ ANALYSIS PANEL ═════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-analysis">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4"  stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="6"  y1="20" x2="6"  y2="14" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <h3>Analysis</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Analysis</div>
+          <div class="fig-page-desc">Performance analytics, consumption patterns and KPI dashboards</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            New report
+          </button>
+          <button class="fig-btn-primary">Refresh</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h4>No analytics data</h4>
         <p>Performance analytics, consumption patterns and KPI dashboards will appear here.</p>
       </div>
     </div>
 
     <!-- ══ KIOSKS & STATIONS PANEL ════════════════════════════════════ -->
     <div class="tab-panel" id="panel-kiosks">
-      <div class="tab-placeholder">
-        <svg class="tab-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="9" y1="7" x2="15" y2="7" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="11" x2="15" y2="11" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#9E9E9E"/></svg>
-        <h3>Kiosks &amp; Stations</h3>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Kiosks &amp; Stations</div>
+          <div class="fig-page-desc">Kiosk device list, station configuration and connectivity status</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Add station
+          </button>
+          <button class="fig-btn-primary">Configure</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="9" y1="7" x2="15" y2="7" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="11" x2="15" y2="11" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#9E9E9E"/></svg>
+        <h4>No devices configured</h4>
         <p>Kiosk device list, station configuration and connectivity status will appear here.</p>
       </div>
     </div>
