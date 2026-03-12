@@ -511,6 +511,43 @@
   .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
   .btn-submit-green:hover { background: #2E7D32; }
 
+  /* ── REFILL TAB ──────────────────────────────────── */
+  .rfill-summary { display:flex; align-items:center; gap:6px; padding:14px 0 12px; flex-wrap:wrap; border-bottom:1px solid var(--grey-bdr); margin-bottom:14px; }
+  .rfill-stat-lbl { font-size:13px; color:#6C7580; }
+  .rfill-stat-val { font-size:13px; font-weight:700; color:#181B1E; }
+  .rfill-sep { color:#DEE2E8; margin:0 6px; }
+  .rfill-view-toggle { display:flex; border:1px solid var(--grey-bdr); border-radius:7px; overflow:hidden; width:fit-content; margin-bottom:14px; }
+  .rfill-vtgl { padding:6px 16px; border:none; font-size:13px; font-weight:600; cursor:pointer; background:white; color:#6C7580; font-family:var(--font); }
+  .rfill-vtgl.active { background:var(--red); color:white; }
+  .rfill-visit-row { cursor:pointer; }
+  .rfill-visit-row:hover td { background:#fafafa; }
+  .rfill-visit-row.ropen td { background:#fef2f2; }
+  .rfill-expand-btn { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:5px; background:#f3f4f6; color:#6C7580; font-size:8px; font-weight:700; }
+  .rfill-visit-row.ropen .rfill-expand-btn { background:var(--red); color:white; }
+  .rfill-detail-row td { padding:0 !important; }
+  .rfill-route-hdr { display:flex; align-items:flex-start; gap:24px; padding:10px 16px; background:#fef9f9; border-top:1px solid #fde8e8; border-bottom:1px solid #fde8e8; flex-wrap:wrap; }
+  .rfill-route-lbl { font-size:10px; font-weight:700; color:#9ca3af; letter-spacing:.07em; margin-bottom:2px; text-transform:uppercase; }
+  .rfill-route-val { font-size:13px; color:#374151; font-weight:500; }
+  .rfill-pos-grid { display:grid; grid-template-columns:16px 56px 1fr 210px 90px 90px; padding:7px 16px; background:#f9fafb; border-bottom:1px solid #f3f4f6; }
+  .rfill-pos-grid span { font-size:10px; font-weight:700; color:#9ca3af; letter-spacing:.08em; }
+  .rfill-pos-row { display:grid; grid-template-columns:16px 56px 1fr 210px 90px 90px; align-items:start; padding:10px 16px; border-bottom:1px solid #f3f4f6; background:white; }
+  .rfill-pos-row:last-child { border-bottom:none; }
+  .rfill-pos-num { font-size:13px; font-weight:700; color:var(--red); font-family:monospace; padding-top:2px; }
+  .rfill-pos-product { font-size:13px; color:#111827; font-weight:500; padding-right:8px; padding-top:2px; }
+  .rfill-act-wrap { display:flex; flex-direction:column; gap:3px; }
+  .rfill-act-line { display:flex; align-items:center; gap:6px; }
+  .rfill-act-badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
+  .rfill-act-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+  .rfill-act-qty { font-family:monospace; font-size:12px; font-weight:700; }
+  .rfill-returned-sep { margin-top:5px; padding-top:5px; border-top:1px dashed #e5e7eb; display:flex; flex-direction:column; gap:3px; }
+  .rfill-net-qty { font-family:monospace; font-size:13px; font-weight:700; text-align:center; padding-top:2px; }
+  .rfill-stock-pill { font-family:monospace; font-size:12px; font-weight:700; text-align:center; padding-top:2px; }
+  .rfill-stock-max { color:#d1d5db; font-weight:400; }
+  .rfill-pct { font-family:monospace; font-size:13px; font-weight:700; }
+  .rfill-legend { margin-top:14px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; padding-bottom:20px; font-size:12px; color:#6b7280; }
+  .rfill-legend strong { font-size:11px; color:#9ca3af; font-weight:700; letter-spacing:.05em; }
+  .rfill-legend-dot { width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:3px; }
+
   /* ── ADD COLUMN EDIT ROW ─────────────────────────── */
   .station-col-edit td { padding: 4px 8px; vertical-align: middle; background: #FFFDE7; }
   .col-edit-input { border: 1px solid #DEE2E8; border-radius: 4px; padding: 4px 6px; font-size: 13px; font-family: inherit; }
@@ -1327,20 +1364,181 @@
 
     <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-refill">
-      <div class="fig-page-hdr">
-        <div>
-          <div class="fig-page-title">Refill</div>
-          <div class="fig-page-desc">Refill schedule, low-stock alerts and operator assignments</div>
-        </div>
-        <div class="fig-page-actions">
-          <button class="fig-btn-tertiary">Export</button>
-          <button class="fig-btn-secondary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Schedule
-          </button>
-          <button class="fig-btn-primary">Send task</button>
+
+      <!-- Summary stats -->
+      <div class="rfill-summary">
+        <span class="rfill-stat-lbl">Avg. stock after refill:</span>
+        <span class="rfill-stat-val">88.7%</span>
+        <span class="rfill-sep">&bull;</span>
+        <span class="rfill-stat-lbl">Avg. filling percentage:</span>
+        <span class="rfill-stat-val">70.3%</span>
+        <span class="rfill-sep">&bull;</span>
+        <span class="rfill-stat-lbl">Avg. positions below par:</span>
+        <span class="rfill-stat-val">4.5</span>
+        <span class="rfill-sep">&bull;</span>
+        <span class="rfill-stat-lbl">No. of visits:</span>
+        <span class="rfill-stat-val">2</span>
+        <button class="fig-btn-primary" style="margin-left:auto">Download report</button>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar" style="padding:8px 0">
+        <input class="search-input" type="text" placeholder="Search route&hellip;" style="width:180px"/>
+        <button class="btn-clear-all">Clear all</button>
+        <div style="flex:1"></div>
+        <select class="dropdown-select"><option>Period</option><option>Last 7 days</option><option>Last 30 days</option><option>Last 90 days</option></select>
+        <select class="dropdown-select"><option>Employee</option><option>f.sesvecan</option></select>
+        <select class="dropdown-select"><option>Action</option><option>Filled</option><option>Corrected</option><option>Removed</option><option>Returned</option></select>
+        <select class="dropdown-select"><option>Source</option><option>Mobile app</option><option>Web</option></select>
+      </div>
+
+      <!-- View toggle -->
+      <div class="rfill-view-toggle">
+        <button class="rfill-vtgl active" onclick="setRefillView('market',this)">Market view</button>
+        <button class="rfill-vtgl" onclick="setRefillView('station',this)">Per station</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrap">
+        <div class="table-scroll">
+        <table id="rfill-table">
+          <thead>
+            <tr>
+              <th style="width:36px"></th>
+              <th>Refill no.</th>
+              <th>Date ▼</th>
+              <th class="rfill-station-col">Station</th>
+              <th style="text-align:center">Empty facings</th>
+              <th style="text-align:center">Stock</th>
+              <th style="text-align:center">Filling %</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- ── Visit 1: 09.03.2026 ── -->
+            <tr class="rfill-visit-row" id="rfill-row-1" onclick="toggleRefillRow(1)">
+              <td style="text-align:center"><span class="rfill-expand-btn">&#9660;</span></td>
+              <td class="fw6" style="font-family:monospace">1</td>
+              <td>09.03.2026</td>
+              <td class="rfill-station-col">G4Y Maksimir 2</td>
+              <td style="text-align:center"><span style="background:#fff7ed;color:#b45309;border:1px solid #fcd79a;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:700">4</span></td>
+              <td style="text-align:center"><span class="rfill-pct" style="color:var(--green)">91.30%</span></td>
+              <td style="text-align:center"><span class="rfill-pct" style="color:#374151">78.40%</span></td>
+            </tr>
+            <tr id="rfill-det-1" class="rfill-detail-row" style="display:none">
+              <td colspan="7">
+          <div class="rfill-route-hdr">
+            <div><div class="rfill-route-lbl">Date &amp; Time</div><div class="rfill-route-val">09.03.2026 <span style="color:#9ca3af">&middot;</span> <span style="font-family:monospace">09:55:20</span></div></div>
+            <div><div class="rfill-route-lbl">Route</div><div><a href="#" onclick="return false" style="font-size:13px;color:var(--red);font-weight:500;text-decoration:none;border-bottom:1px solid #fca5a5">Route Maksimir AM</a></div></div>
+            <div><div class="rfill-route-lbl">Filler</div><div class="rfill-route-val" style="font-family:monospace">f.sesvecan</div></div>
+          </div>
+          <div class="rfill-pos-grid">
+            <span></span><span>POS.</span><span>PRODUCT</span><span>ACTIONS</span><span style="text-align:center">STOCK CHANGE</span><span style="text-align:center">CLOSING STOCK</span>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">66</div>
+            <div class="rfill-pos-product">POLLEO SPORT L-CARNITINE 750ML ORANGE (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+2</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+2</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">65</div>
+            <div class="rfill-pos-product">POLLEO SPORT BCAA 750ML ORANGE-LEMON-LIME (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+4</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+4</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">63</div>
+            <div class="rfill-pos-product">POLLEO SPORT ISO DRINK 750ML LEMON (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+1</span></div><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#fff7ed;color:#b45309;border:1px solid #fcd79a"><span class="rfill-act-dot" style="background:#f59e0b"></span>Corrected</span><span class="rfill-act-qty" style="color:#b45309">-1</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#9ca3af">0</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">62</div>
+            <div class="rfill-pos-product">POLLEO SPORT ISO DRINK 750ML LEMON (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+5</span></div><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#fff7ed;color:#b45309;border:1px solid #fcd79a"><span class="rfill-act-dot" style="background:#f59e0b"></span>Corrected</span><span class="rfill-act-qty" style="color:#b45309">-1</span></div><div class="rfill-returned-sep"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db"><span class="rfill-act-dot" style="background:#9ca3af"></span>Returned</span><span class="rfill-act-qty" style="color:#9ca3af">+1</span></div></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+4</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">57</div>
+            <div class="rfill-pos-product">MONSTER ENERGY THE DOCTOR 0.5L (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+5</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+5</span></div>
+            <div><span class="rfill-stock-pill" style="color:#1a7a3e">5<span class="rfill-stock-max">/5</span></span></div>
+          </div>
+              </td>
+            </tr>
+
+            <!-- ── Visit 2: 03.03.2026 ── -->
+            <tr class="rfill-visit-row" id="rfill-row-2" onclick="toggleRefillRow(2)">
+              <td style="text-align:center"><span class="rfill-expand-btn">&#9660;</span></td>
+              <td class="fw6" style="font-family:monospace">1</td>
+              <td>03.03.2026</td>
+              <td class="rfill-station-col">G4Y Maksimir 2</td>
+              <td style="text-align:center"><span style="background:#fff7ed;color:#b45309;border:1px solid #fcd79a;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:700">5</span></td>
+              <td style="text-align:center"><span class="rfill-pct" style="color:var(--green)">86.06%</span></td>
+              <td style="text-align:center"><span class="rfill-pct" style="color:#b45309">62.10%</span></td>
+            </tr>
+            <tr id="rfill-det-2" class="rfill-detail-row" style="display:none">
+              <td colspan="7">
+          <div class="rfill-route-hdr">
+            <div><div class="rfill-route-lbl">Date &amp; Time</div><div class="rfill-route-val">03.03.2026 <span style="color:#9ca3af">&middot;</span> <span style="font-family:monospace">09:55:20</span></div></div>
+            <div><div class="rfill-route-lbl">Route</div><div><a href="#" onclick="return false" style="font-size:13px;color:var(--red);font-weight:500;text-decoration:none;border-bottom:1px solid #fca5a5">Route Maksimir AM</a></div></div>
+            <div><div class="rfill-route-lbl">Filler</div><div class="rfill-route-val" style="font-family:monospace">f.sesvecan</div></div>
+          </div>
+          <div class="rfill-pos-grid">
+            <span></span><span>POS.</span><span>PRODUCT</span><span>ACTIONS</span><span style="text-align:center">STOCK CHANGE</span><span style="text-align:center">CLOSING STOCK</span>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">66</div>
+            <div class="rfill-pos-product">POLLEO SPORT L-CARNITINE 750ML ORANGE (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+2</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+2</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">65</div>
+            <div class="rfill-pos-product">POLLEO SPORT BCAA 750ML ORANGE-LEMON-LIME (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+4</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+4</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">63</div>
+            <div class="rfill-pos-product">POLLEO SPORT ISO DRINK 750ML LEMON (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+3</span></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+3</span></div>
+            <div><span class="rfill-stock-pill" style="color:#1a7a3e">5<span class="rfill-stock-max">/5</span></span></div>
+          </div>          <div class="rfill-pos-row">
+            <div></div>
+            <div class="rfill-pos-num">62</div>
+            <div class="rfill-pos-product">POLLEO SPORT ISO DRINK 750ML LEMON (1/12)</div>
+            <div class="rfill-act-wrap"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#eaf7ef;color:#1a7a3e;border:1px solid #b7e4c7"><span class="rfill-act-dot" style="background:#2daa60"></span>Filled</span><span class="rfill-act-qty" style="color:#1a7a3e">+6</span></div><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#fef2f2;color:#991b1b;border:1px solid #fca5a5"><span class="rfill-act-dot" style="background:#ef4444"></span>Removed</span><span class="rfill-act-qty" style="color:#991b1b">-2</span></div><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#fff7ed;color:#b45309;border:1px solid #fcd79a"><span class="rfill-act-dot" style="background:#f59e0b"></span>Corrected</span><span class="rfill-act-qty" style="color:#b45309">-1</span></div><div class="rfill-returned-sep"><div class="rfill-act-line"><span class="rfill-act-badge" style="background:#f3f4f6;color:#6b7280;border:1px solid #d1d5db"><span class="rfill-act-dot" style="background:#9ca3af"></span>Returned</span><span class="rfill-act-qty" style="color:#9ca3af">+2</span></div></div></div>
+            <div><span class="rfill-net-qty" style="color:#1a7a3e">+3</span></div>
+            <div><span class="rfill-stock-pill" style="color:#b45309">4<span class="rfill-stock-max">/5</span></span></div>
+          </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
         </div>
       </div>
+
+      <!-- Legend -->
+      <div class="rfill-legend">
+        <strong>ACTION TYPES:</strong>
+        <span><span class="rfill-legend-dot" style="background:#2daa60"></span>Filled</span>
+        <span><span class="rfill-legend-dot" style="background:#f59e0b"></span>Corrected</span>
+        <span><span class="rfill-legend-dot" style="background:#ef4444"></span>Removed</span>
+        <span><span class="rfill-legend-dot" style="background:#9ca3af"></span>Returned to truck <span style="font-size:10px;color:#9ca3af">(no stock impact)</span></span>
+      </div>
+
+    </div>
       <div class="fig-empty-state">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0l-3-3m3 3l3-3" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12c0-4.418 3.582-8 8-8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12a8 8 0 01-8 8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#9E9E9E" stroke-width="1.5"/></svg>
         <h4>No refill tasks</h4>
@@ -1880,6 +2078,20 @@ function filterStationProducts() {
   rows.forEach(tr => {
     const text = tr.textContent.toLowerCase();
     tr.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+}
+function toggleRefillRow(id) {
+  const det = document.getElementById('rfill-det-' + id);
+  const row = document.getElementById('rfill-row-' + id);
+  const isOpen = det.style.display !== 'none';
+  det.style.display = isOpen ? 'none' : '';
+  row.classList.toggle('ropen', !isOpen);
+}
+function setRefillView(view, btn) {
+  document.querySelectorAll('.rfill-vtgl').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.rfill-station-col').forEach(el => {
+    el.style.display = view === 'market' ? '' : 'none';
   });
 }
 function clearStationSearch() {
