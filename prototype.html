@@ -1842,7 +1842,7 @@ function selectMarket(el) {
   document.getElementById('products-market-view').style.display = '';
   document.getElementById('products-station-view').style.display = 'none';
   // Restore market-only tabs
-  ['tab-overview', 'tab-transactions'].forEach(id => {
+  ['tab-overview', 'tab-transactions', 'tab-kiosks'].forEach(id => {
     const btn = document.getElementById(id);
     if (btn) btn.style.display = '';
   });
