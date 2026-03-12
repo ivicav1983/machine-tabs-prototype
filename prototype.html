@@ -723,6 +723,123 @@
   .ov-top-row { grid-template-columns: 1fr; }
 }
 
+
+/* ── Sales & Transactions tabs ───────────────────────────────────────────── */
+.sales-search-input {
+  height: 32px; border: 1px solid var(--grey-bdr); border-radius: 4px;
+  padding: 0 10px 0 30px; font-size: 13px; outline: none; width: 200px;
+  background: #fff url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4.5' stroke='%239E9E9E' stroke-width='1.3'/%3E%3Cline x1='9.5' y1='9.5' x2='12.5' y2='12.5' stroke='%239E9E9E' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 8px center;
+}
+.sales-search-input:focus { border-color: var(--blue); }
+.sales-stat-bar {
+  display: flex; gap: 24px; padding: 10px 0 12px;
+  border-bottom: 1px solid #F0F0F0; margin-bottom: 2px;
+}
+.sales-stat { display: flex; flex-direction: column; gap: 2px; }
+.sales-stat-val { font-size: 18px; font-weight: 700; color: #181B1E; }
+.sales-stat-lbl { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+
+/* transaction expandable row */
+.tr-detail-row td { background: #F8F9FA; padding: 0 !important; }
+.tr-basket { padding: 16px 20px; }
+.tr-basket-hdr { display: flex; gap: 32px; font-size: 13px; margin-bottom: 12px; flex-wrap: wrap; }
+.tr-basket-hdr-item { display: flex; flex-direction: column; gap: 2px; }
+.tr-basket-hdr-label { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+.tr-basket-hdr-val { font-weight: 600; color: #181B1E; }
+.tr-basket-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
+.tr-basket-table th { font-size: 11px; text-transform: uppercase; color: var(--grey-txt); padding: 6px 10px; text-align: left; border-bottom: 1px solid #E0E0E0; }
+.tr-basket-table td { padding: 7px 10px; border-bottom: 1px solid #F0F0F0; }
+.tr-basket-table tr:last-child td { border-bottom: none; }
+.tr-basket-summary { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 13px; padding-top: 8px; border-top: 1px solid #E0E0E0; }
+.tr-basket-summary-row { display: flex; gap: 24px; justify-content: flex-end; }
+.tr-basket-summary-row.total { font-weight: 700; font-size: 14px; }
+.tr-row-expandable { cursor: pointer; }
+.tr-row-expandable:hover td { background: #F5F5F5; }
+.tr-row-expandable.topen td { background: #EEF4FF; }
+.tr-expand-icon { transition: transform .15s; display: inline-block; }
+.tr-row-expandable.topen .tr-expand-icon { transform: rotate(90deg); }
+.tr-status-success { color: #388E3C; font-weight: 600; }
+.tr-status-refund   { color: #F57C00; font-weight: 600; }
+.tr-status-cancelled{ color: #D32F2F; font-weight: 600; }
+
+
+/* ── Sales & Transactions tabs ───────────────────────────────────────────── */
+.sales-search-input {
+  height: 32px; border: 1px solid var(--grey-bdr); border-radius: 4px;
+  padding: 0 10px 0 30px; font-size: 13px; outline: none; width: 200px;
+  background: #fff url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4.5' stroke='%239E9E9E' stroke-width='1.3'/%3E%3Cline x1='9.5' y1='9.5' x2='12.5' y2='12.5' stroke='%239E9E9E' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 8px center;
+}
+.sales-search-input:focus { border-color: var(--blue); }
+.sales-stat-bar {
+  display: flex; gap: 24px; padding: 10px 0 12px;
+  border-bottom: 1px solid #F0F0F0; margin-bottom: 2px;
+}
+.sales-stat { display: flex; flex-direction: column; gap: 2px; }
+.sales-stat-val { font-size: 18px; font-weight: 700; color: #181B1E; }
+.sales-stat-lbl { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+
+/* transaction expandable row */
+.tr-detail-row td { background: #F8F9FA; padding: 0 !important; }
+.tr-basket { padding: 16px 20px; }
+.tr-basket-hdr { display: flex; gap: 32px; font-size: 13px; margin-bottom: 12px; flex-wrap: wrap; }
+.tr-basket-hdr-item { display: flex; flex-direction: column; gap: 2px; }
+.tr-basket-hdr-label { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+.tr-basket-hdr-val { font-weight: 600; color: #181B1E; }
+.tr-basket-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
+.tr-basket-table th { font-size: 11px; text-transform: uppercase; color: var(--grey-txt); padding: 6px 10px; text-align: left; border-bottom: 1px solid #E0E0E0; }
+.tr-basket-table td { padding: 7px 10px; border-bottom: 1px solid #F0F0F0; }
+.tr-basket-table tr:last-child td { border-bottom: none; }
+.tr-basket-summary { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 13px; padding-top: 8px; border-top: 1px solid #E0E0E0; }
+.tr-basket-summary-row { display: flex; gap: 24px; justify-content: flex-end; }
+.tr-basket-summary-row.total { font-weight: 700; font-size: 14px; }
+.tr-row-expandable { cursor: pointer; }
+.tr-row-expandable:hover td { background: #F5F5F5; }
+.tr-row-expandable.topen td { background: #EEF4FF; }
+.tr-expand-icon { transition: transform .15s; display: inline-block; }
+.tr-row-expandable.topen .tr-expand-icon { transform: rotate(90deg); }
+.tr-status-success { color: #388E3C; font-weight: 600; }
+.tr-status-refund   { color: #F57C00; font-weight: 600; }
+.tr-status-cancelled{ color: #D32F2F; font-weight: 600; }
+
+
+/* ── Sales & Transactions tabs ───────────────────────────────────────────── */
+.sales-search-input {
+  height: 32px; border: 1px solid var(--grey-bdr); border-radius: 4px;
+  padding: 0 10px 0 30px; font-size: 13px; outline: none; width: 200px;
+  background: #fff url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='4.5' stroke='%239E9E9E' stroke-width='1.3'/%3E%3Cline x1='9.5' y1='9.5' x2='12.5' y2='12.5' stroke='%239E9E9E' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 8px center;
+}
+.sales-search-input:focus { border-color: var(--blue); }
+.sales-stat-bar {
+  display: flex; gap: 24px; padding: 10px 0 12px;
+  border-bottom: 1px solid #F0F0F0; margin-bottom: 2px;
+}
+.sales-stat { display: flex; flex-direction: column; gap: 2px; }
+.sales-stat-val { font-size: 18px; font-weight: 700; color: #181B1E; }
+.sales-stat-lbl { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+
+/* transaction expandable row */
+.tr-detail-row td { background: #F8F9FA; padding: 0 !important; }
+.tr-basket { padding: 16px 20px; }
+.tr-basket-hdr { display: flex; gap: 32px; font-size: 13px; margin-bottom: 12px; flex-wrap: wrap; }
+.tr-basket-hdr-item { display: flex; flex-direction: column; gap: 2px; }
+.tr-basket-hdr-label { font-size: 11px; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; }
+.tr-basket-hdr-val { font-weight: 600; color: #181B1E; }
+.tr-basket-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
+.tr-basket-table th { font-size: 11px; text-transform: uppercase; color: var(--grey-txt); padding: 6px 10px; text-align: left; border-bottom: 1px solid #E0E0E0; }
+.tr-basket-table td { padding: 7px 10px; border-bottom: 1px solid #F0F0F0; }
+.tr-basket-table tr:last-child td { border-bottom: none; }
+.tr-basket-summary { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 13px; padding-top: 8px; border-top: 1px solid #E0E0E0; }
+.tr-basket-summary-row { display: flex; gap: 24px; justify-content: flex-end; }
+.tr-basket-summary-row.total { font-weight: 700; font-size: 14px; }
+.tr-row-expandable { cursor: pointer; }
+.tr-row-expandable:hover td { background: #F5F5F5; }
+.tr-row-expandable.topen td { background: #EEF4FF; }
+.tr-expand-icon { transition: transform .15s; display: inline-block; }
+.tr-row-expandable.topen .tr-expand-icon { transform: rotate(90deg); }
+.tr-status-success { color: #388E3C; font-weight: 600; }
+.tr-status-refund   { color: #F57C00; font-weight: 600; }
+.tr-status-cancelled{ color: #D32F2F; font-weight: 600; }
+
 </style>
 </head>
 <body>
@@ -941,10 +1058,10 @@
 
       <!-- tab nav (Figma: 44px, 8 tabs) -->
       <nav class="tab-nav">
-        <button class="tab-btn" id="tab-overview"   onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn active" id="tab-overview"   onclick="switchTab('overview')">Overview</button>
         <button class="tab-btn" id="tab-sales"      onclick="switchTab('sales')">Sales</button>
         <button class="tab-btn" id="tab-transactions" onclick="switchTab('transactions')">Transactions</button>
-        <button class="tab-btn active" id="tab-events" onclick="switchTab('events')">
+        <button class="tab-btn" id="tab-events" onclick="switchTab('events')">
           Events<span class="tab-badge" id="events-badge">2</span>
         </button>
         <button class="tab-btn" id="tab-refill"     onclick="switchTab('refill')">Refill</button>
@@ -954,7 +1071,7 @@
     </div>
 
     <!-- ══ EVENTS PANEL ═══════════════════════════════════════════════ -->
-    <div class="tab-panel active" id="panel-events">
+    <div class="tab-panel" id="panel-events">
 
       <!-- Figma: station selector bar -->
       <div class="events-station-bar">
@@ -1337,7 +1454,7 @@
     </div><!-- /panel-products -->
 
     <!-- ══ OVERVIEW PANEL ════════════════════════════════════════════════ -->
-    <div class="tab-panel" id="panel-overview">
+    <div class="tab-panel active" id="panel-overview">
 
       <!-- Page header -->
       <div class="fig-page-hdr">
@@ -1567,53 +1684,221 @@
 
     </div><!-- /panel-overview -->
 
-        <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
+        <!-- ══ SALES PANEL ═══════════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-sales">
+
       <div class="fig-page-hdr">
         <div>
           <div class="fig-page-title">Sales</div>
-          <div class="fig-page-desc">Revenue charts, top-selling products and sales trends</div>
+          <div class="fig-page-desc">Individual sold items — 1 item sold = 1 row</div>
         </div>
         <div class="fig-page-actions">
           <button class="fig-btn-tertiary">Export</button>
-          <button class="fig-btn-secondary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Select period
-          </button>
-          <button class="fig-btn-primary">View report</button>
         </div>
       </div>
-      <div class="fig-empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h4>No sales data</h4>
-        <p>Revenue charts, top-selling products and sales trends will appear here.</p>
-      </div>
-    </div>
 
-    <!-- ══ TRANSACTIONS PANEL ═════════════════════════════════════════ -->
+      <!-- summary stats -->
+      <div class="sales-stat-bar">
+        <div class="sales-stat"><span class="sales-stat-val">1,847</span><span class="sales-stat-lbl">Items sold</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">€ 4,218.50</span><span class="sales-stat-lbl">Revenue</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">€ 2.28</span><span class="sales-stat-lbl">Avg. price</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">932</span><span class="sales-stat-lbl">Transactions</span></div>
+      </div>
+
+      <!-- filter bar -->
+      <div class="filter-bar" style="padding:10px 0 8px">
+        <div style="position:relative">
+          <input class="sales-search-input" id="sales-search" type="text" placeholder="Search product / SKU…"
+            oninput="filterSales()">
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn active-filter" id="sales-btn-period" onclick="toggleDropdown('sales-dd-period')">Last 30 days ▾</button>
+          <div class="dropdown-menu" id="sales-dd-period">
+            <div class="dropdown-item" onclick="salesSelectFilter('period','Today',this)">Today</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('period','Last 7 days',this)">Last 7 days</div>
+            <div class="dropdown-item selected" onclick="salesSelectFilter('period','Last 30 days',this)">Last 30 days</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('period','Custom…',this)">Custom range…</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="sales-btn-kiosk" onclick="toggleDropdown('sales-dd-kiosk')">Kiosk ▾</button>
+          <div class="dropdown-menu" id="sales-dd-kiosk">
+            <div class="dropdown-item selected" onclick="salesSelectFilter('kiosk','All kiosks',this)">All kiosks</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('kiosk','Kiosk 01',this)">Kiosk 01 – Main entrance</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('kiosk','Kiosk 02',this)">Kiosk 02 – Side hall</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="sales-btn-station" onclick="toggleDropdown('sales-dd-station')">Station ▾</button>
+          <div class="dropdown-menu" id="sales-dd-station">
+            <div class="dropdown-item selected" onclick="salesSelectFilter('station','All stations',this)">All stations</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('station','Fruits & Veg',this)">[SHELVES] Fruits &amp; Vegetables</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('station','Cold drinks',this)">[FRIDGE] Cold drinks</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('station','Coffee',this)">[COFFEE] Aristos Coffee</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="sales-btn-payment" onclick="toggleDropdown('sales-dd-payment')">Payment ▾</button>
+          <div class="dropdown-menu" id="sales-dd-payment">
+            <div class="dropdown-item selected" onclick="salesSelectFilter('payment','All',this)">All</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('payment','Cashless',this)">Cashless</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('payment','Cash',this)">Cash</div>
+            <div class="dropdown-item" onclick="salesSelectFilter('payment','Loyalty',this)">Loyalty / Wallet</div>
+          </div>
+        </div>
+        <button class="btn-clear-all" onclick="salesClearFilters()">Clear all</button>
+        <button class="btn-icon-dl" title="Download CSV">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2v8M4.5 7l3 3 3-3" stroke="#495057" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12h11" stroke="#495057" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <!-- table -->
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="sortable" onclick="salesSort('dt')" style="width:140px">
+                  Date &amp; time <span id="sales-sort-dt">↓</span>
+                </th>
+                <th class="sortable" onclick="salesSort('name')">
+                  Product <span id="sales-sort-name"></span>
+                </th>
+                <th style="width:130px">SKU / Barcode</th>
+                <th style="width:110px">Kiosk</th>
+                <th style="width:120px">Payment</th>
+                <th class="sortable" onclick="salesSort('price')" style="width:90px;text-align:right">
+                  Price <span id="sales-sort-price"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="sales-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pagination" id="sales-pagination">
+        <span class="pg-label text-muted">Rows per page:</span>
+        <span class="pg-size active" onclick="salesSetPgSize(this,10)">10</span>
+        <span class="pg-size" onclick="salesSetPgSize(this,20)">20</span>
+        <span class="pg-size" onclick="salesSetPgSize(this,50)">50</span>
+        <span class="pg-total text-muted">Total: <strong id="sales-total">0</strong></span>
+        <div class="pg-nav">
+          <button class="pg-nav-btn" id="sales-pg-prev" onclick="salesChangePage(-1)">&#8249;</button>
+          <div class="pg-num" id="sales-pg-num">1</div>
+          <button class="pg-nav-btn" id="sales-pg-next" onclick="salesChangePage(1)">&#8250;</button>
+        </div>
+      </div>
+
+    </div><!-- /panel-sales -->
+
+            <!-- ══ TRANSACTIONS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-transactions">
+
       <div class="fig-page-hdr">
         <div>
           <div class="fig-page-title">Transactions</div>
-          <div class="fig-page-desc">Payment history, transaction details and receipt lookup</div>
+          <div class="fig-page-desc">One row = one payment / basket. Click a row to see basket details.</div>
         </div>
         <div class="fig-page-actions">
           <button class="fig-btn-tertiary">Export</button>
-          <button class="fig-btn-secondary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
-            Filter
-          </button>
-          <button class="fig-btn-primary">Download CSV</button>
         </div>
       </div>
-      <div class="fig-empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#9E9E9E" stroke-width="1.5"/></svg>
-        <h4>No transactions</h4>
-        <p>Payment history, transaction details and receipt lookup will appear here.</p>
-      </div>
-    </div>
 
-    <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
+      <!-- summary stats -->
+      <div class="sales-stat-bar">
+        <div class="sales-stat"><span class="sales-stat-val">932</span><span class="sales-stat-lbl">Transactions</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">€ 4,218.50</span><span class="sales-stat-lbl">Revenue</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">€ 4.53</span><span class="sales-stat-lbl">Avg. basket</span></div>
+        <div class="sales-stat"><span class="sales-stat-val">1.98</span><span class="sales-stat-lbl">Avg. items / basket</span></div>
+      </div>
+
+      <!-- filter bar -->
+      <div class="filter-bar" style="padding:10px 0 8px">
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn active-filter" id="txn-btn-period" onclick="toggleDropdown('txn-dd-period')">Last 30 days ▾</button>
+          <div class="dropdown-menu" id="txn-dd-period">
+            <div class="dropdown-item" onclick="txnSelectFilter('period','Today',this)">Today</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('period','Last 7 days',this)">Last 7 days</div>
+            <div class="dropdown-item selected" onclick="txnSelectFilter('period','Last 30 days',this)">Last 30 days</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('period','Custom…',this)">Custom range…</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="txn-btn-kiosk" onclick="toggleDropdown('txn-dd-kiosk')">Kiosk ▾</button>
+          <div class="dropdown-menu" id="txn-dd-kiosk">
+            <div class="dropdown-item selected" onclick="txnSelectFilter('kiosk','All',this)">All kiosks</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('kiosk','Kiosk 01',this)">Kiosk 01 – Main entrance</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('kiosk','Kiosk 02',this)">Kiosk 02 – Side hall</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="txn-btn-payment" onclick="toggleDropdown('txn-dd-payment')">Payment ▾</button>
+          <div class="dropdown-menu" id="txn-dd-payment">
+            <div class="dropdown-item selected" onclick="txnSelectFilter('payment','All',this)">All</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('payment','Cashless',this)">Cashless</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('payment','Cash',this)">Cash</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('payment','Loyalty',this)">Loyalty / Wallet</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="dropdown-btn" id="txn-btn-status" onclick="toggleDropdown('txn-dd-status')">Status ▾</button>
+          <div class="dropdown-menu" id="txn-dd-status">
+            <div class="dropdown-item selected" onclick="txnSelectFilter('status','All',this)">All</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('status','Success',this)">Success</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('status','Refund',this)">Refund</div>
+            <div class="dropdown-item" onclick="txnSelectFilter('status','Cancelled',this)">Cancelled</div>
+          </div>
+        </div>
+        <button class="btn-clear-all" onclick="txnClearFilters()">Clear all</button>
+        <button class="btn-icon-dl" title="Download CSV">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2v8M4.5 7l3 3 3-3" stroke="#495057" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12h11" stroke="#495057" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <!-- table -->
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table id="txn-table">
+            <thead>
+              <tr>
+                <th style="width:24px"></th>
+                <th class="sortable" onclick="txnSort('dt')" style="width:140px">
+                  Date &amp; time <span id="txn-sort-dt">↓</span>
+                </th>
+                <th style="width:110px">Type</th>
+                <th style="width:110px">Kiosk</th>
+                <th class="sortable" onclick="txnSort('items')" style="width:70px;text-align:center">
+                  Items <span id="txn-sort-items"></span>
+                </th>
+                <th class="sortable" onclick="txnSort('total')" style="width:100px;text-align:right">
+                  Total <span id="txn-sort-total"></span>
+                </th>
+                <th style="width:130px">Payment</th>
+                <th style="width:100px">Status</th>
+              </tr>
+            </thead>
+            <tbody id="txn-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pagination" id="txn-pagination">
+        <span class="pg-label text-muted">Rows per page:</span>
+        <span class="pg-size active" onclick="txnSetPgSize(this,10)">10</span>
+        <span class="pg-size" onclick="txnSetPgSize(this,20)">20</span>
+        <span class="pg-size" onclick="txnSetPgSize(this,50)">50</span>
+        <span class="pg-total text-muted">Total: <strong id="txn-total">0</strong></span>
+        <div class="pg-nav">
+          <button class="pg-nav-btn" id="txn-pg-prev" onclick="txnChangePage(-1)">&#8249;</button>
+          <div class="pg-num" id="txn-pg-num">1</div>
+          <button class="pg-nav-btn" id="txn-pg-next" onclick="txnChangePage(1)">&#8250;</button>
+        </div>
+      </div>
+
+    </div><!-- /panel-transactions -->
+
+            <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-refill">
 
       <!-- Summary stats -->
@@ -2432,6 +2717,861 @@ function confirmDeleteColumns() {
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
 renderEvents();
+
+/* ══════════════════════════════════════════════════════════════════
+   SALES TAB
+══════════════════════════════════════════════════════════════════ */
+const SALES_DATA = [
+  { dt:'12.03.2026 11:42', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'12.03.2026 11:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'12.03.2026 10:55', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Cash',     price:1.50 },
+  { dt:'12.03.2026 10:47', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 01', payment:'Cashless', price:0.90 },
+  { dt:'12.03.2026 10:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 02', payment:'Loyalty',  price:1.20 },
+  { dt:'12.03.2026 09:58', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 01', payment:'Cashless', price:1.40 },
+  { dt:'11.03.2026 17:05', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'11.03.2026 15:42', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 02', payment:'Cash',     price:0.90 },
+  { dt:'11.03.2026 14:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'11.03.2026 13:05', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Loyalty',  price:1.50 },
+  { dt:'11.03.2026 11:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 01', payment:'Cashless', price:1.20 },
+  { dt:'11.03.2026 10:12', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 02', payment:'Cash',     price:1.40 },
+];
+
+let salesSortCol = 'dt', salesSortDir = -1, salesPage = 1, salesPageSize = 10;
+let salesFilters = { search:'', kiosk:'', payment:'' };
+
+function salesGetFiltered() {
+  const q = (document.getElementById('sales-search')?.value || '').toLowerCase();
+  return SALES_DATA.filter(r => {
+    if (q && !r.name.toLowerCase().includes(q) && !r.sku.includes(q)) return false;
+    if (salesFilters.kiosk && salesFilters.kiosk !== 'All kiosks' && r.kiosk !== salesFilters.kiosk) return false;
+    if (salesFilters.payment && salesFilters.payment !== 'All' && r.payment !== salesFilters.payment) return false;
+    return true;
+  }).sort((a,b) => {
+    let av = a[salesSortCol], bv = b[salesSortCol];
+    if (salesSortCol === 'dt') return salesSortDir * a.dt.localeCompare(b.dt);
+    if (salesSortCol === 'price') return salesSortDir * (a.price - b.price);
+    return salesSortDir * av.localeCompare(bv);
+  });
+}
+
+function salesRender() {
+  const data = salesGetFiltered();
+  const start = (salesPage-1)*salesPageSize;
+  const rows = data.slice(start, start+salesPageSize);
+  const tb = document.getElementById('sales-tbody');
+  if (!tb) return;
+  tb.innerHTML = rows.map(r => `
+    <tr>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td class="fw6">${r.name}</td>
+      <td class="text-muted" style="font-size:12px;font-family:monospace">${r.sku}</td>
+      <td>${r.kiosk}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td class="fw6" style="text-align:right">€ ${r.price.toFixed(2)}</td>
+    </tr>`).join('');
+  document.getElementById('sales-total').textContent = data.length;
+  document.getElementById('sales-pg-num').textContent = salesPage;
+  document.getElementById('sales-pg-prev').disabled = salesPage <= 1;
+  document.getElementById('sales-pg-next').disabled = start + salesPageSize >= data.length;
+}
+
+function salesSort(col) {
+  if (salesSortCol === col) salesSortDir *= -1; else { salesSortCol = col; salesSortDir = -1; }
+  ['dt','name','price'].forEach(c => {
+    const el = document.getElementById('sales-sort-'+c);
+    if (el) el.textContent = c === salesSortCol ? (salesSortDir === -1 ? '↓' : '↑') : '';
+  });
+  salesPage = 1; salesRender();
+}
+
+function salesSelectFilter(type, val, el) {
+  salesFilters[type] = val;
+  const ddId = { period:'sales-dd-period', kiosk:'sales-dd-kiosk', station:'sales-dd-station', payment:'sales-dd-payment' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btnId = ddId.replace('dd','btn');
+    const btn = document.getElementById(btnId);
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All kiosks' && val !== 'All' && val !== 'All stations' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  salesPage = 1; salesRender();
+}
+
+function salesClearFilters() {
+  salesFilters = { search:'', kiosk:'', payment:'' };
+  const si = document.getElementById('sales-search'); if (si) si.value = '';
+  ['sales-dd-period','sales-dd-kiosk','sales-dd-station','sales-dd-payment'].forEach(id=>{
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i)=>it.classList.toggle('selected',i===0));
+  });
+  salesPage = 1; salesRender();
+}
+
+function filterSales() { salesPage = 1; salesRender(); }
+function salesSetPgSize(el, sz) {
+  salesPageSize = sz;
+  document.querySelectorAll('#sales-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); salesPage = 1; salesRender();
+}
+function salesChangePage(d) { salesPage = Math.max(1, salesPage+d); salesRender(); }
+
+/* ══════════════════════════════════════════════════════════════════
+   TRANSACTIONS TAB
+══════════════════════════════════════════════════════════════════ */
+const TXN_DATA = [
+  {
+    id:'TXN-1001', dt:'12.03.2026 11:42', type:'Sale', kiosk:'Kiosk 01', items:3, total:4.50,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:2, unitPrice:1.80, lineTotal:3.60 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+    ],
+    subtotal:4.50, discount:0, tax:0.45, grandTotal:4.50
+  },
+  {
+    id:'TXN-1002', dt:'12.03.2026 10:55', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.50,
+    payment:'Cash', status:'Success',
+    basket:[
+      { name:'Snickers 50g', qty:1, unitPrice:1.50, lineTotal:1.50 },
+    ],
+    subtotal:1.50, discount:0, tax:0.15, grandTotal:1.50
+  },
+  {
+    id:'TXN-1003', dt:'12.03.2026 10:33', type:'Sale', kiosk:'Kiosk 02', items:2, total:3.40,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Nescafé Classic', qty:1, unitPrice:1.20, lineTotal:1.20 },
+      { name:'KitKat 4-finger', qty:1, unitPrice:1.40, lineTotal:1.40 },
+      { name:'Water 500ml',     qty:1, unitPrice:0.80, lineTotal:0.80 },
+    ],
+    subtotal:3.40, discount:0, tax:0.34, grandTotal:3.40
+  },
+  {
+    id:'TXN-1004', dt:'11.03.2026 17:05', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.80,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:1, unitPrice:1.80, lineTotal:1.80 },
+    ],
+    subtotal:1.80, discount:0, tax:0.18, grandTotal:1.80
+  },
+  {
+    id:'TXN-1005', dt:'11.03.2026 14:28', type:'Refund', kiosk:'Kiosk 02', items:1, total:-2.20,
+    payment:'Cashless', status:'Refund',
+    basket:[
+      { name:'Red Bull 250ml', qty:1, unitPrice:2.20, lineTotal:2.20 },
+    ],
+    subtotal:2.20, discount:0, tax:0.22, grandTotal:2.20
+  },
+  {
+    id:'TXN-1006', dt:'11.03.2026 13:05', type:'Sale', kiosk:'Kiosk 01', items:2, total:2.70,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Snickers 50g',   qty:1, unitPrice:1.50, lineTotal:1.50 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+      { name:'Nescafé Classic',qty:1, unitPrice:0.30, lineTotal:0.30 },
+    ],
+    subtotal:2.70, discount:0, tax:0.27, grandTotal:2.70
+  },
+];
+
+let txnSortCol='dt', txnSortDir=-1, txnPage=1, txnPageSize=10;
+let txnFilters = { kiosk:'', payment:'', status:'' };
+let txnOpenId = null;
+
+function txnGetFiltered() {
+  return TXN_DATA.filter(r => {
+    if (txnFilters.kiosk && txnFilters.kiosk !== 'All' && r.kiosk !== txnFilters.kiosk) return false;
+    if (txnFilters.payment && txnFilters.payment !== 'All' && r.payment !== txnFilters.payment) return false;
+    if (txnFilters.status && txnFilters.status !== 'All' && r.status !== txnFilters.status) return false;
+    return true;
+  }).sort((a,b) => {
+    if (txnSortCol === 'dt') return txnSortDir * a.dt.localeCompare(b.dt);
+    if (txnSortCol === 'items') return txnSortDir * (a.items - b.items);
+    if (txnSortCol === 'total') return txnSortDir * (Math.abs(a.total) - Math.abs(b.total));
+    return 0;
+  });
+}
+
+function txnStatusHtml(s) {
+  if (s==='Success')   return '<span class="tr-status-success">&#10003; Success</span>';
+  if (s==='Refund')    return '<span class="tr-status-refund">&#8635; Refund</span>';
+  if (s==='Cancelled') return '<span class="tr-status-cancelled">&#10005; Cancelled</span>';
+  return s;
+}
+
+function txnRender() {
+  const data = txnGetFiltered();
+  const start = (txnPage-1)*txnPageSize;
+  const rows = data.slice(start, start+txnPageSize);
+  const tb = document.getElementById('txn-tbody');
+  if (!tb) return;
+
+  let html = '';
+  rows.forEach(r => {
+    const isOpen = txnOpenId === r.id;
+    const amtStr = r.total < 0 ? '-€ '+Math.abs(r.total).toFixed(2) : '€ '+r.total.toFixed(2);
+    html += `<tr class="tr-row-expandable${isOpen?' topen':''}" onclick="txnToggle('${r.id}',this)">
+      <td style="width:24px;color:#9E9E9E">
+        <span class="tr-expand-icon">&#9654;</span>
+      </td>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td>${r.type}</td>
+      <td>${r.kiosk}</td>
+      <td style="text-align:center">${r.items}</td>
+      <td class="fw6" style="text-align:right;${r.total<0?'color:var(--red)':''}">${amtStr}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td>${txnStatusHtml(r.status)}</td>
+    </tr>`;
+    if (isOpen) {
+      const basketRows = r.basket.map(item =>
+        `<tr><td>${item.name}</td><td style="text-align:center">${item.qty}</td><td style="text-align:right">€ ${item.unitPrice.toFixed(2)}</td><td style="text-align:right;font-weight:600">€ ${item.lineTotal.toFixed(2)}</td></tr>`
+      ).join('');
+      html += `<tr class="tr-detail-row"><td colspan="8"><div class="tr-basket">
+        <div class="tr-basket-hdr">
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Transaction ID</span><span class="tr-basket-hdr-val">${r.id}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Date &amp; time</span><span class="tr-basket-hdr-val">${r.dt}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Kiosk</span><span class="tr-basket-hdr-val">${r.kiosk}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Payment</span><span class="tr-basket-hdr-val">${r.payment}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Status</span><span class="tr-basket-hdr-val">${txnStatusHtml(r.status)}</span></div>
+        </div>
+        <table class="tr-basket-table">
+          <thead><tr><th>Product</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit price</th><th style="text-align:right">Line total</th></tr></thead>
+          <tbody>${basketRows}</tbody>
+        </table>
+        <div class="tr-basket-summary">
+          <div class="tr-basket-summary-row"><span class="text-muted">Subtotal</span><span>€ ${r.subtotal.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Discount</span><span>${r.discount > 0 ? '-€ '+r.discount.toFixed(2) : '—'}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Tax (VAT)</span><span>€ ${r.tax.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row total"><span>Total</span><span>€ ${r.grandTotal.toFixed(2)}</span></div>
+        </div>
+      </div></td></tr>`;
+    }
+  });
+  tb.innerHTML = html;
+
+  document.getElementById('txn-total').textContent = data.length;
+  document.getElementById('txn-pg-num').textContent = txnPage;
+  document.getElementById('txn-pg-prev').disabled = txnPage <= 1;
+  document.getElementById('txn-pg-next').disabled = start + txnPageSize >= data.length;
+}
+
+function txnToggle(id) {
+  txnOpenId = (txnOpenId === id) ? null : id;
+  txnRender();
+}
+
+function txnSort(col) {
+  if (txnSortCol === col) txnSortDir *= -1; else { txnSortCol = col; txnSortDir = -1; }
+  ['dt','items','total'].forEach(c => {
+    const el = document.getElementById('txn-sort-'+c);
+    if (el) el.textContent = c === txnSortCol ? (txnSortDir === -1 ? '↓' : '↑') : '';
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSelectFilter(type, val, el) {
+  txnFilters[type] = val;
+  const ddId = { period:'txn-dd-period', kiosk:'txn-dd-kiosk', payment:'txn-dd-payment', status:'txn-dd-status' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btn = document.getElementById(ddId.replace('dd','btn'));
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  txnPage = 1; txnRender();
+}
+
+function txnClearFilters() {
+  txnFilters = { kiosk:'', payment:'', status:'' };
+  ['txn-dd-period','txn-dd-kiosk','txn-dd-payment','txn-dd-status'].forEach(id => {
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i) => it.classList.toggle('selected', i===0));
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSetPgSize(el, sz) {
+  txnPageSize = sz;
+  document.querySelectorAll('#txn-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); txnPage = 1; txnRender();
+}
+function txnChangePage(d) { txnPage = Math.max(1, txnPage+d); txnRender(); }
+
+// init on DOM ready
+document.addEventListener('DOMContentLoaded', () => { salesRender(); txnRender(); });
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SALES TAB
+══════════════════════════════════════════════════════════════════ */
+const SALES_DATA = [
+  { dt:'12.03.2026 11:42', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'12.03.2026 11:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'12.03.2026 10:55', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Cash',     price:1.50 },
+  { dt:'12.03.2026 10:47', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 01', payment:'Cashless', price:0.90 },
+  { dt:'12.03.2026 10:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 02', payment:'Loyalty',  price:1.20 },
+  { dt:'12.03.2026 09:58', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 01', payment:'Cashless', price:1.40 },
+  { dt:'11.03.2026 17:05', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'11.03.2026 15:42', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 02', payment:'Cash',     price:0.90 },
+  { dt:'11.03.2026 14:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'11.03.2026 13:05', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Loyalty',  price:1.50 },
+  { dt:'11.03.2026 11:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 01', payment:'Cashless', price:1.20 },
+  { dt:'11.03.2026 10:12', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 02', payment:'Cash',     price:1.40 },
+];
+
+let salesSortCol = 'dt', salesSortDir = -1, salesPage = 1, salesPageSize = 10;
+let salesFilters = { search:'', kiosk:'', payment:'' };
+
+function salesGetFiltered() {
+  const q = (document.getElementById('sales-search')?.value || '').toLowerCase();
+  return SALES_DATA.filter(r => {
+    if (q && !r.name.toLowerCase().includes(q) && !r.sku.includes(q)) return false;
+    if (salesFilters.kiosk && salesFilters.kiosk !== 'All kiosks' && r.kiosk !== salesFilters.kiosk) return false;
+    if (salesFilters.payment && salesFilters.payment !== 'All' && r.payment !== salesFilters.payment) return false;
+    return true;
+  }).sort((a,b) => {
+    let av = a[salesSortCol], bv = b[salesSortCol];
+    if (salesSortCol === 'dt') return salesSortDir * a.dt.localeCompare(b.dt);
+    if (salesSortCol === 'price') return salesSortDir * (a.price - b.price);
+    return salesSortDir * av.localeCompare(bv);
+  });
+}
+
+function salesRender() {
+  const data = salesGetFiltered();
+  const start = (salesPage-1)*salesPageSize;
+  const rows = data.slice(start, start+salesPageSize);
+  const tb = document.getElementById('sales-tbody');
+  if (!tb) return;
+  tb.innerHTML = rows.map(r => `
+    <tr>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td class="fw6">${r.name}</td>
+      <td class="text-muted" style="font-size:12px;font-family:monospace">${r.sku}</td>
+      <td>${r.kiosk}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td class="fw6" style="text-align:right">€ ${r.price.toFixed(2)}</td>
+    </tr>`).join('');
+  document.getElementById('sales-total').textContent = data.length;
+  document.getElementById('sales-pg-num').textContent = salesPage;
+  document.getElementById('sales-pg-prev').disabled = salesPage <= 1;
+  document.getElementById('sales-pg-next').disabled = start + salesPageSize >= data.length;
+}
+
+function salesSort(col) {
+  if (salesSortCol === col) salesSortDir *= -1; else { salesSortCol = col; salesSortDir = -1; }
+  ['dt','name','price'].forEach(c => {
+    const el = document.getElementById('sales-sort-'+c);
+    if (el) el.textContent = c === salesSortCol ? (salesSortDir === -1 ? '↓' : '↑') : '';
+  });
+  salesPage = 1; salesRender();
+}
+
+function salesSelectFilter(type, val, el) {
+  salesFilters[type] = val;
+  const ddId = { period:'sales-dd-period', kiosk:'sales-dd-kiosk', station:'sales-dd-station', payment:'sales-dd-payment' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btnId = ddId.replace('dd','btn');
+    const btn = document.getElementById(btnId);
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All kiosks' && val !== 'All' && val !== 'All stations' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  salesPage = 1; salesRender();
+}
+
+function salesClearFilters() {
+  salesFilters = { search:'', kiosk:'', payment:'' };
+  const si = document.getElementById('sales-search'); if (si) si.value = '';
+  ['sales-dd-period','sales-dd-kiosk','sales-dd-station','sales-dd-payment'].forEach(id=>{
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i)=>it.classList.toggle('selected',i===0));
+  });
+  salesPage = 1; salesRender();
+}
+
+function filterSales() { salesPage = 1; salesRender(); }
+function salesSetPgSize(el, sz) {
+  salesPageSize = sz;
+  document.querySelectorAll('#sales-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); salesPage = 1; salesRender();
+}
+function salesChangePage(d) { salesPage = Math.max(1, salesPage+d); salesRender(); }
+
+/* ══════════════════════════════════════════════════════════════════
+   TRANSACTIONS TAB
+══════════════════════════════════════════════════════════════════ */
+const TXN_DATA = [
+  {
+    id:'TXN-1001', dt:'12.03.2026 11:42', type:'Sale', kiosk:'Kiosk 01', items:3, total:4.50,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:2, unitPrice:1.80, lineTotal:3.60 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+    ],
+    subtotal:4.50, discount:0, tax:0.45, grandTotal:4.50
+  },
+  {
+    id:'TXN-1002', dt:'12.03.2026 10:55', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.50,
+    payment:'Cash', status:'Success',
+    basket:[
+      { name:'Snickers 50g', qty:1, unitPrice:1.50, lineTotal:1.50 },
+    ],
+    subtotal:1.50, discount:0, tax:0.15, grandTotal:1.50
+  },
+  {
+    id:'TXN-1003', dt:'12.03.2026 10:33', type:'Sale', kiosk:'Kiosk 02', items:2, total:3.40,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Nescafé Classic', qty:1, unitPrice:1.20, lineTotal:1.20 },
+      { name:'KitKat 4-finger', qty:1, unitPrice:1.40, lineTotal:1.40 },
+      { name:'Water 500ml',     qty:1, unitPrice:0.80, lineTotal:0.80 },
+    ],
+    subtotal:3.40, discount:0, tax:0.34, grandTotal:3.40
+  },
+  {
+    id:'TXN-1004', dt:'11.03.2026 17:05', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.80,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:1, unitPrice:1.80, lineTotal:1.80 },
+    ],
+    subtotal:1.80, discount:0, tax:0.18, grandTotal:1.80
+  },
+  {
+    id:'TXN-1005', dt:'11.03.2026 14:28', type:'Refund', kiosk:'Kiosk 02', items:1, total:-2.20,
+    payment:'Cashless', status:'Refund',
+    basket:[
+      { name:'Red Bull 250ml', qty:1, unitPrice:2.20, lineTotal:2.20 },
+    ],
+    subtotal:2.20, discount:0, tax:0.22, grandTotal:2.20
+  },
+  {
+    id:'TXN-1006', dt:'11.03.2026 13:05', type:'Sale', kiosk:'Kiosk 01', items:2, total:2.70,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Snickers 50g',   qty:1, unitPrice:1.50, lineTotal:1.50 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+      { name:'Nescafé Classic',qty:1, unitPrice:0.30, lineTotal:0.30 },
+    ],
+    subtotal:2.70, discount:0, tax:0.27, grandTotal:2.70
+  },
+];
+
+let txnSortCol='dt', txnSortDir=-1, txnPage=1, txnPageSize=10;
+let txnFilters = { kiosk:'', payment:'', status:'' };
+let txnOpenId = null;
+
+function txnGetFiltered() {
+  return TXN_DATA.filter(r => {
+    if (txnFilters.kiosk && txnFilters.kiosk !== 'All' && r.kiosk !== txnFilters.kiosk) return false;
+    if (txnFilters.payment && txnFilters.payment !== 'All' && r.payment !== txnFilters.payment) return false;
+    if (txnFilters.status && txnFilters.status !== 'All' && r.status !== txnFilters.status) return false;
+    return true;
+  }).sort((a,b) => {
+    if (txnSortCol === 'dt') return txnSortDir * a.dt.localeCompare(b.dt);
+    if (txnSortCol === 'items') return txnSortDir * (a.items - b.items);
+    if (txnSortCol === 'total') return txnSortDir * (Math.abs(a.total) - Math.abs(b.total));
+    return 0;
+  });
+}
+
+function txnStatusHtml(s) {
+  if (s==='Success')   return '<span class="tr-status-success">&#10003; Success</span>';
+  if (s==='Refund')    return '<span class="tr-status-refund">&#8635; Refund</span>';
+  if (s==='Cancelled') return '<span class="tr-status-cancelled">&#10005; Cancelled</span>';
+  return s;
+}
+
+function txnRender() {
+  const data = txnGetFiltered();
+  const start = (txnPage-1)*txnPageSize;
+  const rows = data.slice(start, start+txnPageSize);
+  const tb = document.getElementById('txn-tbody');
+  if (!tb) return;
+
+  let html = '';
+  rows.forEach(r => {
+    const isOpen = txnOpenId === r.id;
+    const amtStr = r.total < 0 ? '-€ '+Math.abs(r.total).toFixed(2) : '€ '+r.total.toFixed(2);
+    html += `<tr class="tr-row-expandable${isOpen?' topen':''}" onclick="txnToggle('${r.id}',this)">
+      <td style="width:24px;color:#9E9E9E">
+        <span class="tr-expand-icon">&#9654;</span>
+      </td>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td>${r.type}</td>
+      <td>${r.kiosk}</td>
+      <td style="text-align:center">${r.items}</td>
+      <td class="fw6" style="text-align:right;${r.total<0?'color:var(--red)':''}">${amtStr}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td>${txnStatusHtml(r.status)}</td>
+    </tr>`;
+    if (isOpen) {
+      const basketRows = r.basket.map(item =>
+        `<tr><td>${item.name}</td><td style="text-align:center">${item.qty}</td><td style="text-align:right">€ ${item.unitPrice.toFixed(2)}</td><td style="text-align:right;font-weight:600">€ ${item.lineTotal.toFixed(2)}</td></tr>`
+      ).join('');
+      html += `<tr class="tr-detail-row"><td colspan="8"><div class="tr-basket">
+        <div class="tr-basket-hdr">
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Transaction ID</span><span class="tr-basket-hdr-val">${r.id}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Date &amp; time</span><span class="tr-basket-hdr-val">${r.dt}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Kiosk</span><span class="tr-basket-hdr-val">${r.kiosk}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Payment</span><span class="tr-basket-hdr-val">${r.payment}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Status</span><span class="tr-basket-hdr-val">${txnStatusHtml(r.status)}</span></div>
+        </div>
+        <table class="tr-basket-table">
+          <thead><tr><th>Product</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit price</th><th style="text-align:right">Line total</th></tr></thead>
+          <tbody>${basketRows}</tbody>
+        </table>
+        <div class="tr-basket-summary">
+          <div class="tr-basket-summary-row"><span class="text-muted">Subtotal</span><span>€ ${r.subtotal.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Discount</span><span>${r.discount > 0 ? '-€ '+r.discount.toFixed(2) : '—'}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Tax (VAT)</span><span>€ ${r.tax.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row total"><span>Total</span><span>€ ${r.grandTotal.toFixed(2)}</span></div>
+        </div>
+      </div></td></tr>`;
+    }
+  });
+  tb.innerHTML = html;
+
+  document.getElementById('txn-total').textContent = data.length;
+  document.getElementById('txn-pg-num').textContent = txnPage;
+  document.getElementById('txn-pg-prev').disabled = txnPage <= 1;
+  document.getElementById('txn-pg-next').disabled = start + txnPageSize >= data.length;
+}
+
+function txnToggle(id) {
+  txnOpenId = (txnOpenId === id) ? null : id;
+  txnRender();
+}
+
+function txnSort(col) {
+  if (txnSortCol === col) txnSortDir *= -1; else { txnSortCol = col; txnSortDir = -1; }
+  ['dt','items','total'].forEach(c => {
+    const el = document.getElementById('txn-sort-'+c);
+    if (el) el.textContent = c === txnSortCol ? (txnSortDir === -1 ? '↓' : '↑') : '';
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSelectFilter(type, val, el) {
+  txnFilters[type] = val;
+  const ddId = { period:'txn-dd-period', kiosk:'txn-dd-kiosk', payment:'txn-dd-payment', status:'txn-dd-status' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btn = document.getElementById(ddId.replace('dd','btn'));
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  txnPage = 1; txnRender();
+}
+
+function txnClearFilters() {
+  txnFilters = { kiosk:'', payment:'', status:'' };
+  ['txn-dd-period','txn-dd-kiosk','txn-dd-payment','txn-dd-status'].forEach(id => {
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i) => it.classList.toggle('selected', i===0));
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSetPgSize(el, sz) {
+  txnPageSize = sz;
+  document.querySelectorAll('#txn-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); txnPage = 1; txnRender();
+}
+function txnChangePage(d) { txnPage = Math.max(1, txnPage+d); txnRender(); }
+
+// init on DOM ready
+document.addEventListener('DOMContentLoaded', () => { salesRender(); txnRender(); });
+
+
+/* ══════════════════════════════════════════════════════════════════
+   SALES TAB
+══════════════════════════════════════════════════════════════════ */
+const SALES_DATA = [
+  { dt:'12.03.2026 11:42', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'12.03.2026 11:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'12.03.2026 10:55', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Cash',     price:1.50 },
+  { dt:'12.03.2026 10:47', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 01', payment:'Cashless', price:0.90 },
+  { dt:'12.03.2026 10:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 02', payment:'Loyalty',  price:1.20 },
+  { dt:'12.03.2026 09:58', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 01', payment:'Cashless', price:1.40 },
+  { dt:'11.03.2026 17:05', name:'Coca Cola 0.5L',     sku:'5901234123457', kiosk:'Kiosk 01', payment:'Cashless', price:1.80 },
+  { dt:'11.03.2026 15:42', name:'Water 500ml',         sku:'3838904051474', kiosk:'Kiosk 02', payment:'Cash',     price:0.90 },
+  { dt:'11.03.2026 14:28', name:'Red Bull 250ml',      sku:'9002490100070', kiosk:'Kiosk 02', payment:'Cashless', price:2.20 },
+  { dt:'11.03.2026 13:05', name:'Snickers 50g',        sku:'5000159459228', kiosk:'Kiosk 01', payment:'Loyalty',  price:1.50 },
+  { dt:'11.03.2026 11:33', name:'Nescafé Classic',     sku:'7613035099103', kiosk:'Kiosk 01', payment:'Cashless', price:1.20 },
+  { dt:'11.03.2026 10:12', name:'KitKat 4-finger',     sku:'5000159504982', kiosk:'Kiosk 02', payment:'Cash',     price:1.40 },
+];
+
+let salesSortCol = 'dt', salesSortDir = -1, salesPage = 1, salesPageSize = 10;
+let salesFilters = { search:'', kiosk:'', payment:'' };
+
+function salesGetFiltered() {
+  const q = (document.getElementById('sales-search')?.value || '').toLowerCase();
+  return SALES_DATA.filter(r => {
+    if (q && !r.name.toLowerCase().includes(q) && !r.sku.includes(q)) return false;
+    if (salesFilters.kiosk && salesFilters.kiosk !== 'All kiosks' && r.kiosk !== salesFilters.kiosk) return false;
+    if (salesFilters.payment && salesFilters.payment !== 'All' && r.payment !== salesFilters.payment) return false;
+    return true;
+  }).sort((a,b) => {
+    let av = a[salesSortCol], bv = b[salesSortCol];
+    if (salesSortCol === 'dt') return salesSortDir * a.dt.localeCompare(b.dt);
+    if (salesSortCol === 'price') return salesSortDir * (a.price - b.price);
+    return salesSortDir * av.localeCompare(bv);
+  });
+}
+
+function salesRender() {
+  const data = salesGetFiltered();
+  const start = (salesPage-1)*salesPageSize;
+  const rows = data.slice(start, start+salesPageSize);
+  const tb = document.getElementById('sales-tbody');
+  if (!tb) return;
+  tb.innerHTML = rows.map(r => `
+    <tr>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td class="fw6">${r.name}</td>
+      <td class="text-muted" style="font-size:12px;font-family:monospace">${r.sku}</td>
+      <td>${r.kiosk}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td class="fw6" style="text-align:right">€ ${r.price.toFixed(2)}</td>
+    </tr>`).join('');
+  document.getElementById('sales-total').textContent = data.length;
+  document.getElementById('sales-pg-num').textContent = salesPage;
+  document.getElementById('sales-pg-prev').disabled = salesPage <= 1;
+  document.getElementById('sales-pg-next').disabled = start + salesPageSize >= data.length;
+}
+
+function salesSort(col) {
+  if (salesSortCol === col) salesSortDir *= -1; else { salesSortCol = col; salesSortDir = -1; }
+  ['dt','name','price'].forEach(c => {
+    const el = document.getElementById('sales-sort-'+c);
+    if (el) el.textContent = c === salesSortCol ? (salesSortDir === -1 ? '↓' : '↑') : '';
+  });
+  salesPage = 1; salesRender();
+}
+
+function salesSelectFilter(type, val, el) {
+  salesFilters[type] = val;
+  const ddId = { period:'sales-dd-period', kiosk:'sales-dd-kiosk', station:'sales-dd-station', payment:'sales-dd-payment' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btnId = ddId.replace('dd','btn');
+    const btn = document.getElementById(btnId);
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All kiosks' && val !== 'All' && val !== 'All stations' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  salesPage = 1; salesRender();
+}
+
+function salesClearFilters() {
+  salesFilters = { search:'', kiosk:'', payment:'' };
+  const si = document.getElementById('sales-search'); if (si) si.value = '';
+  ['sales-dd-period','sales-dd-kiosk','sales-dd-station','sales-dd-payment'].forEach(id=>{
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i)=>it.classList.toggle('selected',i===0));
+  });
+  salesPage = 1; salesRender();
+}
+
+function filterSales() { salesPage = 1; salesRender(); }
+function salesSetPgSize(el, sz) {
+  salesPageSize = sz;
+  document.querySelectorAll('#sales-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); salesPage = 1; salesRender();
+}
+function salesChangePage(d) { salesPage = Math.max(1, salesPage+d); salesRender(); }
+
+/* ══════════════════════════════════════════════════════════════════
+   TRANSACTIONS TAB
+══════════════════════════════════════════════════════════════════ */
+const TXN_DATA = [
+  {
+    id:'TXN-1001', dt:'12.03.2026 11:42', type:'Sale', kiosk:'Kiosk 01', items:3, total:4.50,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:2, unitPrice:1.80, lineTotal:3.60 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+    ],
+    subtotal:4.50, discount:0, tax:0.45, grandTotal:4.50
+  },
+  {
+    id:'TXN-1002', dt:'12.03.2026 10:55', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.50,
+    payment:'Cash', status:'Success',
+    basket:[
+      { name:'Snickers 50g', qty:1, unitPrice:1.50, lineTotal:1.50 },
+    ],
+    subtotal:1.50, discount:0, tax:0.15, grandTotal:1.50
+  },
+  {
+    id:'TXN-1003', dt:'12.03.2026 10:33', type:'Sale', kiosk:'Kiosk 02', items:2, total:3.40,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Nescafé Classic', qty:1, unitPrice:1.20, lineTotal:1.20 },
+      { name:'KitKat 4-finger', qty:1, unitPrice:1.40, lineTotal:1.40 },
+      { name:'Water 500ml',     qty:1, unitPrice:0.80, lineTotal:0.80 },
+    ],
+    subtotal:3.40, discount:0, tax:0.34, grandTotal:3.40
+  },
+  {
+    id:'TXN-1004', dt:'11.03.2026 17:05', type:'Sale', kiosk:'Kiosk 01', items:1, total:1.80,
+    payment:'Cashless', status:'Success',
+    basket:[
+      { name:'Coca Cola 0.5L', qty:1, unitPrice:1.80, lineTotal:1.80 },
+    ],
+    subtotal:1.80, discount:0, tax:0.18, grandTotal:1.80
+  },
+  {
+    id:'TXN-1005', dt:'11.03.2026 14:28', type:'Refund', kiosk:'Kiosk 02', items:1, total:-2.20,
+    payment:'Cashless', status:'Refund',
+    basket:[
+      { name:'Red Bull 250ml', qty:1, unitPrice:2.20, lineTotal:2.20 },
+    ],
+    subtotal:2.20, discount:0, tax:0.22, grandTotal:2.20
+  },
+  {
+    id:'TXN-1006', dt:'11.03.2026 13:05', type:'Sale', kiosk:'Kiosk 01', items:2, total:2.70,
+    payment:'Loyalty', status:'Success',
+    basket:[
+      { name:'Snickers 50g',   qty:1, unitPrice:1.50, lineTotal:1.50 },
+      { name:'Water 500ml',    qty:1, unitPrice:0.90, lineTotal:0.90 },
+      { name:'Nescafé Classic',qty:1, unitPrice:0.30, lineTotal:0.30 },
+    ],
+    subtotal:2.70, discount:0, tax:0.27, grandTotal:2.70
+  },
+];
+
+let txnSortCol='dt', txnSortDir=-1, txnPage=1, txnPageSize=10;
+let txnFilters = { kiosk:'', payment:'', status:'' };
+let txnOpenId = null;
+
+function txnGetFiltered() {
+  return TXN_DATA.filter(r => {
+    if (txnFilters.kiosk && txnFilters.kiosk !== 'All' && r.kiosk !== txnFilters.kiosk) return false;
+    if (txnFilters.payment && txnFilters.payment !== 'All' && r.payment !== txnFilters.payment) return false;
+    if (txnFilters.status && txnFilters.status !== 'All' && r.status !== txnFilters.status) return false;
+    return true;
+  }).sort((a,b) => {
+    if (txnSortCol === 'dt') return txnSortDir * a.dt.localeCompare(b.dt);
+    if (txnSortCol === 'items') return txnSortDir * (a.items - b.items);
+    if (txnSortCol === 'total') return txnSortDir * (Math.abs(a.total) - Math.abs(b.total));
+    return 0;
+  });
+}
+
+function txnStatusHtml(s) {
+  if (s==='Success')   return '<span class="tr-status-success">&#10003; Success</span>';
+  if (s==='Refund')    return '<span class="tr-status-refund">&#8635; Refund</span>';
+  if (s==='Cancelled') return '<span class="tr-status-cancelled">&#10005; Cancelled</span>';
+  return s;
+}
+
+function txnRender() {
+  const data = txnGetFiltered();
+  const start = (txnPage-1)*txnPageSize;
+  const rows = data.slice(start, start+txnPageSize);
+  const tb = document.getElementById('txn-tbody');
+  if (!tb) return;
+
+  let html = '';
+  rows.forEach(r => {
+    const isOpen = txnOpenId === r.id;
+    const amtStr = r.total < 0 ? '-€ '+Math.abs(r.total).toFixed(2) : '€ '+r.total.toFixed(2);
+    html += `<tr class="tr-row-expandable${isOpen?' topen':''}" onclick="txnToggle('${r.id}',this)">
+      <td style="width:24px;color:#9E9E9E">
+        <span class="tr-expand-icon">&#9654;</span>
+      </td>
+      <td class="text-muted" style="font-size:12px">${r.dt}</td>
+      <td>${r.type}</td>
+      <td>${r.kiosk}</td>
+      <td style="text-align:center">${r.items}</td>
+      <td class="fw6" style="text-align:right;${r.total<0?'color:var(--red)':''}">${amtStr}</td>
+      <td><span class="tag-pill tag-grey" style="font-weight:500">${r.payment}</span></td>
+      <td>${txnStatusHtml(r.status)}</td>
+    </tr>`;
+    if (isOpen) {
+      const basketRows = r.basket.map(item =>
+        `<tr><td>${item.name}</td><td style="text-align:center">${item.qty}</td><td style="text-align:right">€ ${item.unitPrice.toFixed(2)}</td><td style="text-align:right;font-weight:600">€ ${item.lineTotal.toFixed(2)}</td></tr>`
+      ).join('');
+      html += `<tr class="tr-detail-row"><td colspan="8"><div class="tr-basket">
+        <div class="tr-basket-hdr">
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Transaction ID</span><span class="tr-basket-hdr-val">${r.id}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Date &amp; time</span><span class="tr-basket-hdr-val">${r.dt}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Kiosk</span><span class="tr-basket-hdr-val">${r.kiosk}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Payment</span><span class="tr-basket-hdr-val">${r.payment}</span></div>
+          <div class="tr-basket-hdr-item"><span class="tr-basket-hdr-label">Status</span><span class="tr-basket-hdr-val">${txnStatusHtml(r.status)}</span></div>
+        </div>
+        <table class="tr-basket-table">
+          <thead><tr><th>Product</th><th style="text-align:center">Qty</th><th style="text-align:right">Unit price</th><th style="text-align:right">Line total</th></tr></thead>
+          <tbody>${basketRows}</tbody>
+        </table>
+        <div class="tr-basket-summary">
+          <div class="tr-basket-summary-row"><span class="text-muted">Subtotal</span><span>€ ${r.subtotal.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Discount</span><span>${r.discount > 0 ? '-€ '+r.discount.toFixed(2) : '—'}</span></div>
+          <div class="tr-basket-summary-row"><span class="text-muted">Tax (VAT)</span><span>€ ${r.tax.toFixed(2)}</span></div>
+          <div class="tr-basket-summary-row total"><span>Total</span><span>€ ${r.grandTotal.toFixed(2)}</span></div>
+        </div>
+      </div></td></tr>`;
+    }
+  });
+  tb.innerHTML = html;
+
+  document.getElementById('txn-total').textContent = data.length;
+  document.getElementById('txn-pg-num').textContent = txnPage;
+  document.getElementById('txn-pg-prev').disabled = txnPage <= 1;
+  document.getElementById('txn-pg-next').disabled = start + txnPageSize >= data.length;
+}
+
+function txnToggle(id) {
+  txnOpenId = (txnOpenId === id) ? null : id;
+  txnRender();
+}
+
+function txnSort(col) {
+  if (txnSortCol === col) txnSortDir *= -1; else { txnSortCol = col; txnSortDir = -1; }
+  ['dt','items','total'].forEach(c => {
+    const el = document.getElementById('txn-sort-'+c);
+    if (el) el.textContent = c === txnSortCol ? (txnSortDir === -1 ? '↓' : '↑') : '';
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSelectFilter(type, val, el) {
+  txnFilters[type] = val;
+  const ddId = { period:'txn-dd-period', kiosk:'txn-dd-kiosk', payment:'txn-dd-payment', status:'txn-dd-status' }[type];
+  if (ddId) {
+    document.querySelectorAll('#'+ddId+' .dropdown-item').forEach(i=>i.classList.remove('selected'));
+    el.classList.add('selected');
+    const btn = document.getElementById(ddId.replace('dd','btn'));
+    if (btn) { btn.textContent = val + ' ▾'; btn.classList.toggle('active-filter', val !== 'All' && val !== 'Last 30 days'); }
+    document.getElementById(ddId).style.display = 'none';
+  }
+  txnPage = 1; txnRender();
+}
+
+function txnClearFilters() {
+  txnFilters = { kiosk:'', payment:'', status:'' };
+  ['txn-dd-period','txn-dd-kiosk','txn-dd-payment','txn-dd-status'].forEach(id => {
+    const dd = document.getElementById(id); if (!dd) return;
+    dd.querySelectorAll('.dropdown-item').forEach((it,i) => it.classList.toggle('selected', i===0));
+  });
+  txnPage = 1; txnRender();
+}
+
+function txnSetPgSize(el, sz) {
+  txnPageSize = sz;
+  document.querySelectorAll('#txn-pagination .pg-size').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); txnPage = 1; txnRender();
+}
+function txnChangePage(d) { txnPage = Math.max(1, txnPage+d); txnRender(); }
+
+// init on DOM ready
+document.addEventListener('DOMContentLoaded', () => { salesRender(); txnRender(); });
+
 </script>
 </body>
 </html>
