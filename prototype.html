@@ -1823,7 +1823,7 @@ function selectStation(el, stationId) {
   document.getElementById('products-market-view').style.display = 'none';
   document.getElementById('products-station-view').style.display = '';
   // Hide market-only tabs; switch away if one is active
-  const marketOnlyTabs = ['tab-overview', 'tab-transactions'];
+  const marketOnlyTabs = ['tab-overview', 'tab-transactions', 'tab-kiosks'];
   marketOnlyTabs.forEach(id => {
     const btn = document.getElementById(id);
     if (btn) btn.style.display = 'none';
