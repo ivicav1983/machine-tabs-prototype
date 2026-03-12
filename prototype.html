@@ -905,36 +905,16 @@
     <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- Figma: Products header row -->
-      <div class="plan-header-row">
-        <div class="plan-title-block">
-          <span class="plan-title">Products</span>
-        </div>
-        <div class="plan-actions">
-          <button class="mkt-btn-grey">Setup</button>
-          <button class="mkt-btn-grey">
-            Layout preview
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="dropdown-wrap">
-            <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
-              Planogram
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </button>
-            <div class="dropdown-menu" id="dd-planogram">
-              <div class="dropdown-item">View planogram</div>
-              <div class="dropdown-item">Export planogram</div>
-              <div class="dropdown-item">Import planogram</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Figma: filter bar -->
-      <div class="filter-bar" style="margin-top:8px">
+      <!-- filter bar: search + actions in one row -->
+      <div class="filter-bar" style="padding:10px 0">
         <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
         <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
         <div style="flex:1"></div>
+        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">Setup</button>
+        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
+          Layout preview
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
       </div>
 
