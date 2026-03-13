@@ -1158,6 +1158,15 @@
 
 
 
+
+/* ── Station Products – row actions & pricelist expand ──────────────────── */
+.st-row-actions { white-space:nowrap; text-align:center; }
+.st-act-btn { background:none; border:none; cursor:pointer; padding:2px 6px; font-size:15px; color:var(--grey-txt); border-radius:3px; line-height:1; }
+.st-act-btn:hover { background:var(--grey-mid); color:var(--dark); }
+.st-expand-btn { background:none; border:none; cursor:pointer; padding:2px 6px; font-size:13px; color:var(--blue); border-radius:3px; line-height:1; display:inline-block; transition:transform 0.2s; }
+.st-expand-btn:hover { background:var(--bg-blue); }
+.st-expand-btn.expanded { transform:rotate(180deg); }
+
 </style>
 </head>
 <body>
@@ -1632,7 +1641,8 @@
           <input class="search-input" id="products-search-station" type="text" placeholder="Search products…" oninput="filterStationProducts()" />
           <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
           <div style="flex:1"></div>
-          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
+          <button class="mkt-btn-grey" id="btn-setup-products" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
+          <button class="mkt-btn-grey" id="btn-show-all-prices" style="font-size:13px;padding:5px 12px;display:none" onclick="toggleAllPrices()">Show all pricelists</button>
           <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
             Layout preview
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1654,6 +1664,7 @@
                 <th>Price 1</th>
                 <th class="col-price2" style="display:none">Price 2</th>
                 <th class="col-price3" style="display:none">Price 3</th>
+                <th class="st-actions-hdr" style="min-width:80px">Actions</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -1669,6 +1680,7 @@
                 <td class="fw6">€1.20</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.32</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.44</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1682,6 +1694,7 @@
                 <td class="fw6">€1.00</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.10</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.20</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1695,6 +1708,7 @@
                 <td class="fw6">€1.50</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.65</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.80</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1708,6 +1722,7 @@
                 <td class="fw6">€1.80</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.98</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€2.16</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1721,6 +1736,7 @@
                 <td class="fw6">€1.30</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.43</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.56</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1734,6 +1750,7 @@
                 <td class="fw6">€0.90</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€0.99</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.08</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1747,6 +1764,7 @@
                 <td class="fw6">€2.10</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€2.31</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€2.52</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
               <tr>
@@ -1760,6 +1778,7 @@
                 <td class="fw6">€1.10</td>
               <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.21</td>
               <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.32</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
               <td></td>
               </tr>
             </tbody>
@@ -3416,6 +3435,10 @@ function clearStationSearch() {
   if (inp) { inp.value = ''; filterStationProducts(); }
 }
 function addStationColumn() {
+  if (_showAllPricesActive) {
+    alert('Please choose the button SHOW DEFAULT VIEW to enable + NEW COLUMN function again.');
+    return;
+  }
   const tbody = document.getElementById('station-tbody');
   if (!tbody) return;
   const existing = tbody.querySelectorAll('tr:not(.station-col-edit)').length;
@@ -3463,8 +3486,9 @@ function confirmStationColumn(btn) {
     <td class="text-muted">${cap}</td>
     <td class="fw6">${fillQty}</td>
     <td class="fw6">€${price}</td>
-    <td class="col-price2 fw6" style="${priceLists>=2?'color:var(--green)':'display:none'}">€${price2}</td>
-    <td class="col-price3 fw6" style="${priceLists>=3?'color:var(--green)':'display:none'}">€${price3}</td>
+    <td class="col-price2 fw6" style="display:none;color:var(--green)">€${price2}</td>
+    <td class="col-price3 fw6" style="display:none;color:var(--green)">€${price3}</td>
+    <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
     <td><span class="tag-pill tag-amber">Pending</span></td>`;
 }
 
@@ -3885,19 +3909,111 @@ function applyPricelistSetup() {
   const sel = document.getElementById('pricelists-select');
   const count = sel ? parseInt(sel.value) : 1;
 
-  // Show/hide header th
-  document.querySelectorAll('.col-price2').forEach(el => {
+  // Show/hide Price 2/3 HEADER columns only (data cells controlled by expand)
+  document.querySelectorAll('thead .col-price2').forEach(el => {
     el.style.display = count >= 2 ? '' : 'none';
   });
-  document.querySelectorAll('.col-price3').forEach(el => {
+  document.querySelectorAll('thead .col-price3').forEach(el => {
     el.style.display = count >= 3 ? '' : 'none';
   });
 
+  // Collapse any previously expanded data cells if count dropped below threshold
+  if (count < 2) {
+    document.querySelectorAll('#station-tbody .col-price2').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.st-expand-btn.expanded').forEach(b => b.classList.remove('expanded'));
+  }
+  if (count < 3) {
+    document.querySelectorAll('#station-tbody .col-price3').forEach(el => el.style.display = 'none');
+  }
+
+  // Show/hide "Show all pricelists" button
+  const showAllBtn = document.getElementById('btn-show-all-prices');
+  if (showAllBtn) {
+    showAllBtn.style.display = count >= 2 ? '' : 'none';
+    // Reset to default label in case it was in "show all" mode
+    if (count < 2) { showAllBtn.textContent = 'Show all pricelists'; _showAllPricesActive = false; }
+  }
+
   // Update Setup button label in toolbar to reflect selection
   const label = count === 1 ? 'Setup' : `Setup (${count} prices)`;
-  document.querySelectorAll('[onclick*="setup-modal"]').forEach(btn => {
-    btn.textContent = label;
-  });
+  const setupBtn = document.getElementById('btn-setup-products');
+  if (setupBtn) setupBtn.textContent = label;
+}
+
+
+// ── PRODUCTS — Pricelist expand / collapse ────────────────────────────────
+let _showAllPricesActive = false;
+
+function toggleRowPrices(btn) {
+  const tr = btn.closest('tr');
+  const count = parseInt(document.getElementById('pricelists-select')?.value || '1');
+  const expanded = btn.classList.toggle('expanded');
+  if (count >= 2) {
+    const p2 = tr.querySelector('.col-price2');
+    if (p2) p2.style.display = expanded ? '' : 'none';
+  }
+  if (count >= 3) {
+    const p3 = tr.querySelector('.col-price3');
+    if (p3) p3.style.display = expanded ? '' : 'none';
+  }
+}
+
+function toggleAllPrices() {
+  _showAllPricesActive = !_showAllPricesActive;
+  const btn = document.getElementById('btn-show-all-prices');
+  const count = parseInt(document.getElementById('pricelists-select')?.value || '1');
+  const addColBtn = document.querySelector('[onclick*="addStationColumn"]');
+
+  if (_showAllPricesActive) {
+    // Reveal all price cells for configured price lists
+    if (count >= 2) document.querySelectorAll('#station-tbody .col-price2').forEach(el => el.style.display = '');
+    if (count >= 3) document.querySelectorAll('#station-tbody .col-price3').forEach(el => el.style.display = '');
+    // Mark row expand buttons as expanded
+    document.querySelectorAll('.st-expand-btn').forEach(b => b.classList.add('expanded'));
+    // Hide per-row action buttons
+    document.querySelectorAll('.st-row-actions').forEach(el => el.style.visibility = 'hidden');
+    // Disable + Add column
+    if (addColBtn) {
+      addColBtn.disabled = true;
+      addColBtn.style.opacity = '0.4';
+      addColBtn.style.cursor = 'not-allowed';
+    }
+    // Switch button label
+    if (btn) btn.textContent = 'Show default view';
+  } else {
+    // Collapse all price data cells
+    document.querySelectorAll('#station-tbody .col-price2').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('#station-tbody .col-price3').forEach(el => el.style.display = 'none');
+    // Reset expand arrows
+    document.querySelectorAll('.st-expand-btn.expanded').forEach(b => b.classList.remove('expanded'));
+    // Restore action buttons
+    document.querySelectorAll('.st-row-actions').forEach(el => el.style.visibility = '');
+    // Re-enable + Add column
+    if (addColBtn) {
+      addColBtn.disabled = false;
+      addColBtn.style.opacity = '';
+      addColBtn.style.cursor = '';
+    }
+    // Switch button label back
+    if (btn) btn.textContent = 'Show all pricelists';
+  }
+}
+
+function editStationColumn(btn) {
+  const tr = btn.closest('tr');
+  const cells = tr.querySelectorAll('td');
+  // Simple alert showing column info (stub — full edit modal out of scope)
+  const colNum = cells[0]?.textContent || '?';
+  const product = cells[1]?.textContent?.trim() || '?';
+  alert('Edit column ' + colNum + ': ' + product + '\n(Edit modal — Phase 2)');
+}
+
+function replaceProduct(btn) {
+  const tr = btn.closest('tr');
+  const cells = tr.querySelectorAll('td');
+  const colNum = cells[0]?.textContent || '?';
+  const product = cells[1]?.textContent?.trim() || '?';
+  alert('Replace product in column ' + colNum + ': ' + product + '\n(Replace dialog — Phase 2)');
 }
 
 </script>
