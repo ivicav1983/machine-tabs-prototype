@@ -586,7 +586,7 @@
 
   /* ── ADD COLUMN EDIT ROW ─────────────────────────── */
   .station-col-edit td { padding: 4px 8px; vertical-align: middle; background: #FFFDE7; }
-  .col-edit-input { border: 1px solid var(--grey-bdr); border-radius: 4px; padding: 4px 6px; font-size: 13px; font-family: inherit; }
+  .col-edit-input { border: 1px solid var(--grey-bdr); border-radius: 4px; padding: 4px 6px; font-size: 13px; font-family: inherit; box-sizing: border-box; }
   .col-edit-wide  { width: 140px; }
   .col-edit-num   { width: 60px; text-align: right; }
   .btn-ok-green   { background: var(--green); color: #fff; border: none; border-radius: 4px; padding: 4px 12px; font-size: 13px; cursor: pointer; }
@@ -3508,7 +3508,7 @@ function addStationColumn() {
     <td class="col-map2 map-cell" style="${document.getElementById('doublemap-checkbox')?.checked?'':'display:none'}"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
     <td><input type="text" class="col-edit-input col-edit-wide" placeholder="Product name"></td>
     <td><input type="text" class="col-edit-input col-edit-wide"></td>
-    <td><input type="text" class="col-edit-input"></td>
+    <td><input type="text" class="col-edit-input" style="width:90px"></td>
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
     <td><input type="number" value="1" class="col-edit-input col-edit-num"></td>
@@ -4101,19 +4101,88 @@ function toggleAllPrices() {
 
 function editStationColumn(btn) {
   const tr = btn.closest('tr');
-  const cells = tr.querySelectorAll('td');
-  // Simple alert showing column info (stub — full edit modal out of scope)
-  const colNum = cells[0]?.textContent || '?';
-  const product = cells[1]?.textContent?.trim() || '?';
-  alert('Edit column ' + colNum + ': ' + product + '\n(Edit modal — Phase 2)');
+  if (tr.dataset.mode) return;
+  tr.dataset.mode = 'edit';
+  const actionsCell = tr.querySelector('.st-row-actions');
+  tr.dataset.origActions = actionsCell.innerHTML;
+  // Make visible price cells (text == €N.NN) editable
+  tr.querySelectorAll('td').forEach(td => {
+    if (/^€[\d.]+$/.test(td.textContent.trim()) && td.style.display !== 'none') {
+      td.dataset.origHtml = td.innerHTML;
+      const val = td.textContent.trim().replace('€','');
+      const hasGreen = td.style.color || td.className.includes('price-pending');
+      td.innerHTML = '<input type="number" step="0.01" value="' + val + '" class="col-edit-input col-edit-num"'
+        + ' style="' + (hasGreen ? 'color:var(--green);' : '') + 'text-align:right">';
+    }
+  });
+  actionsCell.innerHTML = '<button class="btn-ok-green" style="padding:3px 8px;font-size:12px" onclick="saveEditColumn(this)">✓</button>'
+    + ' <button class="btn-delete" style="padding:3px 8px;font-size:12px" onclick="discardEditColumn(this)">✕</button>';
+}
+
+function saveEditColumn(btn) {
+  const tr = btn.closest('tr');
+  tr.querySelectorAll('td').forEach(td => {
+    if (td.dataset.origHtml !== undefined) {
+      const val = parseFloat(td.querySelector('input')?.value || 0).toFixed(2);
+      td.style.color = 'var(--green)'; td.style.fontWeight = '600';
+      td.innerHTML = '€' + val;
+      delete td.dataset.origHtml;
+    }
+  });
+  tr.querySelector('.st-row-actions').innerHTML = tr.dataset.origActions;
+  tr.cells[tr.cells.length - 1].innerHTML = '<span class="tag-pill tag-amber">Pending</span>';
+  delete tr.dataset.mode; delete tr.dataset.origActions;
+}
+
+function discardEditColumn(btn) {
+  const tr = btn.closest('tr');
+  tr.querySelectorAll('td').forEach(td => {
+    if (td.dataset.origHtml !== undefined) {
+      td.innerHTML = td.dataset.origHtml; delete td.dataset.origHtml;
+    }
+  });
+  tr.querySelector('.st-row-actions').innerHTML = tr.dataset.origActions;
+  delete tr.dataset.mode; delete tr.dataset.origActions;
 }
 
 function replaceProduct(btn) {
   const tr = btn.closest('tr');
-  const cells = tr.querySelectorAll('td');
-  const colNum = cells[0]?.textContent || '?';
-  const product = cells[1]?.textContent?.trim() || '?';
-  alert('Replace product in column ' + colNum + ': ' + product + '\n(Replace dialog — Phase 2)');
+  if (tr.dataset.mode) return;
+  tr.dataset.mode = 'replace';
+  const productCell = tr.cells[3]; // Col(0) Map1(1) Map2(2) Product(3)
+  const actionsCell = tr.querySelector('.st-row-actions');
+  tr.dataset.origProduct = productCell.innerHTML;
+  tr.dataset.origActions = actionsCell.innerHTML;
+  const curName = productCell.querySelector('span')?.textContent?.trim() || '';
+  const curBg = productCell.querySelector('div[style*="background"]')?.style?.background || '#E8F5E9';
+  const safeVal = curName.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  productCell.innerHTML = '<div style="display:flex;align-items:center;gap:6px">'
+    + '<div style="width:32px;height:32px;background:' + curBg + ';border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📦</div>'
+    + '<input type="text" class="col-edit-input col-edit-wide" value="' + safeVal + '" style="width:130px"></div>';
+  actionsCell.innerHTML = '<button class="btn-ok-green" style="padding:3px 8px;font-size:12px" onclick="saveReplaceProduct(this)">✓ Save</button>'
+    + ' <button class="btn-delete" style="padding:3px 8px;font-size:12px" onclick="discardReplaceProduct(this)">✕</button>';
+  productCell.querySelector('input').focus();
+  productCell.querySelector('input').select();
+}
+
+function saveReplaceProduct(btn) {
+  const tr = btn.closest('tr');
+  const productCell = tr.cells[3];
+  const actionsCell = tr.querySelector('.st-row-actions');
+  const newName = productCell.querySelector('input')?.value.trim() || '—';
+  productCell.innerHTML = '<div style="display:flex;align-items:center;gap:8px">'
+    + '<div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📦</div>'
+    + '<span>' + newName + '</span></div>';
+  actionsCell.innerHTML = tr.dataset.origActions;
+  tr.cells[tr.cells.length - 1].innerHTML = '<span class="tag-pill tag-amber">Pending</span>';
+  delete tr.dataset.mode; delete tr.dataset.origProduct; delete tr.dataset.origActions;
+}
+
+function discardReplaceProduct(btn) {
+  const tr = btn.closest('tr');
+  tr.cells[3].innerHTML = tr.dataset.origProduct;
+  tr.querySelector('.st-row-actions').innerHTML = tr.dataset.origActions;
+  delete tr.dataset.mode; delete tr.dataset.origProduct; delete tr.dataset.origActions;
 }
 
 
