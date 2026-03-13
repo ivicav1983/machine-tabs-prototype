@@ -1031,9 +1031,9 @@
 .ov-bar         { width:100%; background:#3B7DDD; border-radius:2px 2px 0 0; min-height:4px; }
 .ov-bar-lbl     { font-size:9px; color:#9E9E9E; }
 
-/* Station-only / market-only toggle */
+/* Station-only / market-only toggle — visibility managed via inline style by JS */
 .ov-market-only { }
-.ov-station-only{ display:none; }
+.ov-station-only{ }
 
 </style>
 </head>
@@ -1828,7 +1828,7 @@
             </div><!-- /market rows -->
 
             <!-- Station view: single selected station row -->
-            <div class="ov-station-rows ov-station-only" id="ov-station-rows-station">
+            <div class="ov-station-rows ov-station-only" id="ov-station-rows-station" style="display:none">
               <div class="ov-st-row">
                 <span class="ov-st-type-badge" id="ov-st-type">[SNACK]</span>
                 <span class="ov-st-name" id="ov-st-label">Snack station 1</span>
@@ -1984,7 +1984,7 @@
               </div>
             </div>
             <!-- Station-specific info (hidden by default) -->
-            <div class="ov-rp-body ov-station-only" id="ov-rp-station-info">
+            <div class="ov-rp-body ov-station-only" id="ov-rp-station-info" style="display:none">
               <div class="ov-rp-row">
                 <span class="ov-rp-label">Station type</span>
                 <span class="ov-rp-val" id="ov-rp-st-type">[SNACK]</span>
