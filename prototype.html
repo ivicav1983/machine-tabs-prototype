@@ -1167,6 +1167,17 @@
 .st-expand-btn:hover { background:var(--bg-blue); }
 .st-expand-btn.expanded { transform:rotate(180deg); }
 
+
+/* Bulk action icons in Actions header */
+.bulk-hdr-btn { background:none; border:none; cursor:pointer; padding:2px 5px; font-size:14px; color:rgba(255,255,255,0.8); border-radius:3px; vertical-align:middle; }
+.bulk-hdr-btn:hover { background:rgba(255,255,255,0.2); color:#fff; }
+/* Column mapping cells */
+.col-map1, .col-map2 { font-size:12px; min-width:62px; text-align:center; }
+.map-cell { white-space:nowrap; }
+.map-val  { font-size:12px; font-weight:600; color:var(--dark); }
+.map-edit-btn { background:none; border:none; cursor:pointer; padding:1px 4px; font-size:11px; color:var(--blue); opacity:0.6; }
+.map-edit-btn:hover { opacity:1; }
+.map-input { width:46px; font-size:12px; padding:2px 4px; border:1px solid var(--blue); border-radius:3px; }
 </style>
 </head>
 <body>
@@ -1655,6 +1666,8 @@
             <thead>
               <tr>
                 <th>Column</th>
+                <th class="col-map1" style="display:none">Map 1</th>
+                <th class="col-map2" style="display:none">Map 2</th>
                 <th>Product</th>
                 <th>Recipe</th>
                 <th style="width:100px">Tags</th>
@@ -1666,13 +1679,15 @@
                 <th class="col-price3" style="display:none">Price 3</th>
                 <th class="col-price4" style="display:none">Price 4</th>
                 <th class="col-price5" style="display:none">Price 5</th>
-                <th class="st-actions-hdr" style="min-width:80px">Actions</th>
+                <th class="st-actions-hdr" style="min-width:96px">Actions<span style="display:block;margin-top:3px;white-space:nowrap"><button class="bulk-hdr-btn" onclick="bulkReplace()" title="Bulk Replace all columns">&#8644;</button><button class="bulk-hdr-btn" onclick="bulkEdit()" title="Bulk Edit all columns">&#9998;</button><button class="bulk-hdr-btn" onclick="toggleAllPrices()" title="Bulk Expand / Collapse prices">&#8964;</button></span></th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody id="station-tbody">
               <tr>
                 <td class="fw6">01</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">01</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
@@ -1689,6 +1704,8 @@
               </tr>
               <tr>
                 <td class="fw6">02</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">02</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
@@ -1705,6 +1722,8 @@
               </tr>
               <tr>
                 <td class="fw6">03</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">03</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
@@ -1721,6 +1740,8 @@
               </tr>
               <tr>
                 <td class="fw6">04</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">04</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span></td>
@@ -1737,6 +1758,8 @@
               </tr>
               <tr>
                 <td class="fw6">05</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">05</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span></td>
@@ -1753,6 +1776,8 @@
               </tr>
               <tr>
                 <td class="fw6">06</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">06</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
@@ -1769,6 +1794,8 @@
               </tr>
               <tr>
                 <td class="fw6">07</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">07</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
@@ -1785,6 +1812,8 @@
               </tr>
               <tr>
                 <td class="fw6">08</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">08</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
                 <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
@@ -3073,9 +3102,17 @@
       <div class="setup-section" style="margin-top:18px">
         <p class="setup-section-title">Column mapping</p>
         <label class="setup-check-label">
-          <input type="checkbox">
+          <input type="checkbox" id="colmap-checkbox" onchange="toggleDoubleMapOption()">
           Mapping between reported columns and planogram
         </label>
+        <!-- Double mapping — visible when colmap is enabled -->
+        <div id="doublemap-row" style="display:none;margin-top:10px;padding:8px 8px 8px 12px;border-left:3px solid var(--blue);background:#F3F8FF;border-radius:0 4px 4px 0">
+          <p class="setup-section-title" style="margin-bottom:6px">Double column mapping</p>
+          <label class="setup-check-label">
+            <input type="checkbox" id="doublemap-checkbox">
+            Enable Map 2 (custom, optional per column &mdash; for dual-motor product dispensing)
+          </label>
+        </div>
       </div>
     </div>
     <div class="modal-footer" style="justify-content:space-between">
@@ -3467,6 +3504,8 @@ function addStationColumn() {
   tr.className = 'station-col-edit';
   tr.innerHTML = `
     <td class="fw6">${num}</td>
+    <td class="col-map1 map-cell" style="${document.getElementById('colmap-checkbox')?.checked?'':'display:none'}"><span class="map-val">${num}</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+    <td class="col-map2 map-cell" style="${document.getElementById('doublemap-checkbox')?.checked?'':'display:none'}"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
     <td><input type="text" class="col-edit-input col-edit-wide" placeholder="Product name"></td>
     <td><input type="text" class="col-edit-input col-edit-wide"></td>
     <td><input type="text" class="col-edit-input"></td>
@@ -3503,6 +3542,8 @@ function confirmStationColumn(btn) {
   tr.className = '';
   tr.innerHTML = `
     <td class="fw6">${colNum}</td>
+    <td class="col-map1 map-cell" style="${document.getElementById('colmap-checkbox')?.checked?'':'display:none'}"><span class="map-val">${colNum}</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+    <td class="col-map2 map-cell" style="${document.getElementById('doublemap-checkbox')?.checked?'':'display:none'}"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
     <td>${product}</td>
     <td>${recipe}</td>
     <td>${tags ? `<span class="tag-pill tag-grey">${tags}</span>` : ''}</td>
@@ -3970,16 +4011,21 @@ function onPricelistSetupSubmit() {
   const sel = document.getElementById('pricelists-select');
   const count = sel ? parseInt(sel.value) : 1;
   applyPricelistSetup();
+  applyColMappingVisibility();
   closeModal('setup-modal');
-  // Show push-required notification
-  const labels = ['','one','two','three','four','five'];
-  const title = count === 1
-    ? 'Price list configuration reset'
-    : `${count} price lists configured`;
-  const msg = count === 1
-    ? 'Push product list to the Televend device to apply changes.'
-    : `New price lists (Price 2–${count}) are initialized with Price 1 values. Push product list to the Televend device to activate the new configuration.`;
-  showPricelistToast(title, msg);
+  // Build combined toast
+  const colmapEnabled = !!document.getElementById('colmap-checkbox')?.checked;
+  const doubleEnabled = !!document.getElementById('doublemap-checkbox')?.checked;
+  const parts = [];
+  if (count > 1) parts.push(`New price lists (Price 2–${count}) are initialized with Price 1 values`);
+  if (colmapEnabled) parts.push(doubleEnabled
+    ? 'Column mapping enabled with double mapping (Map 1 + Map 2). Values initialized from planogram column numbers'
+    : 'Column mapping enabled (Map 1). Values initialized from planogram column numbers');
+  if (parts.length === 0) parts.push('Configuration reset to defaults');
+  const title = colmapEnabled
+    ? (count > 1 ? `${count} price lists + column mapping configured` : 'Column mapping configured')
+    : (count === 1 ? 'Price list configuration reset' : `${count} price lists configured`);
+  showPricelistToast(title, parts.join('. ') + '. Push product list to the Televend device to activate the new configuration.');
 }
 
 function showPricelistToast(title, msg) {
@@ -4070,6 +4116,68 @@ function replaceProduct(btn) {
   alert('Replace product in column ' + colNum + ': ' + product + '\n(Replace dialog — Phase 2)');
 }
 
+
+// ── PRODUCTS — Bulk actions (Bulk actions on machine planogram spec) ─────────
+function bulkReplace() {
+  showPricelistToast(
+    'Bulk Replace',
+    'Opens product replace dialog for all columns. Tags, Pickup, Cap, Fill qty and Prices are pre-populated from the original product. Select a new product per column, then Save or Discard all changes at once.'
+  );
+}
+function bulkEdit() {
+  showPricelistToast(
+    'Bulk Edit',
+    'Opens price edit mode for all columns. Modify prices inline for each column, then Save or Discard all changes at once. Columns already in Pending state are included.'
+  );
+}
+
+// ── PRODUCTS — Column mapping (Column mapping + Multicolumn mapping specs) ───
+function toggleDoubleMapOption() {
+  const colmap = document.getElementById('colmap-checkbox');
+  const row    = document.getElementById('doublemap-row');
+  if (!row) return;
+  row.style.display = colmap && colmap.checked ? '' : 'none';
+  if (colmap && !colmap.checked) {
+    const dbl = document.getElementById('doublemap-checkbox');
+    if (dbl) dbl.checked = false;
+  }
+}
+function applyColMappingVisibility() {
+  const colmapEnabled = !!document.getElementById('colmap-checkbox')?.checked;
+  const doubleEnabled = !!document.getElementById('doublemap-checkbox')?.checked;
+  document.querySelectorAll('.col-map1').forEach(el => el.style.display = colmapEnabled ? '' : 'none');
+  document.querySelectorAll('.col-map2').forEach(el => el.style.display = (colmapEnabled && doubleEnabled) ? '' : 'none');
+}
+function editMapCell(btn, mapNum) {
+  const td   = btn.closest('td');
+  const span = td.querySelector('.map-val');
+  const cur  = (span ? span.textContent.trim() : '') === '\u2013' ? '' : (span ? span.textContent.trim() : '');
+  td.innerHTML =
+    '<input type="number" min="0" max="10000" value="' + cur + '" class="map-input">' +
+    '<button onclick="saveMapCell(this,' + mapNum + ')" style="background:var(--green,#00a871);color:#fff;border:none;border-radius:3px;padding:2px 5px;font-size:11px;cursor:pointer;margin-left:2px">&#10003;</button>' +
+    '<button onclick="cancelMapCell(this,\'' + cur + '\',' + mapNum + ')" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--grey-txt,#546e7a);padding:2px 4px">&#10005;</button>';
+  const inp = td.querySelector('input');
+  inp.focus(); inp.select();
+}
+function saveMapCell(btn, mapNum) {
+  const td  = btn.closest('td');
+  const inp = td.querySelector('input');
+  const raw = inp ? inp.value.trim() : '';
+  if (raw === '' || isNaN(raw) || parseInt(raw) < 0 || parseInt(raw) > 10000) {
+    alert('Mapping can not be saved if the value is not in the range [0,10000].');
+    return;
+  }
+  td.innerHTML =
+    '<span class="map-val" style="font-size:12px;font-weight:600">' + parseInt(raw) + '</span>' +
+    '<button class="map-edit-btn" onclick="editMapCell(this,' + mapNum + ')" title="Edit Map ' + mapNum + '" style="background:none;border:none;cursor:pointer;padding:1px 4px;font-size:11px;color:var(--blue,#3b7ddd);opacity:0.6">&#9998;</button>';
+}
+function cancelMapCell(btn, original, mapNum) {
+  const td   = btn.closest('td');
+  const disp = (original === '' || original === undefined) ? '\u2013' : original;
+  td.innerHTML =
+    '<span class="map-val" style="font-size:12px;font-weight:600">' + disp + '</span>' +
+    '<button class="map-edit-btn" onclick="editMapCell(this,' + mapNum + ')" title="Edit Map ' + mapNum + '" style="background:none;border:none;cursor:pointer;padding:1px 4px;font-size:11px;color:var(--blue,#3b7ddd);opacity:0.6">&#9998;</button>';
+}
 </script>
 
 <!-- Pricelist change toast notification -->
