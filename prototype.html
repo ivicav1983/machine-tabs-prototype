@@ -840,6 +840,69 @@
 .tr-status-refund   { color: #F57C00; font-weight: 600; }
 .tr-status-cancelled{ color: #D32F2F; font-weight: 600; }
 
+
+/* ══ KIOSKS TAB ═══════════════════════════════════════════════════════════ */
+.ki-table { width:100%; border-collapse:collapse; font-size:13px; }
+.ki-table th { background:#F8F9FA; font-weight:600; color:#6B7280; font-size:12px;
+               text-transform:uppercase; letter-spacing:.04em; padding:10px 12px;
+               border-bottom:2px solid #E5E7EB; text-align:left; }
+.ki-table td { padding:11px 12px; border-bottom:1px solid #F0F0F0; vertical-align:middle; }
+.ki-table tbody tr { cursor:pointer; transition:background .12s; }
+.ki-table tbody tr:hover { background:#F8F9FA; }
+.ki-table tbody tr.ki-row-active { background:#EEF2FF; }
+.ki-status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+.ki-status-dot.online  { background:#388E3C; }
+.ki-status-dot.offline { background:#D32F2F; }
+.ki-status-dot.warning { background:#F57C00; }
+.ki-detail-wrap { display:none; background:#F8F9FA; border:1px solid #E5E7EB; border-radius:8px;
+                  margin-top:16px; padding:0; }
+.ki-detail-wrap.open { display:block; }
+.ki-detail-header { display:flex; align-items:center; justify-content:space-between;
+                    padding:14px 20px; border-bottom:1px solid #E5E7EB; background:#fff;
+                    border-radius:8px 8px 0 0; }
+.ki-detail-title { font-size:15px; font-weight:600; color:#181B1E; }
+.ki-detail-subtitle { font-size:12px; color:#6B7280; margin-top:2px; }
+.ki-detail-body { padding:20px; display:flex; flex-direction:column; gap:20px; }
+.ki-section { background:#fff; border:1px solid #E5E7EB; border-radius:6px; overflow:hidden; }
+.ki-section-title { font-size:13px; font-weight:600; color:#181B1E; padding:12px 16px;
+                    background:#F8F9FA; border-bottom:1px solid #E5E7EB; }
+.ki-section-body { padding:16px; display:flex; flex-direction:column; gap:12px; }
+.ki-form-row { display:flex; align-items:center; gap:12px; }
+.ki-form-row label { width:200px; font-size:13px; color:#6B7280; flex-shrink:0; }
+.ki-form-ctrl { flex:1; }
+.ki-input { width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:4px;
+            font-size:13px; font-family:var(--font); background:#fff; }
+.ki-input:focus { outline:none; border-color:#3B7DDD; }
+.ki-input[readonly] { background:#F3F4F6; color:#6B7280; cursor:default; }
+.ki-select { width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:4px;
+             font-size:13px; font-family:var(--font); background:#fff; cursor:pointer; }
+.ki-select:focus { outline:none; border-color:#3B7DDD; }
+.ki-toggle-row { display:flex; align-items:center; gap:8px; }
+.ki-toggle { position:relative; width:40px; height:22px; }
+.ki-toggle input { opacity:0; width:0; height:0; }
+.ki-toggle-slider { position:absolute; inset:0; background:#D1D5DB; border-radius:22px;
+                    cursor:pointer; transition:.2s; }
+.ki-toggle-slider:before { content:''; position:absolute; width:16px; height:16px;
+                            left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s; }
+.ki-toggle input:checked + .ki-toggle-slider { background:#3B7DDD; }
+.ki-toggle input:checked + .ki-toggle-slider:before { transform:translateX(18px); }
+.ki-checkbox-row { display:flex; align-items:center; gap:8px; font-size:13px; }
+.ki-tvd-section { display:none; }
+.ki-tvd-section.visible { display:flex; flex-direction:column; gap:16px; }
+.ki-subsection-title { font-size:12px; font-weight:600; text-transform:uppercase;
+                       letter-spacing:.05em; color:#6B7280; padding:8px 16px;
+                       background:#F8F9FA; border-bottom:1px solid #E5E7EB; }
+.ki-readonly-group { background:#F3F4F6; border-radius:4px; padding:10px 12px;
+                     display:flex; flex-direction:column; gap:6px; }
+.ki-readonly-row { display:flex; gap:8px; font-size:13px; }
+.ki-readonly-row .ki-rl { width:180px; color:#6B7280; }
+.ki-readonly-row .ki-rv { color:#374151; font-weight:500; }
+.ki-action-bar { display:flex; gap:12px; justify-content:flex-end; padding:16px 20px;
+                 border-top:1px solid #E5E7EB; background:#fff; border-radius:0 0 8px 8px; }
+
+/* ══ OVERVIEW — STATION VIEW ═══════════════════════════════════════════════ */
+#ov-station-content { display:none; }
+
 </style>
 </head>
 <body>
@@ -1469,6 +1532,118 @@
         </div>
       </div>
 
+      <!-- ── Station view content (hidden by default) ── -->
+      <div id="ov-station-content">
+
+        <!-- Top row: Service status + Station info -->
+        <div class="ov-top-row">
+          <div class="ov-card">
+            <div class="ov-card-title">Service status</div>
+            <div class="ov-status-row">
+              <span class="ov-status-badge ov-status-ok">
+                <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#388E3C"/></svg>
+                OK
+              </span>
+              <span class="text-muted" style="font-size:13px">All systems operational</span>
+            </div>
+            <div class="ov-info-rows">
+              <div class="ov-info-row">
+                <span class="ov-label">Connectivity</span>
+                <span class="badge badge-green">Connected</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Signal</span>
+                <span class="fw6">Strong (4G)</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Uptime (30d)</span>
+                <span class="fw6">99.1 %</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Active alarms</span>
+                <span class="badge badge-green">None</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ov-card">
+            <div class="ov-card-title">Station info</div>
+            <div class="ov-info-rows">
+              <div class="ov-info-row">
+                <span class="ov-label">Station name</span>
+                <span class="fw6" id="ov-station-name-val">Snack station 1</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Type</span>
+                <span class="fw6">[SNACK]</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Market</span>
+                <span class="fw6">Market Ilica 42</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Connected kiosk</span>
+                <span class="fw6">Kiosk A</span>
+              </div>
+              <div class="ov-info-row" style="border-top:1px solid #F0F0F0;margin-top:4px;padding-top:10px">
+                <span class="ov-label">Last sale</span>
+                <span class="fw6">Today, 11:42</span>
+              </div>
+              <div class="ov-info-row">
+                <span class="ov-label">Last refill</span>
+                <span class="fw6">05.03.2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI row -->
+        <div class="ov-kpi-row">
+          <div class="ov-kpi-tile">
+            <span class="ov-kpi-label">Revenue (30d)</span>
+            <span class="ov-kpi-value">&#8364;1,243.80</span>
+            <span class="ov-kpi-delta positive">&#9650; 8.2% vs prev.</span>
+          </div>
+          <div class="ov-kpi-tile">
+            <span class="ov-kpi-label">Items sold (30d)</span>
+            <span class="ov-kpi-value">412</span>
+            <span class="ov-kpi-delta positive">&#9650; 5.1% vs prev.</span>
+          </div>
+          <div class="ov-kpi-tile">
+            <span class="ov-kpi-label">Avg price</span>
+            <span class="ov-kpi-value">&#8364;3.02</span>
+            <span class="ov-kpi-delta neutral">&#9654; No change</span>
+          </div>
+          <div class="ov-kpi-tile">
+            <span class="ov-kpi-label">Downtime (30d)</span>
+            <span class="ov-kpi-value">0.9 %</span>
+            <span class="ov-kpi-delta positive">&#9660; Better</span>
+          </div>
+        </div>
+
+        <!-- Stock status -->
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:16px;margin-top:4px;">
+          <div style="font-size:14px;font-weight:600;color:#181B1E;margin-bottom:12px;">Stock status</div>
+          <div class="ov-info-row" style="margin-bottom:8px;">
+            <span class="ov-label">Stock level</span>
+            <div class="progress-wrap" style="flex:1;max-width:300px">
+              <div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:74%"></div></div>
+              <span class="progress-val">74 %</span>
+            </div>
+            <span class="badge badge-green" style="margin-left:8px;">OK</span>
+          </div>
+          <div class="ov-station-meta">
+            <span>Last refill: 05.03.2026</span>
+            <span>Last sale: Today 11:42</span>
+            <span>Route: Route A – Marko Horvat</span>
+            <a class="ov-stock-link">View stock &#8250;</a>
+          </div>
+        </div>
+
+      </div><!-- /ov-station-content -->
+
+      <div id="ov-market-content">
+
       <!-- ── Top row: Service status + Market info ── -->
       <div class="ov-top-row">
 
@@ -1682,7 +1857,9 @@
 
       </div><!-- /ov-station-list -->
 
-    </div><!-- /panel-overview -->
+    
+      </div><!-- /ov-market-content -->
+</div><!-- /panel-overview -->
 
         <!-- ══ SALES PANEL ═══════════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-sales">
@@ -2088,23 +2265,387 @@
       <div class="fig-page-hdr">
         <div>
           <div class="fig-page-title">Kiosks</div>
-          <div class="fig-page-desc">Kiosk device list, connectivity status and configuration</div>
+          <div class="fig-page-desc">Kiosk device list, connectivity status and Televend configuration</div>
         </div>
         <div class="fig-page-actions">
           <button class="fig-btn-tertiary">Export</button>
-          <button class="fig-btn-secondary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <button class="fig-btn-secondary" onclick="kiAddKiosk()">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/>
+              <line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
             Add kiosk
           </button>
-          <button class="fig-btn-primary">Configure</button>
         </div>
       </div>
-      <div class="fig-empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="9" y1="7" x2="15" y2="7" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="11" x2="15" y2="11" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#9E9E9E"/></svg>
-        <h4>No kiosks configured</h4>
-        <p>Kiosk details — device list, connectivity status and configuration — will appear here.</p>
+
+      <!-- Kiosk list table -->
+      <div style="background:#fff;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;">
+        <table class="ki-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Serial number</th>
+              <th>Status</th>
+              <th>Operation mode</th>
+              <th>Cash handling</th>
+              <th>Cashless</th>
+              <th>Last connection</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="ki-tbody">
+            <tr id="ki-row-0" class="ki-row-active" onclick="kiSelectRow(0)">
+              <td><strong>Kiosk A</strong></td>
+              <td style="color:#6B7280">TVD-2024-001</td>
+              <td><span class="ki-status-dot online"></span>Online</td>
+              <td>Kiosk Payment Support</td>
+              <td><span class="badge badge-green">Enabled</span></td>
+              <td><span class="badge badge-green">3 active</span></td>
+              <td>Today, 11:58</td>
+              <td style="text-align:right">
+                <button class="fig-btn-tertiary" style="padding:4px 10px;font-size:12px">Edit</button>
+              </td>
+            </tr>
+            <tr id="ki-row-1" onclick="kiSelectRow(1)">
+              <td><strong>Kiosk B</strong></td>
+              <td style="color:#6B7280">TVD-2024-002</td>
+              <td><span class="ki-status-dot offline"></span>Offline</td>
+              <td>Kiosk Payment Support</td>
+              <td><span class="badge badge-amber">Disabled</span></td>
+              <td><span class="badge badge-amber">1 active</span></td>
+              <td>Yesterday, 14:23</td>
+              <td style="text-align:right">
+                <button class="fig-btn-tertiary" style="padding:4px 10px;font-size:12px">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+
+      <!-- Kiosk detail panel (shown when a row is selected) -->
+      <div class="ki-detail-wrap open" id="ki-detail-0">
+        <div class="ki-detail-header">
+          <div>
+            <div class="ki-detail-title">Kiosk A</div>
+            <div class="ki-detail-subtitle">TVD-2024-001 &nbsp;·&nbsp; <span class="ki-status-dot online" style="margin-right:4px"></span>Online</div>
+          </div>
+          <button class="fig-btn-tertiary" style="font-size:12px" onclick="kiCloseDetail(0)">✕ Close</button>
+        </div>
+        <div class="ki-detail-body">
+
+          <!-- General Details -->
+          <div class="ki-section">
+            <div class="ki-section-title">General details</div>
+            <div class="ki-section-body">
+              <div class="ki-form-row">
+                <label>Name</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="Kiosk A"></div>
+              </div>
+              <div class="ki-form-row">
+                <label>Serial number</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="TVD-2024-001"></div>
+              </div>
+              <div class="ki-form-row">
+                <label>Hardware type</label>
+                <div class="ki-form-ctrl">
+                  <select class="ki-select"><option>Televend Kiosk v2</option><option>Televend Kiosk v3</option></select>
+                </div>
+              </div>
+              <div class="ki-form-row">
+                <label>Location / note</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="Entrance hall, left side"></div>
+              </div>
+              <div class="ki-form-row">
+                <label></label>
+                <div class="ki-form-ctrl">
+                  <label class="ki-checkbox-row">
+                    <input type="checkbox" id="ki-tvd-checkbox-0" checked onchange="kiToggleTvd(0)">
+                    Set Televend box as payment router
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Televend Configuration (visible because checkbox is checked) -->
+          <div class="ki-tvd-section visible" id="ki-tvd-0">
+
+            <!-- General Setup – Basic -->
+            <div class="ki-section">
+              <div class="ki-section-title">Televend configuration — General setup</div>
+              <div class="ki-subsection-title">Basic</div>
+              <div class="ki-section-body">
+                <div class="ki-form-row">
+                  <label>Operation mode</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option>Kiosk Payment Support</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Cash handling <span style="font-size:10px;background:#388E3C;color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px">NEW</span></label>
+                  <div class="ki-form-ctrl">
+                    <label class="ki-toggle-row">
+                      <label class="ki-toggle">
+                        <input type="checkbox" id="ki-cash-0" checked onchange="kiToggleCash(0)">
+                        <span class="ki-toggle-slider"></span>
+                      </label>
+                      <span id="ki-cash-label-0">Enabled</span>
+                    </label>
+                  </div>
+                </div>
+                <!-- Read-only group -->
+                <div class="ki-readonly-group">
+                  <div style="font-size:11px;color:#9CA3AF;margin-bottom:4px;font-weight:600;">READ-ONLY FIELDS</div>
+                  <div class="ki-readonly-row"><span class="ki-rl">Price mode</span><span class="ki-rv">Price on VMC</span></div>
+                  <div class="ki-readonly-row"><span class="ki-rl">Vend type</span><span class="ki-rv">Single vend</span></div>
+                  <div class="ki-readonly-row"><span class="ki-rl">Failed vend</span><span class="ki-rv">Return credit</span></div>
+                </div>
+                <div class="ki-form-row" id="ki-change-row-0">
+                  <label>Change return</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option>After vend</option><option>Always</option><option>Never</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row" id="ki-maxcredit-row-0">
+                  <label>Max credit</label>
+                  <div class="ki-form-ctrl"><input class="ki-input" type="number" value="0.00" step="0.01"></div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Free vend</label>
+                  <div class="ki-form-ctrl">
+                    <label class="ki-checkbox-row"><input type="checkbox"> Enable free vend</label>
+                  </div>
+                </div>
+              </div>
+              <div class="ki-subsection-title" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="kiToggleAdvanced(0)">
+                <span>Advanced</span>
+                <span id="ki-adv-toggle-0" style="font-size:12px;color:#3B7DDD">Show ▾</span>
+              </div>
+              <div id="ki-advanced-0" style="display:none">
+                <div class="ki-section-body">
+                  <div class="ki-form-row">
+                    <label>Scale factor</label>
+                    <div class="ki-form-ctrl"><input class="ki-input" type="number" value="1"></div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Decimal point</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option>0</option><option>1</option><option selected>2</option><option>3</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-form-row" id="ki-overpay-row-0">
+                    <label>Overpay</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option>Off</option><option>Immediate</option><option selected>3 minutes</option><option>5 minutes</option><option>10 minutes</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Max response time</label>
+                    <div class="ki-form-ctrl"><input class="ki-input" type="number" value="100"></div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Currency</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option selected>Default (company currency)</option><option>EUR</option><option>USD</option><option>GBP</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Cellular network</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option>—</option><option>Network A</option><option>Network B</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-readonly-group">
+                    <div style="font-size:11px;color:#9CA3AF;margin-bottom:4px;font-weight:600;">READ-ONLY FIELDS</div>
+                    <div class="ki-readonly-row"><span class="ki-rl">Low tube level</span><span class="ki-rv">No handling</span></div>
+                    <div class="ki-readonly-row"><span class="ki-rl">Credit update delay</span><span class="ki-rv">1</span></div>
+                    <div class="ki-readonly-row"><span class="ki-rl">Display messages</span><span class="ki-rv">All Messages</span></div>
+                    <div class="ki-readonly-row"><span class="ki-rl">MDB level</span><span class="ki-rv">#1</span></div>
+                    <div class="ki-readonly-row"><span class="ki-rl">ETL</span><span class="ki-rv">Off</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Setup -->
+            <div class="ki-section">
+              <div class="ki-section-title">Televend configuration — Payment setup</div>
+              <div class="ki-subsection-title">Cashless 1 setup</div>
+              <div class="ki-section-body">
+                <div class="ki-form-row">
+                  <label>Cashless 1 mode</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option>Disabled</option><option>Enabled</option><option selected>Enabled – without always idle</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Recharge limit</label>
+                  <div class="ki-form-ctrl"><input class="ki-input" type="number" value="50.00" step="0.01"></div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Pricelist</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option>Default</option><option selected>Pricelist one</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Payment device type</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Open loop</option><option>Closed loop</option></select>
+                  </div>
+                </div>
+              </div>
+              <div class="ki-subsection-title">Cashless 2 setup</div>
+              <div class="ki-section-body">
+                <div class="ki-form-row">
+                  <label>Cashless 2 mode</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Disabled</option><option>Enabled</option><option>Enabled – without always idle</option></select>
+                  </div>
+                </div>
+              </div>
+              <div class="ki-subsection-title">Cashless 3 setup</div>
+              <div class="ki-section-body">
+                <div class="ki-form-row">
+                  <label>Cashless 3 mode</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Disabled</option><option>Enabled</option><option>Enabled – without always idle</option></select>
+                  </div>
+                </div>
+              </div>
+              <!-- Cash payments (shown when cash handling enabled) -->
+              <div id="ki-cash-setup-0">
+                <div class="ki-subsection-title">Cash payment setup</div>
+                <div class="ki-section-body">
+                  <div class="ki-form-row">
+                    <label>Coin changer mode</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option selected>Disable</option><option>Vend and recharge</option><option>Vend only</option><option>Recharge only</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Bank note mode</label>
+                    <div class="ki-form-ctrl">
+                      <select class="ki-select"><option selected>Disable</option><option>Vend and recharge</option><option>Vend only</option><option>Recharge only</option></select>
+                    </div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Maximum change</label>
+                    <div class="ki-form-ctrl"><input class="ki-input" type="number" value="5.00" step="0.01"></div>
+                  </div>
+                  <div class="ki-form-row">
+                    <label>Tube level warning</label>
+                    <div class="ki-form-ctrl"><input class="ki-input" type="number" value="10"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other -->
+            <div class="ki-section">
+              <div class="ki-section-title">Televend configuration — Other</div>
+              <div class="ki-section-body">
+                <div class="ki-form-row">
+                  <label>Bluetooth – Data collection</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Off</option><option>On – Service mode</option><option>On – Televend Wallet</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Bluetooth power level</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Off – 0%</option><option>1%</option><option>5%</option><option>15%</option><option>50%</option><option>100%</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Age verification</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Off</option><option>ID Reader</option><option>Cashless</option><option>Online</option></select>
+                  </div>
+                </div>
+                <div class="ki-form-row">
+                  <label>Temperature sensor</label>
+                  <div class="ki-form-ctrl">
+                    <select class="ki-select"><option selected>Off</option><option>Serial port 1</option><option>Serial port 2</option><option>USB port</option></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /ki-tvd-0 -->
+
+        </div><!-- /ki-detail-body -->
+        <div class="ki-action-bar">
+          <button class="fig-btn-tertiary">Cancel</button>
+          <button class="fig-btn-secondary">Save kiosk</button>
+          <button class="fig-btn-primary">Push configuration to box</button>
+        </div>
+      </div><!-- /ki-detail-0 -->
+
+      <!-- Kiosk B detail (hidden by default) -->
+      <div class="ki-detail-wrap" id="ki-detail-1">
+        <div class="ki-detail-header">
+          <div>
+            <div class="ki-detail-title">Kiosk B</div>
+            <div class="ki-detail-subtitle">TVD-2024-002 &nbsp;·&nbsp; <span class="ki-status-dot offline" style="margin-right:4px"></span>Offline</div>
+          </div>
+          <button class="fig-btn-tertiary" style="font-size:12px" onclick="kiCloseDetail(1)">✕ Close</button>
+        </div>
+        <div class="ki-detail-body">
+          <div class="ki-section">
+            <div class="ki-section-title">General details</div>
+            <div class="ki-section-body">
+              <div class="ki-form-row">
+                <label>Name</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="Kiosk B"></div>
+              </div>
+              <div class="ki-form-row">
+                <label>Serial number</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="TVD-2024-002"></div>
+              </div>
+              <div class="ki-form-row">
+                <label>Hardware type</label>
+                <div class="ki-form-ctrl">
+                  <select class="ki-select"><option selected>Televend Kiosk v2</option><option>Televend Kiosk v3</option></select>
+                </div>
+              </div>
+              <div class="ki-form-row">
+                <label>Location / note</label>
+                <div class="ki-form-ctrl"><input class="ki-input" value="Main corridor, right side"></div>
+              </div>
+              <div class="ki-form-row">
+                <label></label>
+                <div class="ki-form-ctrl">
+                  <label class="ki-checkbox-row">
+                    <input type="checkbox" id="ki-tvd-checkbox-1" onchange="kiToggleTvd(1)">
+                    Set Televend box as payment router
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ki-tvd-section" id="ki-tvd-1">
+            <div class="ki-section">
+              <div class="ki-section-title">Televend configuration</div>
+              <div class="ki-section-body">
+                <div style="color:#6B7280;font-size:13px;padding:8px 0;">
+                  Enable "Set Televend box as payment router" above to configure Televend settings.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ki-action-bar">
+          <button class="fig-btn-tertiary">Cancel</button>
+          <button class="fig-btn-secondary">Save kiosk</button>
+        </div>
+      </div><!-- /ki-detail-1 -->
+
+    </div><!-- /panel-kiosks -->
+
+
 
   </div><!-- /main -->
 </div><!-- /layout -->
@@ -2552,17 +3093,34 @@ function toggleSidebarCollapse() {
 
 function selectStation(el, stationId) {
   document.querySelectorAll('.ss-station-row').forEach(r => r.classList.remove('active'));
+  // Switch Overview panel back to market view
+  const ovStation2 = document.getElementById('ov-station-content');
+  const ovMarket2  = document.getElementById('ov-market-content');
+  if (ovStation2) ovStation2.style.display = 'none';
+  if (ovMarket2)  ovMarket2.style.display  = '';
+  const ovDesc2 = document.querySelector('#panel-overview .fig-page-desc');
+  if (ovDesc2) ovDesc2.textContent = 'Service status, market info, key KPIs and station health';
+
   document.querySelectorAll('.ss-market-row').forEach(r => r.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = 'none';
   document.getElementById('products-station-view').style.display = '';
   // Hide market-only tabs; if one is active fall back to first available station tab
-  const marketOnlyTabs = ['tab-overview', 'tab-transactions', 'tab-kiosks'];
+  const marketOnlyTabs = ['tab-transactions', 'tab-kiosks'];
   const activeIsMarketOnly = marketOnlyTabs.some(id => document.getElementById(id)?.classList.contains('active'));
   marketOnlyTabs.forEach(id => {
     const btn = document.getElementById(id);
     if (btn) btn.style.display = 'none';
   });
+  
+  // Switch Overview panel to station view
+  const ovStation = document.getElementById('ov-station-content');
+  const ovMarket  = document.getElementById('ov-market-content');
+  if (ovStation) ovStation.style.display = '';
+  if (ovMarket)  ovMarket.style.display  = 'none';
+  const ovDesc = document.querySelector('#panel-overview .fig-page-desc');
+  if (ovDesc) ovDesc.textContent = 'Station status, KPIs and stock health';
+
   if (activeIsMarketOnly) {
     // First tab still visible in station view
     const first = document.querySelector('.tab-nav .tab-btn:not([style*="display: none"]):not([style*="display:none"])');
@@ -2576,7 +3134,7 @@ function selectMarket(el) {
   document.getElementById('products-market-view').style.display = '';
   document.getElementById('products-station-view').style.display = 'none';
   // Restore market-only tabs
-  ['tab-overview', 'tab-transactions', 'tab-kiosks'].forEach(id => {
+  ['tab-transactions', 'tab-kiosks'].forEach(id => {
     const btn = document.getElementById(id);
     if (btn) btn.style.display = '';
   });
@@ -3001,6 +3559,50 @@ function txnChangePage(d) { txnPage = Math.max(1, txnPage+d); txnRender(); }
 
 // init on DOM ready
 document.addEventListener('DOMContentLoaded', () => { salesRender(); txnRender(); });
+
+
+/* ══ KIOSKS TAB ═══════════════════════════════════════════════════════════ */
+function kiSelectRow(idx) {
+  document.querySelectorAll('#ki-tbody tr').forEach((r,i) => {
+    r.classList.toggle('ki-row-active', i === idx);
+  });
+  document.querySelectorAll('.ki-detail-wrap').forEach((d,i) => {
+    d.classList.toggle('open', i === idx);
+  });
+}
+function kiCloseDetail(idx) {
+  document.getElementById('ki-detail-' + idx).classList.remove('open');
+  document.querySelectorAll('#ki-tbody tr').forEach(r => r.classList.remove('ki-row-active'));
+}
+function kiToggleTvd(idx) {
+  const cb = document.getElementById('ki-tvd-checkbox-' + idx);
+  const sec = document.getElementById('ki-tvd-' + idx);
+  if (sec) sec.classList.toggle('visible', cb.checked);
+}
+function kiToggleCash(idx) {
+  const cb = document.getElementById('ki-cash-' + idx);
+  const label = document.getElementById('ki-cash-label-' + idx);
+  const changeRow = document.getElementById('ki-change-row-' + idx);
+  const maxRow = document.getElementById('ki-maxcredit-row-' + idx);
+  const cashSetup = document.getElementById('ki-cash-setup-' + idx);
+  const overpayRow = document.getElementById('ki-overpay-row-' + idx);
+  if (label) label.textContent = cb.checked ? 'Enabled' : 'Disabled';
+  if (changeRow) changeRow.style.display = cb.checked ? '' : 'none';
+  if (maxRow) maxRow.style.display = cb.checked ? '' : 'none';
+  if (cashSetup) cashSetup.style.display = cb.checked ? '' : 'none';
+  if (overpayRow) overpayRow.style.display = cb.checked ? '' : 'none';
+}
+function kiToggleAdvanced(idx) {
+  const adv = document.getElementById('ki-advanced-' + idx);
+  const lbl = document.getElementById('ki-adv-toggle-' + idx);
+  if (!adv) return;
+  const open = adv.style.display === '';
+  adv.style.display = open ? 'none' : '';
+  if (lbl) lbl.textContent = open ? 'Show ▾' : 'Hide ▴';
+}
+function kiAddKiosk() {
+  alert('Add kiosk form – not implemented in this prototype');
+}
 
 </script>
 </body>
