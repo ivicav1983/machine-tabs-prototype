@@ -1178,6 +1178,9 @@
 .map-edit-btn { background:none; border:none; cursor:pointer; padding:1px 4px; font-size:11px; color:var(--blue); opacity:0.6; }
 .map-edit-btn:hover { opacity:1; }
 .map-input { width:46px; font-size:12px; padding:2px 4px; border:1px solid var(--blue); border-radius:3px; }
+.bulk-replace-row { background:#F0FFF4; }
+.bulk-replace-row td { border-top:none !important; padding-top:3px; padding-bottom:6px; }
+.bulk-src-row { opacity:0.82; }
 </style>
 </head>
 <body>
@@ -4043,6 +4046,8 @@ function showPricelistToast(title, msg) {
 
 // ── PRODUCTS — Pricelist expand / collapse ────────────────────────────────
 let _showAllPricesActive = false;
+let _bulkMode = null;
+let _bulkSrcActions = new Map();
 
 function toggleRowPrices(btn) {
   const tr = btn.closest('tr');
@@ -4057,6 +4062,7 @@ function toggleRowPrices(btn) {
 }
 
 function toggleAllPrices() {
+  if (_bulkMode) { showPricelistToast('Bulk mode active', 'Please Save or Discard all bulk changes first.'); return; }
   _showAllPricesActive = !_showAllPricesActive;
   const btn = document.getElementById('btn-show-all-prices');
   const count = parseInt(document.getElementById('pricelists-select')?.value || '1');
@@ -4101,6 +4107,7 @@ function toggleAllPrices() {
 
 function editStationColumn(btn) {
   const tr = btn.closest('tr');
+  if (_bulkMode) { showPricelistToast('Bulk mode active', 'Please Save or Discard all bulk changes first.'); return; }
   if (tr.dataset.mode) return;
   tr.dataset.mode = 'edit';
   const actionsCell = tr.querySelector('.st-row-actions');
@@ -4147,6 +4154,7 @@ function discardEditColumn(btn) {
 
 function replaceProduct(btn) {
   const tr = btn.closest('tr');
+  if (_bulkMode) { showPricelistToast('Bulk mode active', 'Please Save or Discard all bulk changes first.'); return; }
   if (tr.dataset.mode) return;
   tr.dataset.mode = 'replace';
   const productCell = tr.cells[3]; // Col(0) Map1(1) Map2(2) Product(3)
@@ -4187,17 +4195,178 @@ function discardReplaceProduct(btn) {
 
 
 // ── PRODUCTS — Bulk actions (Bulk actions on machine planogram spec) ─────────
+function _enterBulkModeHeader(mode) {
+  _bulkMode = mode;
+  const th = document.querySelector('th.st-actions-hdr');
+  if (!th) return;
+  th.dataset.origHtml = th.innerHTML;
+  const saveFn    = mode === 'replace' ? 'saveBulkReplace'  : 'saveBulkEdit';
+  const discardFn = mode === 'replace' ? 'discardBulkReplace' : 'discardBulkEdit';
+  const label = mode === 'replace' ? 'Replace' : 'Edit';
+  th.innerHTML = label + '<br><span style="white-space:nowrap">'
+    + '<button class="btn-ok-green" style="padding:2px 8px;font-size:12px;font-weight:600" onclick="' + saveFn + '()">\u2713 All</button> '
+    + '<button class="btn-delete" style="padding:2px 8px;font-size:12px;font-weight:600;border-width:1px" onclick="' + discardFn + '()">\u2296 All</button>'
+    + '</span>';
+}
+
+function _exitBulkModeHeader() {
+  const th = document.querySelector('th.st-actions-hdr');
+  if (th && th.dataset.origHtml) { th.innerHTML = th.dataset.origHtml; delete th.dataset.origHtml; }
+  _bulkMode = null;
+  _bulkSrcActions.clear();
+}
+
 function bulkReplace() {
-  showPricelistToast(
-    'Bulk Replace',
-    'Opens product replace dialog for all columns. Tags, Pickup, Cap, Fill qty and Prices are pre-populated from the original product. Select a new product per column, then Save or Discard all changes at once.'
-  );
+  if (_bulkMode) return;
+  const tbody = document.getElementById('station-tbody');
+  if (!tbody) return;
+  const count = parseInt(document.getElementById('pricelists-select')?.value || '1');
+  const m1 = document.querySelector('th.col-map1')?.style?.display !== 'none';
+  const m2 = document.querySelector('th.col-map2')?.style?.display !== 'none';
+  [...tbody.querySelectorAll('tr:not(.station-col-edit):not(.bulk-replace-row)')].forEach(tr => {
+    if (tr.dataset.mode) return;
+    const cells = tr.cells;
+    const colNum   = cells[0]?.textContent.trim() || '';
+    const tagsText = cells[5]?.textContent.trim() || '';
+    const pickup   = cells[6]?.textContent.trim() || '1';
+    const cap      = cells[7]?.textContent.trim() || '1';
+    const fillqty  = cells[8]?.textContent.trim() || '1';
+    const p1 = cells[9]?.textContent.trim().replace('\u20ac','') || '1.00';
+    const p2 = cells[10]?.textContent.trim().replace('\u20ac','') || (parseFloat(p1)*1.1).toFixed(2);
+    const p3 = cells[11]?.textContent.trim().replace('\u20ac','') || (parseFloat(p1)*1.2).toFixed(2);
+    const p4 = cells[12]?.textContent.trim().replace('\u20ac','') || (parseFloat(p1)*1.3).toFixed(2);
+    const p5 = cells[13]?.textContent.trim().replace('\u20ac','') || (parseFloat(p1)*1.4).toFixed(2);
+    const actCell = tr.querySelector('.st-row-actions');
+    _bulkSrcActions.set(tr, actCell ? actCell.innerHTML : '');
+    tr.classList.add('bulk-src-row');
+    if (actCell) actCell.innerHTML = '<span style="color:var(--grey-mid);font-size:11px">replacing\u2026</span>';
+    const replRow = document.createElement('tr');
+    replRow.className = 'bulk-replace-row';
+    replRow.dataset.forCol = colNum;
+    replRow.innerHTML =
+      '<td style="color:var(--green);font-size:14px;text-align:center;font-weight:600">\u2192</td>'
+      + '<td class="col-map1 map-cell" style="display:' + (m1?'':'none') + '"></td>'
+      + '<td class="col-map2 map-cell" style="display:' + (m2?'':'none') + '"></td>'
+      + '<td><input type="text" class="col-edit-input col-edit-wide" placeholder="New product name\u2026" style="width:140px"></td>'
+      + '<td><input type="text" class="col-edit-input" style="width:90px" placeholder="Recipe"></td>'
+      + '<td><input type="text" class="col-edit-input" style="width:90px" value="' + tagsText.replace(/"/g,'&quot;') + '"></td>'
+      + '<td><input type="number" class="col-edit-input col-edit-num" value="' + pickup + '"></td>'
+      + '<td><input type="number" class="col-edit-input col-edit-num" value="' + cap + '"></td>'
+      + '<td><input type="number" class="col-edit-input col-edit-num" value="' + fillqty + '"></td>'
+      + '<td><input type="number" step="0.01" class="col-edit-input col-edit-num" value="' + p1 + '"></td>'
+      + '<td class="col-price2" style="display:' + (count>=2?'':'none') + '"><input type="number" step="0.01" class="col-edit-input col-edit-num" style="color:var(--green)" value="' + p2 + '"></td>'
+      + '<td class="col-price3" style="display:' + (count>=3?'':'none') + '"><input type="number" step="0.01" class="col-edit-input col-edit-num" style="color:var(--green)" value="' + p3 + '"></td>'
+      + '<td class="col-price4" style="display:' + (count>=4?'':'none') + '"><input type="number" step="0.01" class="col-edit-input col-edit-num" style="color:var(--green)" value="' + p4 + '"></td>'
+      + '<td class="col-price5" style="display:' + (count>=5?'':'none') + '"><input type="number" step="0.01" class="col-edit-input col-edit-num" style="color:var(--green)" value="' + p5 + '"></td>'
+      + '<td></td><td></td>';
+    tr.after(replRow);
+  });
+  _enterBulkModeHeader('replace');
+}
+
+function saveBulkReplace() {
+  const tbody = document.getElementById('station-tbody');
+  tbody.querySelectorAll('.bulk-replace-row').forEach(replRow => {
+    const origRow = replRow.previousElementSibling;
+    if (!origRow) { replRow.remove(); return; }
+    const inputs = replRow.querySelectorAll('input');
+    const newProduct = inputs[0]?.value.trim() || '';
+    const newRecipe  = inputs[1]?.value.trim() || '';
+    const newTags    = inputs[2]?.value.trim() || '';
+    const newPickup  = inputs[3]?.value || '1';
+    const newCap     = inputs[4]?.value || '1';
+    const newFillqty = inputs[5]?.value || '1';
+    const newP1 = parseFloat(inputs[6]?.value || 0).toFixed(2);
+    if (newProduct) {
+      origRow.cells[3].innerHTML = '<div style="display:flex;align-items:center;gap:8px">'
+        + '<div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">\ud83d\udce6</div>'
+        + '<span>' + newProduct + '</span></div>';
+    }
+    if (newRecipe) origRow.cells[4].textContent = newRecipe;
+    origRow.cells[5].innerHTML = newTags ? '<span class="tag-pill tag-grey">' + newTags + '</span>' : origRow.cells[5].innerHTML;
+    origRow.cells[6].textContent = newPickup;
+    origRow.cells[7].textContent = newCap;
+    origRow.cells[8].textContent = newFillqty;
+    origRow.cells[9].innerHTML = '\u20ac' + newP1;
+    origRow.cells[9].style.color = 'var(--green)'; origRow.cells[9].style.fontWeight = '600';
+    [[10,7],[11,8],[12,9],[13,10]].forEach(([ci,ii]) => {
+      if (inputs[ii] && origRow.cells[ci]) {
+        origRow.cells[ci].innerHTML = '\u20ac' + parseFloat(inputs[ii].value||0).toFixed(2);
+        origRow.cells[ci].style.color = 'var(--green)'; origRow.cells[ci].style.fontWeight = '600';
+      }
+    });
+    const actCell = origRow.querySelector('.st-row-actions');
+    if (actCell) actCell.innerHTML = _bulkSrcActions.get(origRow) || '';
+    origRow.cells[origRow.cells.length-1].innerHTML = '<span class="tag-pill tag-amber">Pending</span>';
+    origRow.classList.remove('bulk-src-row');
+    replRow.remove();
+  });
+  _exitBulkModeHeader();
+}
+
+function discardBulkReplace() {
+  const tbody = document.getElementById('station-tbody');
+  tbody.querySelectorAll('.bulk-replace-row').forEach(r => r.remove());
+  tbody.querySelectorAll('.bulk-src-row').forEach(origRow => {
+    const actCell = origRow.querySelector('.st-row-actions');
+    if (actCell) actCell.innerHTML = _bulkSrcActions.get(origRow) || '';
+    origRow.classList.remove('bulk-src-row');
+  });
+  _exitBulkModeHeader();
 }
 function bulkEdit() {
-  showPricelistToast(
-    'Bulk Edit',
-    'Opens price edit mode for all columns. Modify prices inline for each column, then Save or Discard all changes at once. Columns already in Pending state are included.'
-  );
+  if (_bulkMode) return;
+  const tbody = document.getElementById('station-tbody');
+  if (!tbody) return;
+  [...tbody.querySelectorAll('tr:not(.station-col-edit):not(.bulk-replace-row)')].forEach(tr => {
+    if (tr.dataset.mode) return;
+    tr.dataset.mode = 'bulk-edit';
+    const actCell = tr.querySelector('.st-row-actions');
+    _bulkSrcActions.set(tr, actCell ? actCell.innerHTML : '');
+    if (actCell) actCell.innerHTML = '';
+    tr.querySelectorAll('td').forEach(td => {
+      if (/^\u20ac[\d.]+$/.test(td.textContent.trim()) && td.style.display !== 'none') {
+        td.dataset.origHtml = td.innerHTML;
+        const val = td.textContent.trim().replace('\u20ac','');
+        const hasGreen = td.style.color || td.className.includes('price-pending');
+        td.innerHTML = '<input type="number" step="0.01" value="' + val + '" class="col-edit-input col-edit-num"'
+          + ' style="' + (hasGreen ? 'color:var(--green);' : '') + 'text-align:right">';
+      }
+    });
+  });
+  _enterBulkModeHeader('edit');
+}
+
+function saveBulkEdit() {
+  const tbody = document.getElementById('station-tbody');
+  tbody.querySelectorAll('tr[data-mode="bulk-edit"]').forEach(tr => {
+    tr.querySelectorAll('td').forEach(td => {
+      if (td.dataset.origHtml !== undefined) {
+        const val = parseFloat(td.querySelector('input')?.value || 0).toFixed(2);
+        td.style.color = 'var(--green)'; td.style.fontWeight = '600';
+        td.innerHTML = '\u20ac' + val;
+        delete td.dataset.origHtml;
+      }
+    });
+    const actCell = tr.querySelector('.st-row-actions');
+    if (actCell) actCell.innerHTML = _bulkSrcActions.get(tr) || '';
+    tr.cells[tr.cells.length-1].innerHTML = '<span class="tag-pill tag-amber">Pending</span>';
+    delete tr.dataset.mode;
+  });
+  _exitBulkModeHeader();
+}
+
+function discardBulkEdit() {
+  const tbody = document.getElementById('station-tbody');
+  tbody.querySelectorAll('tr[data-mode="bulk-edit"]').forEach(tr => {
+    tr.querySelectorAll('td').forEach(td => {
+      if (td.dataset.origHtml !== undefined) { td.innerHTML = td.dataset.origHtml; delete td.dataset.origHtml; }
+    });
+    const actCell = tr.querySelector('.st-row-actions');
+    if (actCell) actCell.innerHTML = _bulkSrcActions.get(tr) || '';
+    delete tr.dataset.mode;
+  });
+  _exitBulkModeHeader();
 }
 
 // ── PRODUCTS — Column mapping (Column mapping + Multicolumn mapping specs) ───
