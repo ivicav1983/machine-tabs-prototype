@@ -500,53 +500,24 @@
   .prod-row-old .tag-pill { opacity: .5; }
   .prod-row-new { background: #F1F8E9 !important; }
   .prod-row-new .progress-bar-fill { background: var(--green) !important; }
-
   .prod-status-removing { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: #FFEBEE; color: var(--red); }
   .prod-status-pending  { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: #E8F5E9; color: var(--green); }
   .prod-status-pushed   { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: #E3F2FD; color: var(--blue); }
   .prod-status-active   { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: #DFFFF4; color: #00A871; }
-
-  .prod-icon-btn {
-    background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px;
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: background .12s; color: var(--grey-txt);
-  }
+  .prod-icon-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; transition: background .12s; color: var(--grey-txt); }
   .prod-icon-btn:hover { background: var(--grey-bg); color: var(--dark); }
   .prod-icon-btn.confirm { color: var(--green); }
   .prod-icon-btn.confirm:hover { background: #E8F5E9; }
   .prod-icon-btn.cancel { color: var(--red); }
   .prod-icon-btn.cancel:hover { background: #FFEBEE; }
-
-  .prod-edit-input {
-    padding: 4px 8px; border: 1px solid var(--blue); border-radius: 4px;
-    font-size: 13px; font-family: var(--font); width: 100%; outline: none;
-    background: #FAFAFA;
-  }
-  .prod-edit-select {
-    padding: 4px 8px; border: 1px solid var(--blue); border-radius: 4px;
-    font-size: 13px; font-family: var(--font); width: 100%; outline: none;
-    background: #FAFAFA;
-  }
+  .prod-edit-input { padding: 4px 8px; border: 1px solid var(--blue); border-radius: 4px; font-size: 13px; font-family: var(--font); width: 100%; outline: none; background: #FAFAFA; }
+  .prod-edit-select { padding: 4px 8px; border: 1px solid var(--blue); border-radius: 4px; font-size: 13px; font-family: var(--font); width: 100%; outline: none; background: #FAFAFA; }
   .prod-old-val { font-size: 11px; color: #B71C1C; text-decoration: line-through; display: block; margin-top: 2px; }
   .prod-new-val { font-size: 13px; color: var(--green); font-weight: 600; }
-  .prod-pushed-val { font-size: 13px; color: var(--dark); font-weight: 600; }
-
-  .btn-push-products {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 16px; border-radius: 6px;
-    background: var(--green); border: none; cursor: pointer;
-    font-size: 14px; font-weight: 500; color: #FFFFFF;
-    font-family: var(--font); transition: background .15s; white-space: nowrap;
-  }
+  .btn-push-products { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 6px; background: var(--green); border: none; cursor: pointer; font-size: 14px; font-weight: 500; color: #FFFFFF; font-family: var(--font); transition: background .15s; white-space: nowrap; }
   .btn-push-products:hover { background: #2E7D32; }
   .btn-push-products:disabled { background: #A5D6A7; cursor: not-allowed; }
-
-  .prod-replace-btn {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
-    background: #E3F2FD; color: var(--blue); border: none; cursor: pointer;
-    font-family: var(--font); transition: background .12s; white-space: nowrap;
-  }
+  .prod-replace-btn { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; background: #E3F2FD; color: var(--blue); border: none; cursor: pointer; font-family: var(--font); transition: background .12s; white-space: nowrap; }
   .prod-replace-btn:hover { background: #BBDEFB; }
 
   /* ── PAGINATION ──────────────────────────── */
@@ -1616,12 +1587,13 @@
     <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- ── MARKET VIEW (default: read-only, all stations) ─────────────── -->
+      <!-- ── MARKET VIEW (default: micro market selected) ─────────────── -->
       <div id="products-market-view">
+        <!-- Market toolbar: search + station filter only -->
         <div class="filter-bar" style="padding:10px 0">
           <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
           <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
-          <select class="dropdown-btn" id="station-filter" onchange="filterProducts()" style="min-width:150px;cursor:pointer">
+          <select class="dropdown-select" id="station-filter" onchange="filterProducts()" style="min-width:150px">
             <option value="">All stations</option>
             <option value="Coffee Station">Coffee Station</option>
             <option value="Cold Drinks">Cold Drinks</option>
@@ -1642,41 +1614,83 @@
             </thead>
             <tbody id="products-tbody">
               <tr id="products-noresult" style="display:none"><td colspan="5" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
-              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span></td><td class="fw6">€1.20</td></tr>
-              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span></td><td class="fw6">€1.00</td></tr>
-              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td><td class="fw6">€1.50</td></tr>
-              <tr><td class="fw6">Cold Drinks</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td><td></td><td><span class="tag-pill tag-blue">Cold</span></td><td class="fw6">€1.80</td></tr>
-              <tr><td class="fw6">Snack Bar</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td><td></td><td><span class="tag-pill tag-purple">Snack</span></td><td class="fw6">€1.30</td></tr>
-              <tr><td class="fw6">Cold Drinks</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td><td></td><td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td><td class="fw6">€0.90</td></tr>
-              <tr><td class="fw6">Snack Bar</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td><td></td><td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td><td class="fw6">€2.10</td></tr>
-              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td><td class="fw6">€1.10</td></tr>
+              <tr>
+                <td class="fw6">Coffee Station</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="fw6">€1.20</td>
+              </tr>
+              <tr>
+                <td class="fw6">Coffee Station</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="fw6">€1.00</td>
+              </tr>
+              <tr>
+                <td class="fw6">Coffee Station</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
+                <td class="fw6">€1.50</td>
+              </tr>
+              <tr>
+                <td class="fw6">Cold Drinks</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-blue">Cold</span></td>
+                <td class="fw6">€1.80</td>
+              </tr>
+              <tr>
+                <td class="fw6">Snack Bar</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-purple">Snack</span></td>
+                <td class="fw6">€1.30</td>
+              </tr>
+              <tr>
+                <td class="fw6">Cold Drinks</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
+                <td class="fw6">€0.90</td>
+              </tr>
+              <tr>
+                <td class="fw6">Snack Bar</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
+                <td class="fw6">€2.10</td>
+              </tr>
+              <tr>
+                <td class="fw6">Coffee Station</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
+                <td class="fw6">€1.10</td>
+              </tr>
             </tbody>
           </table>
           </div>
         </div>
       </div><!-- /products-market-view -->
 
-      <!-- ── STATION VIEW (shown when a station is selected) ────────────── -->
+      <!-- ── STATION VIEW (shown when a station is selected) ── NEW Replace/Edit/Push workflow ── -->
       <div id="products-station-view" style="display:none">
+
         <div class="plan-header-row">
           <div class="plan-title-block">
             <span class="plan-title">Products</span>
             <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
             <span class="plan-meta-sep">•</span>
             <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
-            <span class="plan-meta-sep">•</span>
-            <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span></span>
           </div>
           <div class="plan-actions">
             <button class="mkt-btn-grey">Setup</button>
-            <button class="mkt-btn-grey">
-              Layout preview
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+            <button class="mkt-btn-grey">Layout preview <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <div class="dropdown-wrap">
-              <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
-                Planogram ▾
-              </button>
+              <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">Planogram ▾</button>
               <div class="dropdown-menu" id="dd-planogram">
                 <div class="dropdown-item">View planogram</div>
                 <div class="dropdown-item">Export planogram</div>
@@ -1691,14 +1705,14 @@
         </div>
 
         <div class="filter-bar" style="margin-top:8px">
-          <input class="search-input" type="text" placeholder="Search products…" oninput="filterStationProducts(this.value)" style="width:200px">
+          <input class="search-input" type="text" placeholder="Search products…" oninput="filterStationProductsNew(this.value)" style="width:200px">
           <button class="btn-clear-all">Clear all</button>
           <div style="flex:1"></div>
           <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
         </div>
 
         <div class="table-wrap">
-          <table id="products-table">
+          <table>
             <thead>
               <tr>
                 <th style="width:36px"></th>
@@ -1719,18 +1733,220 @@
 
         <div class="pagination">
           <span class="pg-label text-muted">Rows per page:</span>
-          <span class="pg-size" onclick="setPgSize(this)">10</span>
-          <span class="pg-sep">|</span>
-          <span class="pg-size active" onclick="setPgSize(this)">20</span>
-          <span class="pg-sep">|</span>
-          <span class="pg-size" onclick="setPgSize(this)">50</span>
-          <span class="pg-sep">|</span>
+          <span class="pg-size" onclick="setPgSize(this)">10</span><span class="pg-sep">|</span>
+          <span class="pg-size active" onclick="setPgSize(this)">20</span><span class="pg-sep">|</span>
+          <span class="pg-size" onclick="setPgSize(this)">50</span><span class="pg-sep">|</span>
           <span class="pg-size" onclick="setPgSize(this)">100</span>
           <span class="pg-total text-muted">Total items: <strong id="prod-total">8</strong></span>
-          <div class="pg-nav">
-            <button class="pg-nav-btn">‹</button>
-            <div class="pg-num">1</div>
-            <button class="pg-nav-btn">›</button>
+          <div class="pg-nav"><button class="pg-nav-btn">‹</button><div class="pg-num">1</div><button class="pg-nav-btn">›</button></div>
+        </div>
+
+      </div><!-- /products-station-view (NEW) -->
+
+      <!-- OLD station-view kept below for reference, hidden -->
+      <div id="products-station-view-OLD" style="display:none !important">
+        <!-- Station toolbar: search + Setup / Layout preview / Add column -->
+        <div class="filter-bar" style="padding:10px 0;position:sticky;top:0;background:#fff;z-index:5;margin:0 -24px;padding-left:24px;padding-right:24px">
+          <input class="search-input" id="products-search-station" type="text" placeholder="Search products…" oninput="filterStationProducts()" />
+          <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
+          <div style="flex:1"></div>
+          <button class="mkt-btn-grey" id="btn-setup-products" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
+          <button class="mkt-btn-grey" id="btn-show-all-prices" style="font-size:13px;padding:5px 12px;display:none" onclick="toggleAllPrices()">Show all pricelists</button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
+            Layout preview
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="addStationColumn()">+ Add column</button>
+        </div>
+        <div class="table-wrap">
+          <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Column</th>
+                <th class="col-map1" style="display:none">Map 1</th>
+                <th class="col-map2" style="display:none">Map 2</th>
+                <th>Product</th>
+                <th>Recipe</th>
+                <th style="width:100px">Tags</th>
+                <th>Pickup</th>
+                <th>Cap</th>
+                <th>Fill qty</th>
+                <th>Price 1</th>
+                <th class="col-price2" style="display:none">Price 2</th>
+                <th class="col-price3" style="display:none">Price 3</th>
+                <th class="col-price4" style="display:none">Price 4</th>
+                <th class="col-price5" style="display:none">Price 5</th>
+                <th class="st-actions-hdr" style="min-width:96px;text-align:center"><span style="white-space:nowrap"><button class="bulk-hdr-btn" onclick="bulkReplace()" title="Bulk Replace all columns">&#8644;</button><button class="bulk-hdr-btn" onclick="bulkEdit()" title="Bulk Edit all columns">&#9998;</button><button class="bulk-hdr-btn" onclick="toggleAllPrices()" title="Bulk Expand / Collapse prices">&#8964;</button></span></th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="station-tbody">
+              <tr>
+                <td class="fw6">01</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">01</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">17</td>
+                <td class="fw6">€1.20</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.32</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.44</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.56</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€1.68</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">02</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">02</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">6</td>
+                <td class="fw6">€1.00</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.10</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.20</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.30</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€1.40</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">03</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">03</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
+                <td></td>
+                <td class="text-muted">15</td>
+                <td class="fw6">2</td>
+                <td class="fw6">€1.50</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.65</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.80</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.95</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€2.10</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">04</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">04</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-blue">Cold</span></td>
+                <td></td>
+                <td class="text-muted">12</td>
+                <td class="fw6">9</td>
+                <td class="fw6">€1.80</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.98</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€2.16</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€2.34</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€2.52</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">05</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">05</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-purple">Snack</span></td>
+                <td></td>
+                <td class="text-muted">10</td>
+                <td class="fw6">4</td>
+                <td class="fw6">€1.30</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.43</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.56</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.69</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€1.82</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">06</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">06</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
+                <td></td>
+                <td class="text-muted">24</td>
+                <td class="fw6">23</td>
+                <td class="fw6">€0.90</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€0.99</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.08</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.17</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€1.26</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">07</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">07</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
+                <td></td>
+                <td class="text-muted">8</td>
+                <td class="fw6">1</td>
+                <td class="fw6">€2.10</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€2.31</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€2.52</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€2.73</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€2.94</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+              <tr>
+                <td class="fw6">08</td>
+              <td class="col-map1 map-cell" style="display:none"><span class="map-val">08</span><button class="map-edit-btn" onclick="editMapCell(this,1)" title="Edit Map 1">&#9998;</button></td>
+              <td class="col-map2 map-cell" style="display:none"><span class="map-val">–</span><button class="map-edit-btn" onclick="editMapCell(this,2)" title="Edit Map 2">&#9998;</button></td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
+                <td></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
+                <td></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">12</td>
+                <td class="fw6">€1.10</td>
+              <td class="col-price2 price-pending" style="display:none;color:var(--green);font-weight:600">€1.21</td>
+              <td class="col-price3 price-pending" style="display:none;color:var(--green);font-weight:600">€1.32</td>
+              <td class="col-price4 price-pending" style="display:none;color:var(--green);font-weight:600">€1.43</td>
+              <td class="col-price5 price-pending" style="display:none;color:var(--green);font-weight:600">€1.54</td>
+              <td class="st-row-actions"><button class="st-act-btn" onclick="replaceProduct(this)" title="Replace product">⇄</button><button class="st-act-btn" onclick="editStationColumn(this)" title="Edit column">✎</button><button class="st-expand-btn" onclick="toggleRowPrices(this)" title="Expand prices">▾</button></td>
+              <td></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <div class="products-bottom-bar">
+          <div class="products-bottom-row">
+            <div style="display:flex;gap:8px">
+              <button class="btn-green">Save as Planogram</button>
+              <button class="btn-grey-solid">Load Planogram</button>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-green">Push product list</button>
+              <button class="btn-delete" onclick="openDeleteColumnsModal()">Delete Columns</button>
+            </div>
+          </div>
+          <div class="products-bottom-meta">
+            <span>Product list changed: 06.03.2026 12:25 [Dario Skegro]</span>
+            <span>Product list pushed: 06.03.2026 12:25 [Dario Skegro]</span>
+            <span>Based on planogram: Opera</span>
+            <span>Planogram added: 14.01.2026 12:58 [Dario Skegro]</span>
           </div>
         </div>
       </div><!-- /products-station-view -->
@@ -3109,7 +3325,6 @@ function renderRow(r) {
 function toggleChip(type) {
   chipState[type] = !chipState[type];
   renderEvents();
-renderProducts();
 }
 
 // ══ SORT ══════════════════════════════════════════════════════════════════
@@ -3348,9 +3563,13 @@ function clearProductsSearch() {
   if (sel) sel.value = '';
   filterProducts();
 }
-function filterStationProducts(term) {
-  prodSearchTerm = (term || '').trim();
-  renderProducts();
+function filterStationProducts() {
+  const q = (document.getElementById('products-search-station').value || '').toLowerCase();
+  const rows = document.querySelectorAll('#products-station-view tbody tr');
+  rows.forEach(tr => {
+    const text = tr.textContent.toLowerCase();
+    tr.style.display = !q || text.includes(q) ? '' : 'none';
+  });
 }
 function toggleRefillRow(id) {
   const det = document.getElementById('rfill-det-' + id);
@@ -3473,7 +3692,7 @@ function confirmDeleteColumns() {
   closeModal('delete-col-modal');
 }
 
-// ══ PRODUCTS DATA & LOGIC ═════════════════════════════════════════════
+// ══ PRODUCTS (STATION VIEW) – Replace / Edit / Push ══════════════════════
 const productCatalog = [
   'Espresso Single','Americano','Cappuccino','Latte','Mocha','Flat White',
   'Orange Juice 330ml','Apple Juice 330ml','Lemon Iced Tea',
@@ -3482,7 +3701,7 @@ const productCatalog = [
   'Croissant','Muffin','Cookie',
   'Green Tea','Black Tea','Chamomile Tea'
 ];
-const categoryMap = {
+const catMap = {
   'Espresso Single':'Hot beverage','Americano':'Hot beverage','Cappuccino':'Hot beverage',
   'Latte':'Hot beverage','Mocha':'Hot beverage','Flat White':'Hot beverage',
   'Orange Juice 330ml':'Cold drink','Apple Juice 330ml':'Cold drink','Lemon Iced Tea':'Cold drink',
@@ -3491,330 +3710,94 @@ const categoryMap = {
   'Croissant':'Snack','Muffin':'Snack','Cookie':'Snack',
   'Green Tea':'Tea','Black Tea':'Tea','Chamomile Tea':'Tea'
 };
-const emojiMap = {
-  'Hot beverage':'☕','Cold drink':'🧃','Snack':'🍫','Tea':'🍵'
-};
-const colorMap = {
-  'Hot beverage':'#FFECB3','Cold drink':'#E8F5E9','Snack':'#F3E5F5','Tea':'#FFCCBC'
-};
+const emoMap = {'Hot beverage':'☕','Cold drink':'🧃','Snack':'🍫','Tea':'🍵'};
+const colMap = {'Hot beverage':'#FFECB3','Cold drink':'#E8F5E9','Snack':'#F3E5F5','Tea':'#FFCCBC'};
 
-let productsData = [
-  { id:1, category:'Hot beverage', product:'Espresso Single', fillQty:17, fillCap:20, column:'01', price:1.20, tags:['Hot'],             curQty:17, curCap:20, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:2, category:'Hot beverage', product:'Americano',       fillQty:6,  fillCap:20, column:'02', price:1.00, tags:['Hot'],             curQty:6,  curCap:20, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:3, category:'Hot beverage', product:'Cappuccino',      fillQty:2,  fillCap:15, column:'03', price:1.50, tags:['Hot','Milk'],      curQty:2,  curCap:15, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:4, category:'Cold drink',   product:'Orange Juice 330ml', fillQty:9, fillCap:12, column:'04', price:1.80, tags:['Cold'],          curQty:9,  curCap:12, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:5, category:'Snack',        product:'Chocolate Bar',   fillQty:4,  fillCap:10, column:'05', price:1.30, tags:['Snack'],           curQty:4,  curCap:10, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:6, category:'Cold drink',   product:'Still Water 500ml', fillQty:23, fillCap:24, column:'06', price:0.90, tags:['Cold','Best seller'], curQty:23, curCap:24, status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:7, category:'Snack',        product:'Croissant',       fillQty:1,  fillCap:8,  column:'07', price:2.10, tags:['Snack','Hot food'], curQty:1, curCap:8,  status:'active', editing:false, replacing:false, oldData:null, newData:null },
-  { id:8, category:'Tea',          product:'Green Tea',       fillQty:12, fillCap:20, column:'08', price:1.10, tags:['Hot','Organic'],   curQty:12, curCap:20, status:'active', editing:false, replacing:false, oldData:null, newData:null },
+let prodData = [
+  {id:1,cat:'Hot beverage',product:'Espresso Single',fq:17,fc:20,col:'01',price:1.20,tags:['Hot'],cq:17,cc:20,status:'active',editing:false,replacing:false,nd:null},
+  {id:2,cat:'Hot beverage',product:'Americano',fq:6,fc:20,col:'02',price:1.00,tags:['Hot'],cq:6,cc:20,status:'active',editing:false,replacing:false,nd:null},
+  {id:3,cat:'Hot beverage',product:'Cappuccino',fq:2,fc:15,col:'03',price:1.50,tags:['Hot','Milk'],cq:2,cc:15,status:'active',editing:false,replacing:false,nd:null},
+  {id:4,cat:'Cold drink',product:'Orange Juice 330ml',fq:9,fc:12,col:'04',price:1.80,tags:['Cold'],cq:9,cc:12,status:'active',editing:false,replacing:false,nd:null},
+  {id:5,cat:'Snack',product:'Chocolate Bar',fq:4,fc:10,col:'05',price:1.30,tags:['Snack'],cq:4,cc:10,status:'active',editing:false,replacing:false,nd:null},
+  {id:6,cat:'Cold drink',product:'Still Water 500ml',fq:23,fc:24,col:'06',price:0.90,tags:['Cold','Best seller'],cq:23,cc:24,status:'active',editing:false,replacing:false,nd:null},
+  {id:7,cat:'Snack',product:'Croissant',fq:1,fc:8,col:'07',price:2.10,tags:['Snack','Hot food'],cq:1,cc:8,status:'active',editing:false,replacing:false,nd:null},
+  {id:8,cat:'Tea',product:'Green Tea',fq:12,fc:20,col:'08',price:1.10,tags:['Hot','Organic'],cq:12,cc:20,status:'active',editing:false,replacing:false,nd:null},
 ];
-let prodSearchTerm = '';
+let prodSearch = '';
 
-function getTagClass(tag) {
-  const t = tag.toLowerCase();
-  if (t==='hot' || t==='hot food') return 'tag-amber';
-  if (t==='cold') return 'tag-blue';
-  if (t==='snack' || t==='milk') return 'tag-purple';
-  if (t==='best seller' || t==='organic') return 'tag-green';
-  return 'tag-blue';
+function tagCls(t){ const l=t.toLowerCase(); if(l==='hot'||l==='hot food')return'tag-amber'; if(l==='cold')return'tag-blue'; if(l==='snack'||l==='milk')return'tag-purple'; if(l==='best seller'||l==='organic')return'tag-green'; return'tag-blue'; }
+function prgClr(q,c){ const p=c>0?q/c:0; if(p<=.15)return'crit'; if(p<=.35)return'low'; return'ok'; }
+
+function renderProducts(){
+  let rows=prodData;
+  if(prodSearch){const s=prodSearch.toLowerCase();rows=rows.filter(r=>r.product.toLowerCase().includes(s)||r.cat.toLowerCase().includes(s));}
+  const tb=document.getElementById('station-products-tbody'); if(!tb)return;
+  tb.innerHTML=rows.length===0?'<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>':rows.map(rpRow).join('');
+  const pt=document.getElementById('prod-total'); if(pt)pt.textContent=rows.length;
+  const pb=document.getElementById('btn-push-products'); if(pb)pb.disabled=!prodData.some(r=>r.status==='pending'||r.status==='removing');
 }
 
-function progressColor(qty, cap) {
-  const pct = cap > 0 ? qty/cap : 0;
-  if (pct <= 0.15) return 'crit';
-  if (pct <= 0.35) return 'low';
-  return 'ok';
-}
+function rpRow(r){
+  const em=emoMap[r.cat]||'📦', bg=colMap[r.cat]||'#E0E0E0';
+  const prodIcon=`<div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bg};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${em}</div>`;
+  const chk=`<button class="prod-icon-btn confirm" title="Confirm" onclick="confirmReplace(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  const canc=`<button class="prod-icon-btn cancel" title="Cancel" onclick="cancelAction(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
+  const pencil=`<button class="prod-icon-btn" title="Edit" onclick="startEdit(${r.id})"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  const replBtn=`<button class="prod-replace-btn" onclick="startReplace(${r.id})">Replace</button>`;
 
-function renderProducts() {
-  let rows = productsData;
-  if (prodSearchTerm) {
-    const s = prodSearchTerm.toLowerCase();
-    rows = rows.filter(r => r.product.toLowerCase().includes(s) || r.category.toLowerCase().includes(s));
+  if(r.replacing){
+    const opts=productCatalog.map(p=>`<option value="${p}" ${p===r.product?'selected':''}>${p}</option>`).join('');
+    return`<tr style="background:#EDF4FF"><td></td><td><span class="text-muted" id="rc-${r.id}">${r.cat}</span></td><td><select class="prod-edit-select" id="rp-${r.id}" onchange="onRpChange(${r.id})">${opts}</select><div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <b>${r.product}</b></div></td><td><input class="prod-edit-input" id="rf-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="rcl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="rpr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="rt-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td>—</td><td>${chk}${canc}</td></tr>`;
   }
-
-  const tbody = document.getElementById('station-products-tbody');
-  if (!tbody) return;
-  tbody.innerHTML = rows.length === 0
-    ? '<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>'
-    : rows.map(renderProductRow).join('');
-
-  document.getElementById('prod-total').textContent = rows.length;
-
-  // Enable/disable Push button
-  const hasPending = productsData.some(r => r.status === 'pending' || r.status === 'removing');
-  document.getElementById('btn-push-products').disabled = !hasPending;
-}
-
-function renderProductRow(r) {
-  const emoji = emojiMap[r.category] || '📦';
-  const bgColor = colorMap[r.category] || '#E0E0E0';
-
-  // ── REPLACING MODE: show inline edit for ALL columns ──
-  if (r.replacing) {
-    const optionsHtml = productCatalog.map(p =>
-      `<option value="${p}" ${p===r.product ? 'selected' : ''}>${p}</option>`
-    ).join('');
-    return `<tr style="background:#EDF4FF">
-      <td></td>
-      <td><span class="text-muted" id="replace-cat-${r.id}">${r.category}</span></td>
-      <td><select class="prod-edit-select" id="replace-product-${r.id}" onchange="onReplaceProductChange(${r.id})">${optionsHtml}</select>
-        <div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <strong>${r.product}</strong></div></td>
-      <td><input class="prod-edit-input" id="replace-fill-${r.id}" value="${r.fillQty}/${r.fillCap}" style="width:80px"></td>
-      <td><input class="prod-edit-input" id="replace-col-${r.id}" value="${r.column}" style="width:50px"></td>
-      <td><input class="prod-edit-input" id="replace-price-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td>
-      <td><input class="prod-edit-input" id="replace-tags-${r.id}" value="${r.tags.join(', ')}" style="width:120px" placeholder="Tag1, Tag2"></td>
-      <td>—</td>
-      <td><span class="text-muted">—</span></td>
-      <td>
-        <button class="prod-icon-btn confirm" title="Confirm replace" onclick="confirmReplace(${r.id})">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="prod-icon-btn cancel" title="Cancel" onclick="cancelReplace(${r.id})">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </td>
-    </tr>`;
+  if(r.editing){
+    return`<tr style="background:#FFFDE7"><td></td><td><span class="text-muted">${r.cat}</span></td><td>${prodIcon}<span class="fw6">${r.product}</span></div><div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Use Replace to change product</div></td><td><input class="prod-edit-input" id="ef-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="ecl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="epr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="et-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td><span class="prod-status-active">Active</span></td><td><button class="prod-icon-btn confirm" title="Save" onclick="confirmEdit(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${canc}</td></tr>`;
   }
-
-  // ── EDITING MODE (pencil): edit all columns except product name ──
-  if (r.editing) {
-    return `<tr style="background:#FFFDE7">
-      <td></td>
-      <td><span class="text-muted">${r.category}</span></td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bgColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${emoji}</div><span class="fw6">${r.product}</span></div>
-        <div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Product cannot be changed — use Replace to swap</div></td>
-      <td><input class="prod-edit-input" id="edit-fill-${r.id}" value="${r.fillQty}/${r.fillCap}" style="width:80px"></td>
-      <td><input class="prod-edit-input" id="edit-col-${r.id}" value="${r.column}" style="width:50px"></td>
-      <td><input class="prod-edit-input" id="edit-price-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td>
-      <td><input class="prod-edit-input" id="edit-tags-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td>
-      <td>—</td>
-      <td><span class="prod-status-active">Active</span></td>
-      <td>
-        <button class="prod-icon-btn confirm" title="Save changes" onclick="confirmEdit(${r.id})">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="prod-icon-btn cancel" title="Cancel" onclick="cancelEdit(${r.id})">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </td>
-    </tr>`;
+  if(r.status==='removing'){
+    const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0;
+    return`<tr class="prod-row-old"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span style="text-decoration:line-through">${r.product}</span></div></td><td style="text-decoration:line-through">${r.fq}/${r.fc}</td><td style="text-decoration:line-through" class="fw6">${r.col}</td><td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-removing">Removing</span></td><td></td></tr>`;
   }
-
-  // ── REMOVING row (old product, shown in red after replace confirmed) ──
-  if (r.status === 'removing') {
-    const pct = r.curCap > 0 ? Math.round(r.curQty/r.curCap*100) : 0;
-    const pc = progressColor(r.curQty, r.curCap);
-    return `<tr class="prod-row-old">
-      <td></td>
-      <td class="text-muted">${r.category}</td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bgColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;opacity:.5">${emoji}</div><span style="text-decoration:line-through">${r.product}</span></div></td>
-      <td style="text-decoration:line-through">${r.fillQty}/${r.fillCap}</td>
-      <td style="text-decoration:line-through" class="fw6">${r.column}</td>
-      <td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td>
-      <td>${r.tags.map(t=>'<span class="tag-pill '+getTagClass(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td>
-      <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val">${r.curQty}/${r.curCap}</span></div></td>
-      <td><span class="prod-status-removing">Removing</span></td>
-      <td></td>
-    </tr>`;
+  if(r.status==='pending'){
+    const pct=r.fc>0?Math.round(r.cq/r.cc*100):0;
+    let pc2=`<span class="prod-new-val">€${r.price.toFixed(2)}</span>`;
+    if(r.nd&&r.nd.op!==undefined&&r.nd.op!==r.price)pc2+=`<span class="prod-old-val">€${r.nd.op.toFixed(2)}</span>`;
+    return`<tr class="prod-row-new"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="prod-new-val">${r.product}</span></div></td><td><span class="prod-new-val">${r.fq}/${r.fc}</span></td><td class="fw6"><span class="prod-new-val">${r.col}</span></td><td>${pc2}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:${pct}%"></div></div><span class="progress-val" style="color:var(--green)">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-pending">Pending</span></td><td></td></tr>`;
   }
-
-  // ── PENDING row (new product, shown in green after replace confirmed) ──
-  if (r.status === 'pending') {
-    const pct = r.fillCap > 0 ? Math.round(r.curQty/r.curCap*100) : 0;
-    const nd = r.newData;
-    let priceCell = `<span class="prod-new-val">€${r.price.toFixed(2)}</span>`;
-    if (nd && nd.oldPrice !== undefined && nd.oldPrice !== r.price) {
-      priceCell = `<span class="prod-new-val">€${r.price.toFixed(2)}</span><span class="prod-old-val">€${nd.oldPrice.toFixed(2)}</span>`;
-    }
-    return `<tr class="prod-row-new">
-      <td></td>
-      <td class="text-muted">${r.category}</td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bgColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${emoji}</div><span class="prod-new-val">${r.product}</span></div></td>
-      <td><span class="prod-new-val">${r.fillQty}/${r.fillCap}</span></td>
-      <td class="fw6"><span class="prod-new-val">${r.column}</span></td>
-      <td>${priceCell}</td>
-      <td>${r.tags.map(t=>'<span class="tag-pill '+getTagClass(t)+'">'+t+'</span>').join('')}</td>
-      <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:${pct}%"></div></div><span class="progress-val" style="color:var(--green)">${r.curQty}/${r.curCap}</span></div></td>
-      <td><span class="prod-status-pending">Pending</span></td>
-      <td></td>
-    </tr>`;
+  if(r.status==='pushed'){
+    const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
+    return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="fw6">${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${clr}">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-pushed">Pushed</span></td><td>${pencil}${replBtn}</td></tr>`;
   }
-
-  // ── PUSHED row ──
-  if (r.status === 'pushed') {
-    const pct = r.fillCap > 0 ? Math.round(r.curQty/r.curCap*100) : 0;
-    const pc = progressColor(r.curQty, r.curCap);
-    return `<tr>
-      <td></td>
-      <td class="text-muted">${r.category}</td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bgColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${emoji}</div><span class="fw6">${r.product}</span></div></td>
-      <td>${r.fillQty}/${r.fillCap}</td>
-      <td class="fw6">${r.column}</td>
-      <td class="fw6">€${r.price.toFixed(2)}</td>
-      <td>${r.tags.map(t=>'<span class="tag-pill '+getTagClass(t)+'">'+t+'</span>').join('')}</td>
-      <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)'}">${r.curQty}/${r.curCap}</span></div></td>
-      <td><span class="prod-status-pushed">Pushed</span></td>
-      <td>
-        <button class="prod-icon-btn" title="Edit" onclick="startEdit(${r.id})">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="prod-replace-btn" onclick="startReplace(${r.id})">Replace</button>
-      </td>
-    </tr>`;
-  }
-
-  // ── ACTIVE (default) row ──
-  const pct = r.fillCap > 0 ? Math.round(r.curQty/r.curCap*100) : 0;
-  const pc = progressColor(r.curQty, r.curCap);
-  return `<tr>
-    <td></td>
-    <td class="text-muted">${r.category}</td>
-    <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:${bgColor};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${emoji}</div><span>${r.product}</span></div></td>
-    <td>${r.fillQty}/${r.fillCap}</td>
-    <td class="fw6">${r.column}</td>
-    <td class="fw6">€${r.price.toFixed(2)}</td>
-    <td>${r.tags.map(t=>'<span class="tag-pill '+getTagClass(t)+'">'+t+'</span>').join('')}</td>
-    <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)'}">${r.curQty}/${r.curCap}</span></div></td>
-    <td><span class="prod-status-active">Active</span></td>
-    <td>
-      <button class="prod-icon-btn" title="Edit" onclick="startEdit(${r.id})">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <button class="prod-replace-btn" onclick="startReplace(${r.id})">Replace</button>
-    </td>
-  </tr>`;
+  // active
+  const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
+  return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span>${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${clr}">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-active">Active</span></td><td>${pencil}${replBtn}</td></tr>`;
 }
 
-// ── Replace: opens inline form to pick a new product for the row ──
-function startReplace(id) {
-  const r = productsData.find(p => p.id === id);
-  if (r) { r.replacing = true; r.editing = false; }
+function startReplace(id){const r=prodData.find(p=>p.id===id);if(r){r.replacing=true;r.editing=false;}renderProducts();}
+function onRpChange(id){const s=document.getElementById('rp-'+id);document.getElementById('rc-'+id).textContent=catMap[s.value]||'Other';}
+function confirmReplace(id){
+  const r=prodData.find(p=>p.id===id);if(!r)return;
+  const np=document.getElementById('rp-'+id).value,fp=document.getElementById('rf-'+id).value.split('/'),nc=document.getElementById('rcl-'+id).value,npr=parseFloat(document.getElementById('rpr-'+id).value)||0,nt=document.getElementById('rt-'+id).value.split(',').map(t=>t.trim()).filter(Boolean);
+  const old={id:Date.now(),cat:r.cat,product:r.product,fq:r.fq,fc:r.fc,col:r.col,price:r.price,tags:[...r.tags],cq:r.cq,cc:r.cc,status:'removing',editing:false,replacing:false,nd:null};
+  const op=r.price;r.product=np;r.cat=catMap[np]||r.cat;r.fq=parseInt(fp[0])||r.fq;r.fc=parseInt(fp[1])||r.fc;r.col=nc;r.price=npr;r.tags=nt;r.cq=r.fq;r.cc=r.fc;r.status='pending';r.replacing=false;r.nd={op};
+  prodData.splice(prodData.indexOf(r),0,old);renderProducts();
+}
+function startEdit(id){const r=prodData.find(p=>p.id===id);if(r){r.editing=true;r.replacing=false;}renderProducts();}
+function confirmEdit(id){
+  const r=prodData.find(p=>p.id===id);if(!r)return;
+  const fp=document.getElementById('ef-'+id).value.split('/'),nc=document.getElementById('ecl-'+id).value,npr=parseFloat(document.getElementById('epr-'+id).value)||r.price,nt=document.getElementById('et-'+id).value.split(',').map(t=>t.trim()).filter(Boolean);
+  if(npr!==r.price){
+    const old={id:Date.now(),cat:r.cat,product:r.product,fq:r.fq,fc:r.fc,col:r.col,price:r.price,tags:[...r.tags],cq:r.cq,cc:r.cc,status:'removing',editing:false,replacing:false,nd:null};
+    const op=r.price;r.fq=parseInt(fp[0])||r.fq;r.fc=parseInt(fp[1])||r.fc;r.col=nc;r.price=npr;r.tags=nt;r.status='pending';r.editing=false;r.nd={op};
+    prodData.splice(prodData.indexOf(r),0,old);
+  } else {r.fq=parseInt(fp[0])||r.fq;r.fc=parseInt(fp[1])||r.fc;r.col=nc;r.tags=nt;r.editing=false;}
   renderProducts();
 }
+function cancelAction(id){const r=prodData.find(p=>p.id===id);if(r){r.replacing=false;r.editing=false;}renderProducts();}
+function pushProductList(){prodData=prodData.filter(r=>r.status!=='removing');prodData.forEach(r=>{if(r.status==='pending'){r.status='pushed';r.nd=null;}});renderProducts();}
+function filterStationProductsNew(t){prodSearch=(t||'').trim();renderProducts();}
 
-function onReplaceProductChange(id) {
-  const sel = document.getElementById('replace-product-' + id);
-  const cat = categoryMap[sel.value] || 'Other';
-  document.getElementById('replace-cat-' + id).textContent = cat;
-}
-
-function confirmReplace(id) {
-  const r = productsData.find(p => p.id === id);
-  if (!r) return;
-  const newProduct = document.getElementById('replace-product-' + id).value;
-  const fillParts = document.getElementById('replace-fill-' + id).value.split('/');
-  const newCol = document.getElementById('replace-col-' + id).value;
-  const newPrice = parseFloat(document.getElementById('replace-price-' + id).value) || 0;
-  const newTags = document.getElementById('replace-tags-' + id).value.split(',').map(t=>t.trim()).filter(Boolean);
-  const newCat = categoryMap[newProduct] || r.category;
-
-  // Create "removing" clone of old row
-  const oldRow = {
-    id: Date.now(), category: r.category, product: r.product,
-    fillQty: r.fillQty, fillCap: r.fillCap, column: r.column,
-    price: r.price, tags: [...r.tags], curQty: r.curQty, curCap: r.curCap,
-    status: 'removing', editing: false, replacing: false, oldData: null, newData: null
-  };
-
-  // Update the current row to become "pending" (new)
-  const oldPrice = r.price;
-  r.product = newProduct;
-  r.category = newCat;
-  r.fillQty = parseInt(fillParts[0]) || r.fillQty;
-  r.fillCap = parseInt(fillParts[1]) || r.fillCap;
-  r.column = newCol;
-  r.price = newPrice;
-  r.tags = newTags;
-  r.curQty = r.fillQty;
-  r.curCap = r.fillCap;
-  r.status = 'pending';
-  r.replacing = false;
-  r.newData = { oldPrice: oldPrice, isSameProduct: (newProduct === oldRow.product) };
-
-  // Insert old row just before the new one
-  const idx = productsData.indexOf(r);
-  productsData.splice(idx, 0, oldRow);
-
-  renderProducts();
-}
-
-function cancelReplace(id) {
-  const r = productsData.find(p => p.id === id);
-  if (r) r.replacing = false;
-  renderProducts();
-}
-
-// ── Edit (pencil): inline edit of existing product's attributes ──
-function startEdit(id) {
-  const r = productsData.find(p => p.id === id);
-  if (r) { r.editing = true; r.replacing = false; }
-  renderProducts();
-}
-
-function confirmEdit(id) {
-  const r = productsData.find(p => p.id === id);
-  if (!r) return;
-  const fillParts = document.getElementById('edit-fill-' + id).value.split('/');
-  const newCol = document.getElementById('edit-col-' + id).value;
-  const newPrice = parseFloat(document.getElementById('edit-price-' + id).value) || r.price;
-  const newTags = document.getElementById('edit-tags-' + id).value.split(',').map(t=>t.trim()).filter(Boolean);
-
-  // If price changed, treat as same-product replacement
-  const priceChanged = (newPrice !== r.price);
-
-  if (priceChanged) {
-    const oldRow = {
-      id: Date.now(), category: r.category, product: r.product,
-      fillQty: r.fillQty, fillCap: r.fillCap, column: r.column,
-      price: r.price, tags: [...r.tags], curQty: r.curQty, curCap: r.curCap,
-      status: 'removing', editing: false, replacing: false, oldData: null, newData: null
-    };
-    const oldPrice = r.price;
-    r.fillQty = parseInt(fillParts[0]) || r.fillQty;
-    r.fillCap = parseInt(fillParts[1]) || r.fillCap;
-    r.column = newCol;
-    r.price = newPrice;
-    r.tags = newTags;
-    r.status = 'pending';
-    r.editing = false;
-    r.newData = { oldPrice: oldPrice, isSameProduct: true };
-    const idx = productsData.indexOf(r);
-    productsData.splice(idx, 0, oldRow);
-  } else {
-    r.fillQty = parseInt(fillParts[0]) || r.fillQty;
-    r.fillCap = parseInt(fillParts[1]) || r.fillCap;
-    r.column = newCol;
-    r.tags = newTags;
-    r.editing = false;
-  }
-  renderProducts();
-}
-
-function cancelEdit(id) {
-  const r = productsData.find(p => p.id === id);
-  if (r) r.editing = false;
-  renderProducts();
-}
-
-// ── Push Product List: removing rows disappear, pending→pushed ──
-function pushProductList() {
-  productsData = productsData.filter(r => r.status !== 'removing');
-  productsData.forEach(r => {
-    if (r.status === 'pending') {
-      r.status = 'pushed';
-      r.newData = null;
-    }
-  });
-  renderProducts();
-}
-
-function filterProducts(term) {
-  prodSearchTerm = term;
-  renderProducts();
-}
 // ══ INIT ══════════════════════════════════════════════════════════════════
 renderEvents();
+renderProducts();
 
 /* ══════════════════════════════════════════════════════════════════
    SALES TAB
