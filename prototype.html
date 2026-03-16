@@ -1722,7 +1722,6 @@
                 <th>Column</th>
                 <th>Price</th>
                 <th>Tags</th>
-                <th>Current Qty</th>
                 <th>Status</th>
                 <th style="width:80px">Actions</th>
               </tr>
@@ -3714,14 +3713,14 @@ const emoMap = {'Hot beverage':'☕','Cold drink':'🧃','Snack':'🍫','Tea':'�
 const colMap = {'Hot beverage':'#FFECB3','Cold drink':'#E8F5E9','Snack':'#F3E5F5','Tea':'#FFCCBC'};
 
 let prodData = [
-  {id:1,cat:'Hot beverage',product:'Espresso Single',fq:17,fc:20,col:'01',price:1.20,tags:['Hot'],cq:17,cc:20,status:'active',editing:false,replacing:false,nd:null},
-  {id:2,cat:'Hot beverage',product:'Americano',fq:6,fc:20,col:'02',price:1.00,tags:['Hot'],cq:6,cc:20,status:'active',editing:false,replacing:false,nd:null},
-  {id:3,cat:'Hot beverage',product:'Cappuccino',fq:2,fc:15,col:'03',price:1.50,tags:['Hot','Milk'],cq:2,cc:15,status:'active',editing:false,replacing:false,nd:null},
-  {id:4,cat:'Cold drink',product:'Orange Juice 330ml',fq:9,fc:12,col:'04',price:1.80,tags:['Cold'],cq:9,cc:12,status:'active',editing:false,replacing:false,nd:null},
-  {id:5,cat:'Snack',product:'Chocolate Bar',fq:4,fc:10,col:'05',price:1.30,tags:['Snack'],cq:4,cc:10,status:'active',editing:false,replacing:false,nd:null},
-  {id:6,cat:'Cold drink',product:'Still Water 500ml',fq:23,fc:24,col:'06',price:0.90,tags:['Cold','Best seller'],cq:23,cc:24,status:'active',editing:false,replacing:false,nd:null},
-  {id:7,cat:'Snack',product:'Croissant',fq:1,fc:8,col:'07',price:2.10,tags:['Snack','Hot food'],cq:1,cc:8,status:'active',editing:false,replacing:false,nd:null},
-  {id:8,cat:'Tea',product:'Green Tea',fq:12,fc:20,col:'08',price:1.10,tags:['Hot','Organic'],cq:12,cc:20,status:'active',editing:false,replacing:false,nd:null},
+  {id:1,cat:'Hot beverage',product:'Espresso Single',fq:17,fc:20,col:'01',price:1.20,tags:['Hot'],cq:17,cc:20,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:2,cat:'Hot beverage',product:'Americano',fq:6,fc:20,col:'02',price:1.00,tags:['Hot'],cq:6,cc:20,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:3,cat:'Hot beverage',product:'Cappuccino',fq:2,fc:15,col:'03',price:1.50,tags:['Hot','Milk'],cq:2,cc:15,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:4,cat:'Cold drink',product:'Orange Juice 330ml',fq:9,fc:12,col:'04',price:1.80,tags:['Cold'],cq:9,cc:12,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:5,cat:'Snack',product:'Chocolate Bar',fq:4,fc:10,col:'05',price:1.30,tags:['Snack'],cq:4,cc:10,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:6,cat:'Cold drink',product:'Still Water 500ml',fq:23,fc:24,col:'06',price:0.90,tags:['Cold','Best seller'],cq:23,cc:24,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:7,cat:'Snack',product:'Croissant',fq:1,fc:8,col:'07',price:2.10,tags:['Snack','Hot food'],cq:1,cc:8,status:'pushed',editing:false,replacing:false,nd:null},
+  {id:8,cat:'Tea',product:'Green Tea',fq:12,fc:20,col:'08',price:1.10,tags:['Hot','Organic'],cq:12,cc:20,status:'pushed',editing:false,replacing:false,nd:null},
 ];
 let prodSearch = '';
 
@@ -3732,7 +3731,7 @@ function renderProducts(){
   let rows=prodData;
   if(prodSearch){const s=prodSearch.toLowerCase();rows=rows.filter(r=>r.product.toLowerCase().includes(s)||r.cat.toLowerCase().includes(s));}
   const tb=document.getElementById('station-products-tbody'); if(!tb)return;
-  tb.innerHTML=rows.length===0?'<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>':rows.map(rpRow).join('');
+  tb.innerHTML=rows.length===0?'<tr><td colspan="9" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>':rows.map(rpRow).join('');
   const pt=document.getElementById('prod-total'); if(pt)pt.textContent=rows.length;
   const pb=document.getElementById('btn-push-products'); if(pb)pb.disabled=!prodData.some(r=>r.status==='pending'||r.status==='removing');
 }
@@ -3743,32 +3742,32 @@ function rpRow(r){
   const chk=`<button class="prod-icon-btn confirm" title="Confirm" onclick="confirmReplace(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
   const canc=`<button class="prod-icon-btn cancel" title="Cancel" onclick="cancelAction(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 5l8 8M13 5l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
   const pencil=`<button class="prod-icon-btn" title="Edit" onclick="startEdit(${r.id})"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
-  const replBtn=`<button class="prod-replace-btn" onclick="startReplace(${r.id})">Replace</button>`;
+  const replBtn=`<button class="prod-icon-btn" title="Replace" onclick="startReplace(${r.id})"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 5h10M9 2l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11H4M7 14l-3-3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
 
   if(r.replacing){
     const opts=productCatalog.map(p=>`<option value="${p}" ${p===r.product?'selected':''}>${p}</option>`).join('');
-    return`<tr style="background:#EDF4FF"><td></td><td><span class="text-muted" id="rc-${r.id}">${r.cat}</span></td><td><select class="prod-edit-select" id="rp-${r.id}" onchange="onRpChange(${r.id})">${opts}</select><div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <b>${r.product}</b></div></td><td><input class="prod-edit-input" id="rf-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="rcl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="rpr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="rt-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td>—</td><td>${chk}${canc}</td></tr>`;
+    return`<tr style="background:#EDF4FF"><td></td><td><span class="text-muted" id="rc-${r.id}">${r.cat}</span></td><td><select class="prod-edit-select" id="rp-${r.id}" onchange="onRpChange(${r.id})">${opts}</select><div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <b>${r.product}</b></div></td><td><input class="prod-edit-input" id="rf-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="rcl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="rpr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="rt-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td>${chk}${canc}</td></tr>`;
   }
   if(r.editing){
-    return`<tr style="background:#FFFDE7"><td></td><td><span class="text-muted">${r.cat}</span></td><td>${prodIcon}<span class="fw6">${r.product}</span></div><div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Use Replace to change product</div></td><td><input class="prod-edit-input" id="ef-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="ecl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="epr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="et-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td><span class="prod-status-active">Active</span></td><td><button class="prod-icon-btn confirm" title="Save" onclick="confirmEdit(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${canc}</td></tr>`;
+    return`<tr style="background:#FFFDE7"><td></td><td><span class="text-muted">${r.cat}</span></td><td>${prodIcon}<span class="fw6">${r.product}</span></div><div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Use Replace to change product</div></td><td><input class="prod-edit-input" id="ef-${r.id}" value="${r.fq}/${r.fc}" style="width:80px"></td><td><input class="prod-edit-input" id="ecl-${r.id}" value="${r.col}" style="width:50px"></td><td><input class="prod-edit-input" id="epr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="et-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td><span class="prod-status-pushed">Pushed</span></td><td><button class="prod-icon-btn confirm" title="Save" onclick="confirmEdit(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${canc}</td></tr>`;
   }
   if(r.status==='removing'){
     const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0;
-    return`<tr class="prod-row-old"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span style="text-decoration:line-through">${r.product}</span></div></td><td style="text-decoration:line-through">${r.fq}/${r.fc}</td><td style="text-decoration:line-through" class="fw6">${r.col}</td><td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-removing">Removing</span></td><td></td></tr>`;
+    return`<tr class="prod-row-old"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span style="text-decoration:line-through">${r.product}</span></div></td><td style="text-decoration:line-through">${r.fq}/${r.fc}</td><td style="text-decoration:line-through" class="fw6">${r.col}</td><td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td><td><span class="prod-status-removing">Removing</span></td><td></td></tr>`;
   }
   if(r.status==='pending'){
     const pct=r.fc>0?Math.round(r.cq/r.cc*100):0;
     let pc2=`<span class="prod-new-val">€${r.price.toFixed(2)}</span>`;
     if(r.nd&&r.nd.op!==undefined&&r.nd.op!==r.price)pc2+=`<span class="prod-old-val">€${r.nd.op.toFixed(2)}</span>`;
-    return`<tr class="prod-row-new"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="prod-new-val">${r.product}</span></div></td><td><span class="prod-new-val">${r.fq}/${r.fc}</span></td><td class="fw6"><span class="prod-new-val">${r.col}</span></td><td>${pc2}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:${pct}%"></div></div><span class="progress-val" style="color:var(--green)">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-pending">Pending</span></td><td></td></tr>`;
+    return`<tr class="prod-row-new"><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="prod-new-val">${r.product}</span></div></td><td><span class="prod-new-val">${r.fq}/${r.fc}</span></td><td class="fw6"><span class="prod-new-val">${r.col}</span></td><td>${pc2}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pending">Pending</span></td><td></td></tr>`;
   }
   if(r.status==='pushed'){
     const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
-    return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="fw6">${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${clr}">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-pushed">Pushed</span></td><td>${pencil}${replBtn}</td></tr>`;
+    return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="fw6">${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pushed">Pushed</span></td><td>${pencil}${replBtn}</td></tr>`;
   }
   // active
   const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
-  return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span>${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ${pc}" style="width:${pct}%"></div></div><span class="progress-val" style="color:${clr}">${r.cq}/${r.cc}</span></div></td><td><span class="prod-status-active">Active</span></td><td>${pencil}${replBtn}</td></tr>`;
+  return`<tr><td></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span>${r.product}</span></div></td><td>${r.fq}/${r.fc}</td><td class="fw6">${r.col}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-active">Active</span></td><td>${pencil}${replBtn}</td></tr>`;
 }
 
 function startReplace(id){const r=prodData.find(p=>p.id===id);if(r){r.replacing=true;r.editing=false;}renderProducts();}
