@@ -1616,94 +1616,125 @@
     <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- Figma: Products header row -->
-      <div class="plan-header-row">
-        <div class="plan-title-block">
-          <span class="plan-title">Products</span>
-          <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
-          </span>
+      <!-- ── MARKET VIEW (default: read-only, all stations) ─────────────── -->
+      <div id="products-market-view">
+        <div class="filter-bar" style="padding:10px 0">
+          <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
+          <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
+          <select class="dropdown-btn" id="station-filter" onchange="filterProducts()" style="min-width:150px;cursor:pointer">
+            <option value="">All stations</option>
+            <option value="Coffee Station">Coffee Station</option>
+            <option value="Cold Drinks">Cold Drinks</option>
+            <option value="Snack Bar">Snack Bar</option>
+          </select>
         </div>
-        <div class="plan-actions">
-          <button class="mkt-btn-grey">Setup</button>
-          <button class="mkt-btn-grey">
-            Layout preview
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="dropdown-wrap">
-            <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
-              Planogram
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div class="table-wrap">
+          <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Station</th>
+                <th>Product</th>
+                <th>Recipe</th>
+                <th style="width:100px">Tags</th>
+                <th>Price 1</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody">
+              <tr id="products-noresult" style="display:none"><td colspan="5" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
+              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span></td><td class="fw6">€1.20</td></tr>
+              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span></td><td class="fw6">€1.00</td></tr>
+              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td><td class="fw6">€1.50</td></tr>
+              <tr><td class="fw6">Cold Drinks</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td><td></td><td><span class="tag-pill tag-blue">Cold</span></td><td class="fw6">€1.80</td></tr>
+              <tr><td class="fw6">Snack Bar</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td><td></td><td><span class="tag-pill tag-purple">Snack</span></td><td class="fw6">€1.30</td></tr>
+              <tr><td class="fw6">Cold Drinks</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td><td></td><td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td><td class="fw6">€0.90</td></tr>
+              <tr><td class="fw6">Snack Bar</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td><td></td><td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td><td class="fw6">€2.10</td></tr>
+              <tr><td class="fw6">Coffee Station</td><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td><td></td><td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td><td class="fw6">€1.10</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div><!-- /products-market-view -->
+
+      <!-- ── STATION VIEW (shown when a station is selected) ────────────── -->
+      <div id="products-station-view" style="display:none">
+        <div class="plan-header-row">
+          <div class="plan-title-block">
+            <span class="plan-title">Products</span>
+            <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
+            <span class="plan-meta-sep">•</span>
+            <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
+            <span class="plan-meta-sep">•</span>
+            <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span></span>
+          </div>
+          <div class="plan-actions">
+            <button class="mkt-btn-grey">Setup</button>
+            <button class="mkt-btn-grey">
+              Layout preview
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="dropdown-menu" id="dd-planogram">
-              <div class="dropdown-item">View planogram</div>
-              <div class="dropdown-item">Export planogram</div>
-              <div class="dropdown-item">Import planogram</div>
+            <div class="dropdown-wrap">
+              <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
+                Planogram ▾
+              </button>
+              <div class="dropdown-menu" id="dd-planogram">
+                <div class="dropdown-item">View planogram</div>
+                <div class="dropdown-item">Export planogram</div>
+                <div class="dropdown-item">Import planogram</div>
+              </div>
             </div>
-          </div>
-          <button class="btn-push-products" id="btn-push-products" onclick="pushProductList()" disabled>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v9M4 4l3-3 3 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 10v2h12v-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Push product list
-          </button>
-        </div>
-      </div>
-
-      <!-- Figma: filter bar -->
-      <div class="filter-bar" style="margin-top:8px">
-        <input class="search-input" type="text" placeholder="Search products…" oninput="filterProducts(this.value)" style="width:200px">
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn active-filter" onclick="toggleDropdown('dd-plan-period')">Period ▾</button>
-          <div class="dropdown-menu" id="dd-plan-period">
-            <div class="dropdown-item selected">All time</div>
-            <div class="dropdown-item">Last 7 days</div>
-            <div class="dropdown-item">Last 30 days</div>
+            <button class="btn-push-products" id="btn-push-products" onclick="pushProductList()" disabled>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v9M4 4l3-3 3 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 10v2h12v-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Push product list
+            </button>
           </div>
         </div>
-        <button class="btn-clear-all">Clear all</button>
-        <div style="flex:1"></div>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
-      </div>
 
-      <div class="table-wrap">
-        <table id="products-table">
-          <thead>
-            <tr>
-              <th style="width:36px"></th>
-              <th>Category</th>
-              <th>Product</th>
-              <th>Fill Qty/Cap</th>
-              <th>Column</th>
-              <th>Price</th>
-              <th>Tags</th>
-              <th>Current Qty</th>
-              <th>Status</th>
-              <th style="width:80px">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="products-tbody"></tbody>
-        </table>
-      </div>
-
-      <div class="pagination">
-        <span class="pg-label text-muted">Rows per page:</span>
-        <span class="pg-size" onclick="setPgSize(this)">10</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size active" onclick="setPgSize(this)">20</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">50</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">100</span>
-        <span class="pg-total text-muted">Total items: <strong id="prod-total">8</strong></span>
-        <div class="pg-nav">
-          <button class="pg-nav-btn">‹</button>
-          <div class="pg-num">1</div>
-          <button class="pg-nav-btn">›</button>
+        <div class="filter-bar" style="margin-top:8px">
+          <input class="search-input" type="text" placeholder="Search products…" oninput="filterStationProducts(this.value)" style="width:200px">
+          <button class="btn-clear-all">Clear all</button>
+          <div style="flex:1"></div>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
         </div>
-      </div>
+
+        <div class="table-wrap">
+          <table id="products-table">
+            <thead>
+              <tr>
+                <th style="width:36px"></th>
+                <th>Category</th>
+                <th>Product</th>
+                <th>Fill Qty/Cap</th>
+                <th>Column</th>
+                <th>Price</th>
+                <th>Tags</th>
+                <th>Current Qty</th>
+                <th>Status</th>
+                <th style="width:80px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="station-products-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <span class="pg-label text-muted">Rows per page:</span>
+          <span class="pg-size" onclick="setPgSize(this)">10</span>
+          <span class="pg-sep">|</span>
+          <span class="pg-size active" onclick="setPgSize(this)">20</span>
+          <span class="pg-sep">|</span>
+          <span class="pg-size" onclick="setPgSize(this)">50</span>
+          <span class="pg-sep">|</span>
+          <span class="pg-size" onclick="setPgSize(this)">100</span>
+          <span class="pg-total text-muted">Total items: <strong id="prod-total">8</strong></span>
+          <div class="pg-nav">
+            <button class="pg-nav-btn">‹</button>
+            <div class="pg-num">1</div>
+            <button class="pg-nav-btn">›</button>
+          </div>
+        </div>
+      </div><!-- /products-station-view -->
+
     </div><!-- /panel-products -->
 
     <!-- ══ OVERVIEW PANEL ════════════════════════════════════════════════ -->
@@ -3317,13 +3348,9 @@ function clearProductsSearch() {
   if (sel) sel.value = '';
   filterProducts();
 }
-function filterStationProducts() {
-  const q = (document.getElementById('products-search-station').value || '').toLowerCase();
-  const rows = document.querySelectorAll('#products-station-view tbody tr');
-  rows.forEach(tr => {
-    const text = tr.textContent.toLowerCase();
-    tr.style.display = !q || text.includes(q) ? '' : 'none';
-  });
+function filterStationProducts(term) {
+  prodSearchTerm = (term || '').trim();
+  renderProducts();
 }
 function toggleRefillRow(id) {
   const det = document.getElementById('rfill-det-' + id);
@@ -3506,7 +3533,8 @@ function renderProducts() {
     rows = rows.filter(r => r.product.toLowerCase().includes(s) || r.category.toLowerCase().includes(s));
   }
 
-  const tbody = document.getElementById('products-tbody');
+  const tbody = document.getElementById('station-products-tbody');
+  if (!tbody) return;
   tbody.innerHTML = rows.length === 0
     ? '<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>'
     : rows.map(renderProductRow).join('');
