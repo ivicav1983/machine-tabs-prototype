@@ -3183,24 +3183,7 @@
         </select>
       </div>
 
-      <hr class="setup-divider">
-
-      <!-- Column mapping -->
-      <div class="setup-section" style="margin-top:18px">
-        <p class="setup-section-title">Column mapping</p>
-        <label class="setup-check-label">
-          <input type="checkbox" id="colmap-checkbox" onchange="toggleDoubleMapOption()">
-          Mapping between reported columns and planogram
-        </label>
-        <!-- Double mapping — visible when colmap is enabled -->
-        <div id="doublemap-row" style="display:none;margin-top:10px;padding:8px 8px 8px 12px;border-left:3px solid var(--blue);background:#F3F8FF;border-radius:0 4px 4px 0">
-          <p class="setup-section-title" style="margin-bottom:6px">Double column mapping</p>
-          <label class="setup-check-label">
-            <input type="checkbox" id="doublemap-checkbox">
-            Enable Map 2 (custom, optional per column &mdash; for dual-motor product dispensing)
-          </label>
-        </div>
-      </div>
+      <!-- Column mapping – OUT OF SCOPE (will not be prototyped) -->
     </div>
     <div class="modal-footer" style="justify-content:space-between">
       <button class="btn btn-cancel-red" onclick="closeModal('setup-modal')">Cancel</button>
