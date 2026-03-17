@@ -1706,9 +1706,7 @@
           <table>
             <thead>
               <tr>
-                <th style="width:36px"></th>
                 <th>Column</th>
-                <th>Category</th>
                 <th>Product</th>
                 <th>Fill Qty</th>
                 <th>Cap</th>
@@ -3723,7 +3721,7 @@ function renderProducts(){
   let rows=prodData;
   if(prodSearch){const s=prodSearch.toLowerCase();rows=rows.filter(r=>r.product.toLowerCase().includes(s)||r.cat.toLowerCase().includes(s));}
   const tb=document.getElementById('station-products-tbody'); if(!tb)return;
-  tb.innerHTML=rows.length===0?'<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>':rows.map(rpRow).join('');
+  tb.innerHTML=rows.length===0?'<tr><td colspan="8" style="text-align:center;padding:36px;color:var(--grey-txt)">No products match.</td></tr>':rows.map(rpRow).join('');
   const pt=document.getElementById('prod-total'); if(pt)pt.textContent=rows.length;
   const pb=document.getElementById('btn-push-products'); if(pb)pb.disabled=!prodData.some(r=>r.status==='pending'||r.status==='removing');
 }
@@ -3738,28 +3736,28 @@ function rpRow(r){
 
   if(r.replacing){
     const opts=productCatalog.map(p=>`<option value="${p}" ${p===r.product?'selected':''}>${p}</option>`).join('');
-    return`<tr style="background:#EDF4FF"><td><input class="prod-edit-input" id="rcl-${r.id}" value="${r.col}" style="width:50px"></td><td><span class="text-muted" id="rc-${r.id}">${r.cat}</span></td><td><select class="prod-edit-select" id="rp-${r.id}" onchange="onRpChange(${r.id})">${opts}</select><div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <b>${r.product}</b></div></td><td><input class="prod-edit-input" id="rf-${r.id}" value="${r.fq}" style="width:60px"></td><td><input class="prod-edit-input" id="rfc-${r.id}" value="${r.fc}" style="width:60px"></td><td><input class="prod-edit-input" id="rpr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="rt-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td>${chk}${canc}</td></tr>`;
+    return`<tr style="background:#EDF4FF"><td><input class="prod-edit-input" id="rcl-${r.id}" value="${r.col}" style="width:50px"></td><td><select class="prod-edit-select" id="rp-${r.id}" onchange="onRpChange(${r.id})">${opts}</select><div style="font-size:11px;color:var(--grey-txt);margin-top:3px">Replacing: <b>${r.product}</b></div></td><td><input class="prod-edit-input" id="rf-${r.id}" value="${r.fq}" style="width:60px"></td><td><input class="prod-edit-input" id="rfc-${r.id}" value="${r.fc}" style="width:60px"></td><td><input class="prod-edit-input" id="rpr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="rt-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td>—</td><td>${chk}${canc}</td></tr>`;
   }
   if(r.editing){
-    return`<tr style="background:#FFFDE7"><td><input class="prod-edit-input" id="ecl-${r.id}" value="${r.col}" style="width:50px"></td><td><span class="text-muted">${r.cat}</span></td><td>${prodIcon}<span class="fw6">${r.product}</span></div><div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Use Replace to change product</div></td><td><input class="prod-edit-input" id="ef-${r.id}" value="${r.fq}" style="width:60px"></td><td><input class="prod-edit-input" id="efc-${r.id}" value="${r.fc}" style="width:60px"></td><td><input class="prod-edit-input" id="epr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="et-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td><span class="prod-status-pushed">Pushed</span></td><td><button class="prod-icon-btn confirm" title="Save" onclick="confirmEdit(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${canc}</td></tr>`;
+    return`<tr style="background:#FFFDE7"><td><input class="prod-edit-input" id="ecl-${r.id}" value="${r.col}" style="width:50px"></td><td>${prodIcon}<span class="fw6">${r.product}</span></div><div style="font-size:11px;color:var(--grey-txt);margin-top:2px">Use Replace to change product</div></td><td><input class="prod-edit-input" id="ef-${r.id}" value="${r.fq}" style="width:60px"></td><td><input class="prod-edit-input" id="efc-${r.id}" value="${r.fc}" style="width:60px"></td><td><input class="prod-edit-input" id="epr-${r.id}" value="${r.price.toFixed(2)}" style="width:70px"></td><td><input class="prod-edit-input" id="et-${r.id}" value="${r.tags.join(', ')}" style="width:120px"></td><td><span class="prod-status-pushed">Pushed</span></td><td><button class="prod-icon-btn confirm" title="Save" onclick="confirmEdit(${r.id})"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${canc}</td></tr>`;
   }
   if(r.status==='removing'){
     const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0;
-    return`<tr class="prod-row-old"><td style="text-decoration:line-through" class="fw6">${r.col}</td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span style="text-decoration:line-through">${r.product}</span></div></td><td style="text-decoration:line-through">${r.fq}</td><td style="text-decoration:line-through">${r.fc}</td><td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td><td><span class="prod-status-removing">Removing</span></td><td></td></tr>`;
+    return`<tr class="prod-row-old"><td style="text-decoration:line-through" class="fw6">${r.col}</td><td>${prodIcon}<span style="text-decoration:line-through">${r.product}</span></div></td><td style="text-decoration:line-through">${r.fq}</td><td style="text-decoration:line-through">${r.fc}</td><td style="text-decoration:line-through" class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'" style="opacity:.5;text-decoration:line-through">'+t+'</span>').join('')}</td><td><span class="prod-status-removing">Removing</span></td><td></td></tr>`;
   }
   if(r.status==='pending'){
     const pct=r.fc>0?Math.round(r.cq/r.cc*100):0;
     let pc2=`<span class="prod-new-val">€${r.price.toFixed(2)}</span>`;
     if(r.nd&&r.nd.op!==undefined&&r.nd.op!==r.price)pc2+=`<span class="prod-old-val">€${r.nd.op.toFixed(2)}</span>`;
-    return`<tr class="prod-row-new"><td class="fw6"><span class="prod-new-val">${r.col}</span></td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="prod-new-val">${r.product}</span></div></td><td><span class="prod-new-val">${r.fq}</span></td><td><span class="prod-new-val">${r.fc}</span></td><td>${pc2}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pending">Pending</span></td><td></td></tr>`;
+    return`<tr class="prod-row-new"><td class="fw6"><span class="prod-new-val">${r.col}</span></td><td>${prodIcon}<span class="prod-new-val">${r.product}</span></div></td><td><span class="prod-new-val">${r.fq}</span></td><td><span class="prod-new-val">${r.fc}</span></td><td>${pc2}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pending">Pending</span></td><td></td></tr>`;
   }
   if(r.status==='pushed'){
     const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
-    return`<tr><td class="fw6">${r.col}</td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span class="fw6">${r.product}</span></div></td><td>${r.fq}</td><td>${r.fc}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pushed">Pushed</span></td><td>${pencil}${replBtn}</td></tr>`;
+    return`<tr><td class="fw6">${r.col}</td><td>${prodIcon}<span class="fw6">${r.product}</span></div></td><td>${r.fq}</td><td>${r.fc}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-pushed">Pushed</span></td><td>${pencil}${replBtn}</td></tr>`;
   }
   // active
   const pc=prgClr(r.cq,r.cc),pct=r.cc>0?Math.round(r.cq/r.cc*100):0,clr=pc==='crit'?'var(--red)':pc==='low'?'var(--amber)':'var(--green)';
-  return`<tr><td class="fw6">${r.col}</td><td class="text-muted">${r.cat}</td><td>${prodIcon}<span>${r.product}</span></div></td><td>${r.fq}</td><td>${r.fc}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-active">Active</span></td><td>${pencil}${replBtn}</td></tr>`;
+  return`<tr><td class="fw6">${r.col}</td><td>${prodIcon}<span>${r.product}</span></div></td><td>${r.fq}</td><td>${r.fc}</td><td class="fw6">€${r.price.toFixed(2)}</td><td>${r.tags.map(t=>'<span class="tag-pill '+tagCls(t)+'">'+t+'</span>').join('')}</td><td><span class="prod-status-active">Active</span></td><td>${pencil}${replBtn}</td></tr>`;
 }
 
 function startReplace(id){const r=prodData.find(p=>p.id===id);if(r){r.replacing=true;r.editing=false;}renderProducts();}
