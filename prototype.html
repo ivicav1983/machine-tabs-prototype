@@ -2081,6 +2081,8 @@ function selectStation(el, stationId) {
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = 'none';
   document.getElementById('products-station-view').style.display = '';
+  document.getElementById('tab-analysis').style.display = 'none';
+  document.getElementById('tab-kiosks').style.display = 'none';
 }
 
 function selectMarket(el) {
@@ -2088,6 +2090,8 @@ function selectMarket(el) {
   el.classList.add('active');
   document.getElementById('products-market-view').style.display = '';
   document.getElementById('products-station-view').style.display = 'none';
+  document.getElementById('tab-analysis').style.display = '';
+  document.getElementById('tab-kiosks').style.display = '';
 }
 
 // ══ PRODUCTS SEARCH ═══════════════════════════════════════════════════════
