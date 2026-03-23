@@ -511,6 +511,16 @@
   .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
   .btn-submit-green:hover { background: #2E7D32; }
 
+  /* ── ROW ACTION ICONS ───────────────────────────── */
+  .row-actions { display: flex; gap: 4px; align-items: center; }
+  .btn-icon-sm {
+    background: none; border: 1px solid var(--grey-bdr); border-radius: 4px;
+    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .1s, border-color .1s; flex-shrink: 0;
+  }
+  .btn-icon-sm:hover { background: var(--grey-bg); border-color: #BDBDBD; }
+  .btn-icon-sm svg { display: block; }
+
   /* ── PRODUCTS BOTTOM BAR ─────────────────────────── */
   .products-bottom-bar {
     display: flex; flex-direction: column; gap: 8px;
@@ -1032,68 +1042,59 @@
           <table>
             <thead>
               <tr>
-                <th>Station</th>
+                <th style="width:72px">Column</th>
                 <th>Product</th>
-                <th>Recipe</th>
                 <th style="width:100px">Tags</th>
                 <th>Price 1</th>
               </tr>
             </thead>
             <tbody id="products-tbody">
-              <tr id="products-noresult" style="display:none"><td colspan="5" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
-              <tr>
-                <td class="fw6">Coffee Station</td>
+              <tr id="products-noresult" style="display:none"><td colspan="4" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
+              <tr data-station="Coffee Station">
+                <td class="fw6">01</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
                 <td class="fw6">€1.20</td>
               </tr>
-              <tr>
-                <td class="fw6">Coffee Station</td>
+              <tr data-station="Coffee Station">
+                <td class="fw6">02</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
                 <td class="fw6">€1.00</td>
               </tr>
-              <tr>
-                <td class="fw6">Coffee Station</td>
+              <tr data-station="Coffee Station">
+                <td class="fw6">03</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
                 <td class="fw6">€1.50</td>
               </tr>
-              <tr>
-                <td class="fw6">Cold Drinks</td>
+              <tr data-station="Cold Drinks">
+                <td class="fw6">04</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span></td>
                 <td class="fw6">€1.80</td>
               </tr>
-              <tr>
-                <td class="fw6">Snack Bar</td>
+              <tr data-station="Snack Bar">
+                <td class="fw6">05</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span></td>
                 <td class="fw6">€1.30</td>
               </tr>
-              <tr>
-                <td class="fw6">Cold Drinks</td>
+              <tr data-station="Cold Drinks">
+                <td class="fw6">06</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
                 <td class="fw6">€0.90</td>
               </tr>
-              <tr>
-                <td class="fw6">Snack Bar</td>
+              <tr data-station="Snack Bar">
+                <td class="fw6">07</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
                 <td class="fw6">€2.10</td>
               </tr>
-              <tr>
-                <td class="fw6">Coffee Station</td>
+              <tr data-station="Coffee Station">
+                <td class="fw6">08</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
                 <td class="fw6">€1.10</td>
               </tr>
@@ -1122,96 +1123,78 @@
           <table>
             <thead>
               <tr>
-                <th>Column</th>
+                <th style="width:72px">Column</th>
                 <th>Product</th>
-                <th>Recipe</th>
                 <th style="width:100px">Tags</th>
-                <th>Pickup</th>
-                <th>Cap</th>
-                <th>Fill qty</th>
+                <th style="width:60px">Cap</th>
                 <th>Price 1</th>
+                <th style="width:72px"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="fw6">01</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
-                <td></td>
                 <td class="text-muted">20</td>
-                <td class="fw6">17</td>
                 <td class="fw6">€1.20</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">02</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span></td>
-                <td></td>
                 <td class="text-muted">20</td>
-                <td class="fw6">6</td>
                 <td class="fw6">€1.00</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">03</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
-                <td></td>
                 <td class="text-muted">15</td>
-                <td class="fw6">2</td>
                 <td class="fw6">€1.50</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">04</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span></td>
-                <td></td>
                 <td class="text-muted">12</td>
-                <td class="fw6">9</td>
                 <td class="fw6">€1.80</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">05</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span></td>
-                <td></td>
                 <td class="text-muted">10</td>
-                <td class="fw6">4</td>
                 <td class="fw6">€1.30</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">06</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
-                <td></td>
                 <td class="text-muted">24</td>
-                <td class="fw6">23</td>
                 <td class="fw6">€0.90</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">07</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
-                <td></td>
                 <td class="text-muted">8</td>
-                <td class="fw6">1</td>
                 <td class="fw6">€2.10</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
               <tr>
                 <td class="fw6">08</td>
                 <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
-                <td></td>
                 <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
-                <td></td>
                 <td class="text-muted">20</td>
-                <td class="fw6">12</td>
                 <td class="fw6">€1.10</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
               </tr>
             </tbody>
           </table>
@@ -1506,6 +1489,71 @@
     <div class="modal-footer" style="justify-content:space-between">
       <button class="btn btn-cancel-red" onclick="closeModal('setup-modal')">Cancel</button>
       <button class="btn btn-submit-green">Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EDIT COLUMN MODAL ══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="edit-column-modal" onclick="if(event.target===this)closeModal('edit-column-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Edit Column</span>
+      <button class="modal-close" onclick="closeModal('edit-column-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Capacity</label>
+        <input class="modal-input" type="number" placeholder="e.g. 20" min="1" max="100" value="20">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Price 1 (€)</label>
+        <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0" value="1.20">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Tags</label>
+        <input class="modal-input" type="text" placeholder="e.g. Hot, Organic" value="Hot">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('edit-column-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('edit-column-modal')">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REPLACE PRODUCT MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="replace-product-modal" onclick="if(event.target===this)closeModal('replace-product-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Replace Product</span>
+      <button class="modal-close" onclick="closeModal('replace-product-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info" style="margin-bottom:12px">Select a new product to assign to this column slot.</p>
+      <div class="modal-field">
+        <label class="modal-label">New product</label>
+        <select class="modal-select">
+          <option value="">— Select product —</option>
+          <option>Espresso Single</option>
+          <option>Americano</option>
+          <option>Cappuccino</option>
+          <option>Orange Juice 330ml</option>
+          <option>Still Water 500ml</option>
+          <option>Chocolate Bar</option>
+          <option>Croissant</option>
+          <option>Green Tea</option>
+          <option>Latte Macchiato</option>
+          <option>Sparkling Water 500ml</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Price 1 (€)</label>
+        <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('replace-product-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('replace-product-modal')">Replace</button>
     </div>
   </div>
 </div>
@@ -2051,7 +2099,7 @@ function filterProducts() {
   rows.forEach(tr => {
     if (tr.id === 'products-noresult') return;
     const text = tr.textContent.toLowerCase();
-    const stationCell = tr.cells[0] ? tr.cells[0].textContent : '';
+    const stationCell = tr.dataset.station || '';
     const matchQ = !q || text.includes(q);
     const matchStation = !station || stationCell === station;
     const show = matchQ && matchStation;
