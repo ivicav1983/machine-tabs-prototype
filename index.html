@@ -1111,11 +1111,11 @@
           <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
           <div style="flex:1"></div>
           <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
-          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="openModal('layout-preview-modal')">
             Layout preview
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="openModal('add-column-modal')">+ Add column</button>
         </div>
         <div class="table-wrap">
           <div class="table-scroll">
@@ -1221,12 +1221,12 @@
         <div class="products-bottom-bar">
           <div class="products-bottom-row">
             <div style="display:flex;gap:8px">
-              <button class="btn-green">Save as Planogram</button>
-              <button class="btn-grey-solid">Load Planogram</button>
+              <button class="btn-green" onclick="openModal('save-planogram-modal')">Save as Planogram</button>
+              <button class="btn-grey-solid" onclick="openModal('load-planogram-modal')">Load Planogram</button>
             </div>
             <div style="display:flex;gap:8px">
-              <button class="btn-green">Push product list</button>
-              <button class="btn-delete">Delete Columns</button>
+              <button class="btn-green" onclick="openModal('push-product-modal')">Push product list</button>
+              <button class="btn-delete" onclick="openModal('delete-columns-modal')">Delete Columns</button>
             </div>
           </div>
           <div class="products-bottom-meta">
@@ -1510,6 +1510,244 @@
   </div>
 </div>
 
+<!-- ══ LAYOUT PREVIEW MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="layout-preview-modal" onclick="if(event.target===this)closeModal('layout-preview-modal')">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-header">
+      <span class="modal-title">Layout Preview</span>
+      <button class="modal-close" onclick="closeModal('layout-preview-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info" style="margin-bottom:14px">Visual overview of the current station planogram. Columns are shown left to right with their fill levels.</p>
+      <div style="display:flex;gap:6px;align-items:flex-end;padding:16px;background:#F8F9FA;border-radius:8px;border:1px solid var(--grey-bdr);overflow-x:auto">
+        <!-- Column bars -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:85%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">01</span>
+          <span style="font-size:10px;color:#888;text-align:center">17/20</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:30%;background:#F57C00;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">02</span>
+          <span style="font-size:10px;color:#888;text-align:center">6/20</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:13%;background:#D32F2F;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">03</span>
+          <span style="font-size:10px;color:#888;text-align:center">2/15</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:75%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">04</span>
+          <span style="font-size:10px;color:#888;text-align:center">9/12</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:40%;background:#F57C00;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">05</span>
+          <span style="font-size:10px;color:#888;text-align:center">4/10</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:96%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">06</span>
+          <span style="font-size:10px;color:#888;text-align:center">23/24</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:12%;background:#D32F2F;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">07</span>
+          <span style="font-size:10px;color:#888;text-align:center">1/8</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:60%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">08</span>
+          <span style="font-size:10px;color:#888;text-align:center">12/20</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:#555">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#388E3C;border-radius:2px;display:inline-block"></span>OK (≥50%)</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#F57C00;border-radius:2px;display:inline-block"></span>Low (20–50%)</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#D32F2F;border-radius:2px;display:inline-block"></span>Critical (&lt;20%)</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-cancel-red" onclick="closeModal('layout-preview-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD COLUMN MODAL ════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="add-column-modal" onclick="if(event.target===this)closeModal('add-column-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Add Column</span>
+      <button class="modal-close" onclick="closeModal('add-column-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Position</label>
+        <select class="modal-select">
+          <option>After column 08 (append)</option>
+          <option>Before column 01</option>
+          <option>After column 01</option>
+          <option>After column 04</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Product</label>
+        <select class="modal-select">
+          <option value="">— Select product —</option>
+          <option>Espresso Single</option>
+          <option>Americano</option>
+          <option>Cappuccino</option>
+          <option>Orange Juice 330ml</option>
+          <option>Still Water 500ml</option>
+          <option>Chocolate Bar</option>
+          <option>Croissant</option>
+          <option>Green Tea</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="modal-field" style="flex:1">
+          <label class="modal-label">Capacity</label>
+          <input class="modal-input" type="number" placeholder="e.g. 20" min="1" max="100">
+        </div>
+        <div class="modal-field" style="flex:1">
+          <label class="modal-label">Price (€)</label>
+          <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('add-column-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('add-column-modal')">Add Column</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVE AS PLANOGRAM MODAL ════════════════════════════════════════════ -->
+<div class="modal-overlay" id="save-planogram-modal" onclick="if(event.target===this)closeModal('save-planogram-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Save as Planogram</span>
+      <button class="modal-close" onclick="closeModal('save-planogram-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Planogram name</label>
+        <input class="modal-input" type="text" placeholder="e.g. Opera Spring 2026" value="">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Description (optional)</label>
+        <textarea class="modal-textarea" placeholder="Notes about this planogram layout…" rows="3"></textarea>
+      </div>
+      <p style="font-size:12px;color:var(--grey-txt);margin-top:4px">Current layout with 8 columns will be saved. You can load it later from <strong>Load Planogram</strong>.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('save-planogram-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('save-planogram-modal')">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOAD PLANOGRAM MODAL ═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="load-planogram-modal" onclick="if(event.target===this)closeModal('load-planogram-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Load Planogram</span>
+      <button class="modal-close" onclick="closeModal('load-planogram-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Select planogram</label>
+        <select class="modal-select">
+          <option value="">— Choose saved planogram —</option>
+          <option>Opera (14.01.2026 – Dario Skegro)</option>
+          <option>Classic Summer 2025 (08.06.2025 – Ana Kovač)</option>
+          <option>Standard Q4 2025 (02.10.2025 – Dario Skegro)</option>
+          <option>Promo December (01.12.2025 – SuperAdmin)</option>
+        </select>
+      </div>
+      <div style="background:#FFF8E1;border:1px solid #FFE082;border-radius:6px;padding:10px 12px;font-size:12px;color:#795548;display:flex;gap:8px;align-items:flex-start;margin-top:4px">
+        <span style="font-size:16px;line-height:1.2">⚠</span>
+        <span>Loading a planogram will <strong>replace the current product layout</strong>. Unsaved changes will be lost.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('load-planogram-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('load-planogram-modal')">Load</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PUSH PRODUCT LIST MODAL ════════════════════════════════════════════ -->
+<div class="modal-overlay" id="push-product-modal" onclick="if(event.target===this)closeModal('push-product-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Push product list</span>
+      <button class="modal-close" onclick="closeModal('push-product-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info">The current product list will be pushed to the machine. The machine will sync immediately upon next connection.</p>
+      <div style="background:#E8F5E9;border:1px solid #A5D6A7;border-radius:6px;padding:10px 14px;font-size:13px;margin-top:4px">
+        <div style="font-weight:600;margin-bottom:4px;color:#2E7D32">Station: <span id="push-station-name">Shelves 1</span></div>
+        <div style="color:#388E3C;font-size:12px">8 columns · Last push: 06.03.2026 12:25 [Dario Skegro]</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('push-product-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('push-product-modal')">Push</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE COLUMNS MODAL ═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="delete-columns-modal" onclick="if(event.target===this)closeModal('delete-columns-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Delete Columns</span>
+      <button class="modal-close" onclick="closeModal('delete-columns-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:#FFEBEE;border:1px solid #FFCDD2;border-radius:6px;padding:10px 12px;font-size:12px;color:#C62828;display:flex;gap:8px;align-items:flex-start;margin-bottom:12px">
+        <span style="font-size:16px;line-height:1.2">⚠</span>
+        <span>This action <strong>cannot be undone</strong>. Deleted columns will be permanently removed from this station's product list.</span>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Select columns to delete</label>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 01 – Espresso Single</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 02 – Americano</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 03 – Cappuccino</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 04 – Orange Juice</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 05 – Chocolate Bar</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 06 – Still Water</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 07 – Croissant</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 08 – Green Tea</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('delete-columns-modal')">Cancel</button>
+      <button class="btn btn-cancel-red" onclick="closeModal('delete-columns-modal')">Delete selected</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ══ EVENTS DATA ══════════════════════════════════════════════════════════
 let eventsData = [
@@ -1730,6 +1968,7 @@ function saveNewEvent() {
 }
 
 // ══ MODAL / MENU HELPERS ══════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function toggleDropdown(id) {
