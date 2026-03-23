@@ -2241,7 +2241,7 @@ function replaceProduct(btn) {
   tr.dataset.origHtml = tr.innerHTML;
   tr.classList.add('editing-row');
   const cells = tr.querySelectorAll('td');
-  const currentName = (cells[1].querySelector('span')||{textContent:''}).textContent;
+  const currentName = ((cells[1].querySelector('span')||{textContent:''}).textContent).trim();
   const opts = PRODUCTS_LIST.map(p => '<option value="' + p.name + '">' + p.emoji + ' ' + p.name + '</option>').join('');
   cells[1].innerHTML = '<select class="inline-input" style="width:175px">' + opts + '</select>';
   const sel = cells[1].querySelector('select');
