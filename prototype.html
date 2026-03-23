@@ -276,64 +276,6 @@
   .tab-panel { display: none; flex: 1; overflow-y: auto; padding: 0 24px 40px; }
   .tab-panel.active { display: block; }
 
-  /* ── PLACEHOLDER TAB ─────────────────────── */
-  .placeholder-tab {
-    display: flex; align-items: center; justify-content: center;
-    height: 220px; color: var(--grey-txt); font-size: 14px;
-    font-style: italic;
-  }
-
-  /* ── ALARM BADGE in title ────────────────── */
-  .mkt-alarm-badge {
-    display: inline-flex; align-items: center;
-    padding: 2px 9px; border-radius: 4px;
-    background: var(--red); color: #fff;
-    font-size: 11px; font-weight: 700; letter-spacing: .5px;
-    flex-shrink: 0; margin-right: 8px; vertical-align: middle;
-  }
-
-  /* ── STAT BAR (Status / Signal / Uptime / Usage score) ── */
-  .mkt-stat-bar {
-    display: flex; align-items: center;
-    padding: 7px 24px 8px; gap: 0;
-    border-top: 1px solid var(--grey-bdr);
-  }
-  .mkt-stat-item {
-    display: flex; flex-direction: column; gap: 2px;
-    padding-right: 24px; margin-right: 24px;
-    border-right: 1px solid var(--grey-bdr);
-  }
-  .mkt-stat-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
-  .mkt-stat-label {
-    font-size: 10px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: .5px; color: var(--grey-txt); white-space: nowrap;
-  }
-  .mkt-stat-val { font-size: 13px; font-weight: 600; color: var(--dark); }
-  .mkt-signal-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 2px 9px; border-radius: 12px;
-    background: #DFFFF4; color: #00A871;
-    font-size: 12px; font-weight: 600;
-  }
-  .mkt-alarm-stat {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 2px 9px; border-radius: 12px;
-    background: #FFEBEE; color: var(--red);
-    font-size: 12px; font-weight: 600;
-  }
-
-  /* ── ADD STATION link ────────────────────── */
-  .ss-add-station {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 14px;
-    font-size: 13px; font-weight: 500; color: var(--ss-active-txt);
-    cursor: pointer; transition: background .12s;
-    border-bottom: 1px solid #F2F4F6; flex-shrink: 0;
-  }
-  .ss-add-station:hover { background: #F8F9FA; }
-  .sidebar.collapsed .ss-add-station span { display: none; }
-  .sidebar.collapsed .ss-add-station { justify-content: center; padding: 10px 0; }
-
   /* ── BUTTONS ─────────────────────────────── */
   .btn {
     display: inline-flex; align-items: center; gap: 5px;
@@ -435,6 +377,14 @@
     background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
   }
   .search-input:focus { border-color: var(--blue); }
+  .dropdown-select {
+    padding: 0 28px 0 10px; height: 32px; border: 1px solid var(--grey-bdr); border-radius: 6px;
+    font-size: 13px; font-family: var(--font); background: var(--white); color: var(--dark);
+    appearance: none; cursor: pointer; outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 9px center;
+  }
+  .dropdown-select:focus { border-color: var(--blue); }
 
   /* ── TABLE ───────────────────────────────── */
   .table-wrap { border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
@@ -522,6 +472,141 @@
   .divider { border: none; border-top: 1px solid var(--grey-bdr); margin: 18px 0; }
   .text-muted { color: var(--grey-txt); }
   .fw6 { font-weight: 600; }
+
+  /* ── SETUP MODAL ─────────────────────────────────── */
+  .setup-modal { max-width: 640px; }
+  .setup-section-title {
+    font-size: 13px; font-weight: 700; color: #181B1E;
+    margin: 0 0 10px;
+  }
+  .setup-section { margin-bottom: 22px; }
+  .setup-section:last-child { margin-bottom: 0; }
+  .setup-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .setup-check-label {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; color: #181B1E; cursor: pointer;
+  }
+  .setup-check-label input[type=checkbox] {
+    width: 15px; height: 15px; accent-color: var(--blue); cursor: pointer; flex-shrink: 0;
+  }
+  .setup-divider { border: none; border-top: 1px solid var(--grey-bdr); margin: 18px 0 0; }
+
+  /* quantity warnings table */
+  .setup-table-wrap { border: 1px solid var(--grey-bdr); border-radius: 6px; overflow: hidden; margin-top: 10px; max-height: 260px; overflow-y: auto; }
+  .setup-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .setup-table thead tr { background: var(--grey-bg); position: sticky; top: 0; }
+  .setup-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--grey-txt); text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid var(--grey-bdr); white-space: nowrap; }
+  .setup-table td { padding: 8px 12px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
+  .setup-table tbody tr:last-child td { border-bottom: none; }
+  .setup-table tbody tr:hover { background: #FAFAFA; }
+  .setup-name-active { color: var(--amber); font-weight: 600; font-size: 13px; }
+  .setup-name-inactive { color: #181B1E; font-size: 13px; }
+  .setup-amount { font-weight: 600; font-size: 13px; color: #181B1E; }
+  .setup-unit { font-size: 12px; color: var(--grey-txt); white-space: nowrap; }
+  .setup-slider { width: 100%; accent-color: #9C7CD4; cursor: pointer; }
+
+  /* modal footer buttons */
+  .btn-cancel-red { background: var(--red); color: #fff; border-color: var(--red); }
+  .btn-cancel-red:hover { background: var(--red-dark); }
+  .btn-submit-green { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-submit-green:hover { background: #2E7D32; }
+
+  /* ── ROW ACTION ICONS ───────────────────────────── */
+  .row-actions { display: flex; gap: 4px; align-items: center; }
+  .btn-icon-sm {
+    background: none; border: 1px solid var(--grey-bdr); border-radius: 4px;
+    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .1s, border-color .1s; flex-shrink: 0;
+  }
+  .btn-icon-sm:hover { background: var(--grey-bg); border-color: #BDBDBD; }
+  .btn-icon-sm svg { display: block; }
+
+  /* ── PRODUCTS BOTTOM BAR ─────────────────────────── */
+  .products-bottom-bar {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 14px 0 6px; border-top: 1px solid var(--grey-bdr); margin-top: 6px;
+  }
+  .products-bottom-row { display: flex; justify-content: space-between; align-items: center; }
+  .products-bottom-meta { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #6C7580; }
+  .btn-green {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; border: none; white-space: nowrap;
+    background: var(--green); color: #fff; transition: background .15s; min-width: 160px;
+  }
+  .btn-green:hover { background: #2E7D32; }
+  .btn-delete {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; white-space: nowrap;
+    background: #fff; color: var(--red); border: 1.5px solid var(--red); transition: background .15s, color .15s;
+  }
+  .btn-delete:hover { background: var(--red); color: #fff; }
+  .btn-grey-solid {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    font-family: var(--font); cursor: pointer; border: none; white-space: nowrap;
+    background: #6C757D; color: #fff; transition: background .15s; min-width: 160px;
+  }
+  .btn-grey-solid:hover { background: #5A6268; }
+
+  /* ── TYPE CHIP TOGGLES (Events filter bar) ── */
+  .chip-toggle-bar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .chip-toggle {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+    border: 1.5px solid; cursor: pointer; transition: opacity .15s, background .15s;
+    user-select: none;
+  }
+  .chip-toggle::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .chip-alarm { background: #FFEBEE; color: var(--red); border-color: var(--red); }
+  .chip-alarm::before { background: var(--red); }
+  .chip-warn  { background: #FFF3E0; color: var(--amber); border-color: var(--amber); }
+  .chip-warn::before  { background: var(--amber); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border-radius: 0; }
+  .chip-info  { background: #E3F2FD; color: var(--blue); border-color: var(--blue); }
+  .chip-info::before  { background: var(--blue); }
+  .chip-toggle.off { opacity: .38; filter: grayscale(.5); }
+
+  /* ── FIGMA PAGE HEADER (Figma: Header/Light) ──────────────────── */
+  .fig-page-hdr {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 20px 0 16px; border-bottom: 1px solid var(--grey-bdr); margin-bottom: 20px;
+  }
+  .fig-page-title { font-size: 22px; font-weight: 700; color: #181B1E; margin-bottom: 4px; line-height: 1.2; }
+  .fig-page-desc  { font-size: 14px; color: #6C7580; }
+  .fig-page-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; padding-top: 4px; }
+  /* Tertiary – white outlined */
+  .fig-btn-tertiary {
+    padding: 7px 16px; border: 1px solid #DEE2E8; background: #FFFFFF; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #181B1E; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-tertiary:hover { background: #F8F9FA; }
+  /* Secondary – light grey with icon */
+  .fig-btn-secondary {
+    padding: 7px 16px; border: 1px solid #DEE2E8; background: #F1F3F5; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #181B1E; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-secondary:hover { background: #E9ECEF; }
+  /* Primary – dark fill */
+  .fig-btn-primary {
+    padding: 7px 16px; border: none; background: #181B1E; border-radius: 6px;
+    font-size: 13px; font-weight: 500; color: #FFFFFF; font-family: var(--font);
+    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fig-btn-primary:hover { background: #2D3035; }
+  /* Empty state inside tab */
+  .fig-empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 24px; gap: 10px;
+    background: #FAFAFA; border-radius: 8px; border: 1px dashed #DEE2E8;
+  }
+  .fig-empty-state svg { opacity: .2; }
+  .fig-empty-state h4 { font-size: 14px; font-weight: 600; color: #9E9E9E; }
+  .fig-empty-state p  { font-size: 13px; color: #BDBDBD; text-align: center; max-width: 320px; }
 
   /* ── MODALS ──────────────────────────────── */
   .modal-overlay {
@@ -611,11 +696,11 @@
   <!-- ── STATIONS SIDEBAR (Figma: Machines/Side menu/Stations) ── -->
   <aside class="sidebar" id="stations-sidebar">
 
-    <!-- ─ Section: CHOOSE VIEW ─ -->
-    <div class="ss-hdr"><span class="ss-hdr-text">Choose view</span></div>
+    <!-- ─ Section: MICRO MARKET ─ -->
+    <div class="ss-hdr"><span class="ss-hdr-text">Micro Market</span></div>
 
-    <!-- Market view row (active by default) -->
-    <div class="ss-market-row active" onclick="selectMarketView(this)">
+    <!-- Market row (active) -->
+    <div class="ss-market-row active" onclick="selectMarket(this)" style="cursor:pointer">
       <!-- expanded: basket icon -->
       <div class="ss-market-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -634,7 +719,7 @@
           <path d="M16 10a4 4 0 01-8 0" stroke="#3B7DDD" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </div>
-      <span class="ss-market-name">Market view</span>
+      <span class="ss-market-name">Intis Nutrico</span>
       <span class="ss-chevron-blue">›</span>
     </div>
 
@@ -717,16 +802,6 @@
       <span class="ss-chevron-dark">›</span>
     </div>
 
-    <!-- ─ Add station ─ -->
-    <div class="ss-add-station">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <circle cx="8" cy="8" r="6.5" stroke="#3B7DDD" stroke-width="1.4"/>
-        <line x1="8" y1="5" x2="8" y2="11" stroke="#3B7DDD" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="5" y1="8" x2="11" y2="8" stroke="#3B7DDD" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-      <span>Add station</span>
-    </div>
-
     <!-- ─ Collapse toggle ─ -->
     <div class="ss-toggle" id="ss-toggle-btn" onclick="toggleSidebarCollapse()" title="Collapse sidebar">
       <!-- backburger (collapse) icon -->
@@ -758,88 +833,47 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M10 3L5 8l5 5" stroke="#181B1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Back to list
+          Back to Machine list
         </button>
         <!-- title block -->
         <div class="mkt-title-block">
-          <div class="mkt-title">
-            <span class="mkt-alarm-badge">ALARM</span>Intis Nutrico: Bani 73a
+          <div class="mkt-title">Intis Nutrico: Bani 73a</div>
+          <div class="mkt-status-row" style="margin-top:3px;font-size:13px;color:#6C7580">
+            Micro market &nbsp;·&nbsp; Zagreb, Bani 73a &nbsp;·&nbsp;
+            <span style="color:var(--ss-green);font-weight:600">● Online</span>
           </div>
         </div>
-        <!-- action buttons -->
+        <!-- action buttons (Figma: Tertiary / Secondary / Primary) -->
         <div class="mkt-actions">
-          <button class="mkt-btn-grey">
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-              <circle cx="7.5" cy="7.5" r="6" stroke="#181B1E" stroke-width="1.4"/>
-              <circle cx="7.5" cy="7.5" r="2.5" stroke="#181B1E" stroke-width="1.4"/>
-              <line x1="7.5" y1="1.5" x2="7.5" y2="4" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/>
-              <line x1="7.5" y1="11" x2="7.5" y2="13.5" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/>
-              <line x1="1.5" y1="7.5" x2="4" y2="7.5" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/>
-              <line x1="11" y1="7.5" x2="13.5" y2="7.5" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/>
+          <button class="fig-btn-tertiary">Update firmware</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/>
+              <line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/>
             </svg>
             Market setup
           </button>
-          <button class="mkt-btn-dark">
+          <button class="fig-btn-primary">
             Send
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5l3 3 3-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- stat bar (Figma: Status / Signal / Uptime / Usage score) -->
-      <div class="mkt-stat-bar">
-        <div class="mkt-stat-item">
-          <span class="mkt-stat-label">Status</span>
-          <span class="mkt-alarm-stat">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#D32F2F"/></svg>
-            Alarm
-          </span>
-        </div>
-        <div class="mkt-stat-item">
-          <span class="mkt-stat-label">Signal</span>
-          <span class="mkt-signal-badge">
-            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00A871"/></svg>
-            Connected
-          </span>
-        </div>
-        <div class="mkt-stat-item">
-          <span class="mkt-stat-label">Uptime (Last 30 days)</span>
-          <span class="mkt-stat-val">98%</span>
-        </div>
-        <div class="mkt-stat-item">
-          <span class="mkt-stat-label">Usage score</span>
-          <span class="mkt-stat-val">High (75% – 100%)</span>
-        </div>
-      </div>
-
-      <!-- tab nav (Figma: Overview/Sales/Transactions/Events/Stock/Refill/Products/Kiosks) -->
+      <!-- tab nav (Figma: 44px, 8 tabs) -->
       <nav class="tab-nav">
-        <button class="tab-btn" id="tab-overview" onclick="switchTab('overview')">Overview</button>
-        <button class="tab-btn" id="tab-sales" onclick="switchTab('sales')">Sales</button>
-        <button class="tab-btn market-only-tab" id="tab-transactions" onclick="switchTab('transactions')">Transactions</button>
+        <button class="tab-btn" id="tab-overview"   onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" id="tab-sales"      onclick="switchTab('sales')">Sales</button>
+        <button class="tab-btn" id="tab-transactions" onclick="switchTab('transactions')">Transactions</button>
         <button class="tab-btn active" id="tab-events" onclick="switchTab('events')">
           Events<span class="tab-badge" id="events-badge">2</span>
         </button>
-        <button class="tab-btn" id="tab-stock" onclick="switchTab('stock')">Stock</button>
-        <button class="tab-btn" id="tab-refill" onclick="switchTab('refill')">Refill</button>
-        <button class="tab-btn" id="tab-products" onclick="switchTab('products')">Products</button>
-        <button class="tab-btn market-only-tab" id="tab-kiosks" onclick="switchTab('kiosks')">Kiosks</button>
+        <button class="tab-btn" id="tab-refill"     onclick="switchTab('refill')">Refill</button>
+        <button class="tab-btn" id="tab-products"   onclick="switchTab('products')">Products</button>
+        <button class="tab-btn" id="tab-analysis"   onclick="switchTab('analysis')">Analysis</button>
+        <button class="tab-btn" id="tab-kiosks"     onclick="switchTab('kiosks')">Kiosks &amp; Stations</button>
       </nav>
-    </div>
-
-    <!-- ══ OVERVIEW PANEL ════════════════════════════════════════════ -->
-    <div class="tab-panel" id="panel-overview">
-      <div class="placeholder-tab">Overview — coming soon</div>
-    </div>
-
-    <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
-    <div class="tab-panel" id="panel-sales">
-      <div class="placeholder-tab">Sales — coming soon</div>
-    </div>
-
-    <!-- ══ TRANSACTIONS PANEL (market view only) ══════════════════════ -->
-    <div class="tab-panel" id="panel-transactions">
-      <div class="placeholder-tab">Transactions — coming soon</div>
     </div>
 
     <!-- ══ EVENTS PANEL ═══════════════════════════════════════════════ -->
@@ -881,6 +915,13 @@
         </div>
         <!-- add new event button -->
         <button class="btn btn-primary" onclick="openNewEvent()">+ Add new event</button>
+      </div>
+
+      <!-- Figma: chip filter toggles (Info / Warning / Alarm) -->
+      <div class="chip-toggle-bar" style="padding:8px 0 4px">
+        <span class="chip-toggle chip-alarm" id="chip-alarm" onclick="toggleChip('alarm')">ALARM (<span id="chip-count-alarm">2</span>)</span>
+        <span class="chip-toggle chip-warn"  id="chip-warn"  onclick="toggleChip('warn')">WARNING (<span id="chip-count-warn">2</span>)</span>
+        <span class="chip-toggle chip-info"  id="chip-info"  onclick="toggleChip('info')">INFO (<span id="chip-count-info">3</span>)</span>
       </div>
 
       <!-- Figma: filter bar (Period | Status | Assigned | Name | Machine mode | Clear all | download) -->
@@ -983,187 +1024,342 @@
     <!-- ══ PLANOGRAMS PANEL ════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-products">
 
-      <!-- Figma: Products header row -->
-      <div class="plan-header-row">
-        <div class="plan-title-block">
-          <span class="plan-title">Products</span>
-          <span class="plan-meta">Product list changed: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Product list published: 03.12.2025, 16:06 by SuperAdmin</span>
-          <span class="plan-meta-sep">•</span>
-          <span class="plan-meta">Stock warning: <span style="color:var(--red);font-weight:600">30%</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-left:3px"><path d="M1 11l5-9 5 9H1zm5-6v3" stroke="#6C7580" stroke-width="1.3" stroke-linecap="round"/><circle cx="6" cy="9.5" r=".6" fill="#6C7580"/></svg>
-          </span>
+      <!-- ── MARKET VIEW (default: micro market selected) ─────────────── -->
+      <div id="products-market-view">
+        <!-- Market toolbar: search + station filter only -->
+        <div class="filter-bar" style="padding:10px 0">
+          <input class="search-input" id="products-search" type="text" placeholder="Search products…" oninput="filterProducts()" />
+          <button class="btn-clear-all" onclick="clearProductsSearch()">Clear all</button>
+          <select class="dropdown-select" id="station-filter" onchange="filterProducts()" style="min-width:150px">
+            <option value="">All stations</option>
+            <option value="Coffee Station">Coffee Station</option>
+            <option value="Cold Drinks">Cold Drinks</option>
+            <option value="Snack Bar">Snack Bar</option>
+          </select>
         </div>
-        <div class="plan-actions">
-          <button class="mkt-btn-grey">Setup</button>
-          <button class="mkt-btn-grey">
+        <div class="table-wrap">
+          <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:72px">Column</th>
+                <th>Product</th>
+                <th style="width:100px">Tags</th>
+                <th>Price 1</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody">
+              <tr id="products-noresult" style="display:none"><td colspan="4" style="text-align:center;padding:36px 12px;color:var(--grey-txt)">No products match the search.</td></tr>
+              <tr data-station="Coffee Station">
+                <td class="fw6">01</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="fw6">€1.20</td>
+              </tr>
+              <tr data-station="Coffee Station">
+                <td class="fw6">02</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="fw6">€1.00</td>
+              </tr>
+              <tr data-station="Coffee Station">
+                <td class="fw6">03</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
+                <td class="fw6">€1.50</td>
+              </tr>
+              <tr data-station="Cold Drinks">
+                <td class="fw6">04</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
+                <td><span class="tag-pill tag-blue">Cold</span></td>
+                <td class="fw6">€1.80</td>
+              </tr>
+              <tr data-station="Snack Bar">
+                <td class="fw6">05</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
+                <td><span class="tag-pill tag-purple">Snack</span></td>
+                <td class="fw6">€1.30</td>
+              </tr>
+              <tr data-station="Cold Drinks">
+                <td class="fw6">06</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
+                <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
+                <td class="fw6">€0.90</td>
+              </tr>
+              <tr data-station="Snack Bar">
+                <td class="fw6">07</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
+                <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
+                <td class="fw6">€2.10</td>
+              </tr>
+              <tr data-station="Coffee Station">
+                <td class="fw6">08</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
+                <td class="fw6">€1.10</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div><!-- /products-market-view -->
+
+      <!-- ── STATION VIEW (shown when a station is selected) ────────────── -->
+      <div id="products-station-view" style="display:none">
+        <!-- Station toolbar: search + Setup / Layout preview / Add column -->
+        <div class="filter-bar" style="padding:10px 0">
+          <input class="search-input" id="products-search-station" type="text" placeholder="Search products…" oninput="filterStationProducts()" />
+          <button class="btn-clear-all" onclick="clearStationSearch()">Clear all</button>
+          <div style="flex:1"></div>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="document.getElementById('setup-modal').classList.add('open')">Setup</button>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="openModal('layout-preview-modal')">
             Layout preview
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2h3v3M10 2L6 6" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7v3H2V2h3" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <div class="dropdown-wrap">
-            <button class="mkt-btn-grey" onclick="toggleDropdown('dd-planogram')">
-              Planogram
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#181B1E" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </button>
-            <div class="dropdown-menu" id="dd-planogram">
-              <div class="dropdown-item">View planogram</div>
-              <div class="dropdown-item">Export planogram</div>
-              <div class="dropdown-item">Import planogram</div>
+          <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px" onclick="openModal('add-column-modal')">+ Add column</button>
+        </div>
+        <div class="table-wrap">
+          <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:72px">Column</th>
+                <th>Product</th>
+                <th style="width:100px">Tags</th>
+                <th style="width:60px">Cap</th>
+                <th>Price 1</th>
+                <th style="width:72px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw6">01</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">€1.20</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">02</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">€1.00</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">03</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
+                <td class="text-muted">15</td>
+                <td class="fw6">€1.50</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">04</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
+                <td><span class="tag-pill tag-blue">Cold</span></td>
+                <td class="text-muted">12</td>
+                <td class="fw6">€1.80</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">05</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
+                <td><span class="tag-pill tag-purple">Snack</span></td>
+                <td class="text-muted">10</td>
+                <td class="fw6">€1.30</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">06</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
+                <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
+                <td class="text-muted">24</td>
+                <td class="fw6">€0.90</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">07</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
+                <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
+                <td class="text-muted">8</td>
+                <td class="fw6">€2.10</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+              <tr>
+                <td class="fw6">08</td>
+                <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
+                <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
+                <td class="text-muted">20</td>
+                <td class="fw6">€1.10</td>
+                <td><div class="row-actions"><button class="btn-icon-sm" title="Edit" onclick="openModal('edit-column-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 2l2 2-6 6H3V8l6-6z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button class="btn-icon-sm" title="Replace" onclick="openModal('replace-product-modal')"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M8 2l3 2-3 2M11 9H2M5 7l-3 2 3 2" stroke="#555" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <div class="products-bottom-bar">
+          <div class="products-bottom-row">
+            <div style="display:flex;gap:8px">
+              <button class="btn-green" onclick="openModal('save-planogram-modal')">Save as Planogram</button>
+              <button class="btn-grey-solid" onclick="openModal('load-planogram-modal')">Load Planogram</button>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-green" onclick="openModal('push-product-modal')">Push product list</button>
+              <button class="btn-delete" onclick="openModal('delete-columns-modal')">Delete Columns</button>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Figma: filter bar -->
-      <div class="filter-bar" style="margin-top:8px">
-        <div class="dropdown-wrap">
-          <button class="dropdown-btn active-filter" onclick="toggleDropdown('dd-plan-period')">Period ▾</button>
-          <div class="dropdown-menu" id="dd-plan-period">
-            <div class="dropdown-item selected">All time</div>
-            <div class="dropdown-item">Last 7 days</div>
-            <div class="dropdown-item">Last 30 days</div>
+          <div class="products-bottom-meta">
+            <span>Product list changed: 06.03.2026 12:25 [Dario Skegro]</span>
+            <span>Product list pushed: 06.03.2026 12:25 [Dario Skegro]</span>
+            <span>Based on planogram: Opera</span>
+            <span>Planogram added: 14.01.2026 12:58 [Dario Skegro]</span>
           </div>
         </div>
-        <button class="btn-clear-all">Clear all</button>
-        <div style="flex:1"></div>
-        <button class="mkt-btn-grey" style="font-size:13px;padding:5px 12px">+ Add column</button>
-      </div>
+      </div><!-- /products-station-view -->
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Product</th>
-              <th class="sortable" onclick="">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M3 7l3 3 3-3M3 5l3-3 3 3" stroke="#9E9E9E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </th>
-              <th>Fill Qty/Cap</th>
-              <th>Column</th>
-              <th>Price</th>
-              <th>Tags</th>
-              <th>Current Qty</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-muted">Hot beverage</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFECB3;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Espresso Single</span></div></td>
-              <td></td>
-              <td>17/20</td>
-              <td class="fw6">01</td>
-              <td class="fw6">€1.20</td>
-              <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:85%"></div></div><span class="progress-val" style="color:var(--green)">17/20</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Hot beverage</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Americano</span></div></td>
-              <td></td>
-              <td>6/20</td>
-              <td class="fw6">02</td>
-              <td class="fw6">€1.00</td>
-              <td><span class="tag-pill tag-amber">Hot</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:30%"></div></div><span class="progress-val" style="color:var(--amber)">6/20</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Hot beverage</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FCE4EC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">☕</div><span>Cappuccino</span></div></td>
-              <td></td>
-              <td>2/15</td>
-              <td class="fw6">03</td>
-              <td class="fw6">€1.50</td>
-              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-purple">Milk</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:13%"></div></div><span class="progress-val" style="color:var(--red)">2/15</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Cold drink</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E8F5E9;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧃</div><span>Orange Juice 330ml</span></div></td>
-              <td></td>
-              <td>9/12</td>
-              <td class="fw6">04</td>
-              <td class="fw6">€1.80</td>
-              <td><span class="tag-pill tag-blue">Cold</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:75%"></div></div><span class="progress-val" style="color:var(--green)">9/12</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Snack</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#F3E5F5;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍫</div><span>Chocolate Bar</span></div></td>
-              <td></td>
-              <td>4/10</td>
-              <td class="fw6">05</td>
-              <td class="fw6">€1.30</td>
-              <td><span class="tag-pill tag-purple">Snack</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill low" style="width:40%"></div></div><span class="progress-val" style="color:var(--amber)">4/10</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Cold drink</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#E3F2FD;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💧</div><span>Still Water 500ml</span></div></td>
-              <td></td>
-              <td>23/24</td>
-              <td class="fw6">06</td>
-              <td class="fw6">€0.90</td>
-              <td><span class="tag-pill tag-blue">Cold</span><span class="tag-pill tag-green">Best seller</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:96%"></div></div><span class="progress-val" style="color:var(--green)">23/24</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Snack</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFF9C4;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🥐</div><span>Croissant</span></div></td>
-              <td></td>
-              <td>1/8</td>
-              <td class="fw6">07</td>
-              <td class="fw6">€2.10</td>
-              <td><span class="tag-pill tag-purple">Snack</span><span class="tag-pill tag-amber">Hot food</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill crit" style="width:12%"></div></div><span class="progress-val" style="color:var(--red)">1/8</span></div></td>
-            </tr>
-            <tr>
-              <td class="text-muted">Tea</td>
-              <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;background:#FFCCBC;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🍵</div><span>Green Tea</span></div></td>
-              <td></td>
-              <td>12/20</td>
-              <td class="fw6">08</td>
-              <td class="fw6">€1.10</td>
-              <td><span class="tag-pill tag-amber">Hot</span><span class="tag-pill tag-green">Organic</span></td>
-              <td><div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill ok" style="width:60%"></div></div><span class="progress-val" style="color:var(--green)">12/20</span></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="pagination">
-        <span class="pg-label text-muted">Rows per page:</span>
-        <span class="pg-size" onclick="setPgSize(this)">10</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size active" onclick="setPgSize(this)">20</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">50</span>
-        <span class="pg-sep">|</span>
-        <span class="pg-size" onclick="setPgSize(this)">100</span>
-        <span class="pg-total text-muted">Total items: <strong>8</strong></span>
-        <div class="pg-nav">
-          <button class="pg-nav-btn">‹</button>
-          <div class="pg-num">1</div>
-          <button class="pg-nav-btn">›</button>
-        </div>
-      </div>
     </div><!-- /panel-products -->
 
-    <!-- ══ STOCK PANEL ════════════════════════════════════════════════ -->
-    <div class="tab-panel" id="panel-stock">
-      <div class="placeholder-tab">Stock — coming soon</div>
+    <!-- ══ OVERVIEW PANEL ═════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-overview">
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Overview</div>
+          <div class="fig-page-desc">Summary metrics, status indicators and quick-action tiles for this micro market</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Add widget
+          </button>
+          <button class="fig-btn-primary">Refresh</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No data yet</h4>
+        <p>Summary metrics, status indicators and quick-action tiles will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ SALES PANEL ════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-sales">
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Sales</div>
+          <div class="fig-page-desc">Revenue charts, top-selling products and sales trends</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Select period
+          </button>
+          <button class="fig-btn-primary">View report</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>No sales data</h4>
+        <p>Revenue charts, top-selling products and sales trends will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ TRANSACTIONS PANEL ═════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-transactions">
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Transactions</div>
+          <div class="fig-page-desc">Payment history, transaction details and receipt lookup</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Filter
+          </button>
+          <button class="fig-btn-primary">Download CSV</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No transactions</h4>
+        <p>Payment history, transaction details and receipt lookup will appear here.</p>
+      </div>
     </div>
 
     <!-- ══ REFILL PANEL ═══════════════════════════════════════════════ -->
     <div class="tab-panel" id="panel-refill">
-      <div class="placeholder-tab">Refill — coming soon</div>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Refill</div>
+          <div class="fig-page-desc">Refill schedule, low-stock alerts and operator assignments</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Schedule
+          </button>
+          <button class="fig-btn-primary">Send task</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 0l-3-3m3 3l3-3" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12c0-4.418 3.582-8 8-8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12a8 8 0 01-8 8" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#9E9E9E" stroke-width="1.5"/></svg>
+        <h4>No refill tasks</h4>
+        <p>Refill schedule, low-stock alerts and operator assignments will appear here.</p>
+      </div>
     </div>
 
-    <!-- ══ KIOSKS PANEL (market view only) ═══════════════════════════ -->
+    <!-- ══ ANALYSIS PANEL ═════════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-analysis">
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Analysis</div>
+          <div class="fig-page-desc">Performance analytics, consumption patterns and KPI dashboards</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            New report
+          </button>
+          <button class="fig-btn-primary">Refresh</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="4" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="20" x2="6" y2="14" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h4>No analytics data</h4>
+        <p>Performance analytics, consumption patterns and KPI dashboards will appear here.</p>
+      </div>
+    </div>
+
+    <!-- ══ KIOSKS & STATIONS PANEL ════════════════════════════════════ -->
     <div class="tab-panel" id="panel-kiosks">
-      <div class="placeholder-tab">Kiosks — coming soon</div>
+      <div class="fig-page-hdr">
+        <div>
+          <div class="fig-page-title">Kiosks &amp; Stations</div>
+          <div class="fig-page-desc">Kiosk device list, station configuration and connectivity status</div>
+        </div>
+        <div class="fig-page-actions">
+          <button class="fig-btn-tertiary">Export</button>
+          <button class="fig-btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#181B1E" stroke-width="1.3"/><line x1="7" y1="4.5" x2="7" y2="9.5" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/><line x1="4.5" y1="7" x2="9.5" y2="7" stroke="#181B1E" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Add station
+          </button>
+          <button class="fig-btn-primary">Configure</button>
+        </div>
+      </div>
+      <div class="fig-empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#9E9E9E" stroke-width="1.5"/><line x1="9" y1="7" x2="15" y2="7" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="11" x2="15" y2="11" stroke="#9E9E9E" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#9E9E9E"/></svg>
+        <h4>No devices configured</h4>
+        <p>Kiosk device list, station configuration and connectivity status will appear here.</p>
+      </div>
     </div>
-
 
   </div><!-- /main -->
 </div><!-- /layout -->
@@ -1260,6 +1456,346 @@
   </div>
 </div>
 
+<!-- ══ SETUP MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="setup-modal" onclick="if(event.target===this)closeModal('setup-modal')">
+  <div class="modal setup-modal">
+    <div class="modal-header">
+      <span class="modal-title">Setup</span>
+      <button class="modal-close" onclick="closeModal('setup-modal')">✕</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:70vh">
+
+      <!-- Multiple price lists -->
+      <div class="setup-section">
+        <p class="setup-section-title">Multiple price lists</p>
+        <select class="modal-select" style="max-width:220px">
+          <option>One price list</option>
+          <option>Two price lists</option>
+          <option>Three price lists</option>
+        </select>
+      </div>
+
+      <hr class="setup-divider">
+
+      <!-- Column mapping -->
+      <div class="setup-section" style="margin-top:18px">
+        <p class="setup-section-title">Column mapping</p>
+        <label class="setup-check-label">
+          <input type="checkbox">
+          Mapping between reported columns and planogram
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer" style="justify-content:space-between">
+      <button class="btn btn-cancel-red" onclick="closeModal('setup-modal')">Cancel</button>
+      <button class="btn btn-submit-green">Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EDIT COLUMN MODAL ══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="edit-column-modal" onclick="if(event.target===this)closeModal('edit-column-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Edit Column</span>
+      <button class="modal-close" onclick="closeModal('edit-column-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Capacity</label>
+        <input class="modal-input" type="number" placeholder="e.g. 20" min="1" max="100" value="20">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Price 1 (€)</label>
+        <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0" value="1.20">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Tags</label>
+        <input class="modal-input" type="text" placeholder="e.g. Hot, Organic" value="Hot">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('edit-column-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('edit-column-modal')">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REPLACE PRODUCT MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="replace-product-modal" onclick="if(event.target===this)closeModal('replace-product-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Replace Product</span>
+      <button class="modal-close" onclick="closeModal('replace-product-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info" style="margin-bottom:12px">Select a new product to assign to this column slot.</p>
+      <div class="modal-field">
+        <label class="modal-label">New product</label>
+        <select class="modal-select">
+          <option value="">— Select product —</option>
+          <option>Espresso Single</option>
+          <option>Americano</option>
+          <option>Cappuccino</option>
+          <option>Orange Juice 330ml</option>
+          <option>Still Water 500ml</option>
+          <option>Chocolate Bar</option>
+          <option>Croissant</option>
+          <option>Green Tea</option>
+          <option>Latte Macchiato</option>
+          <option>Sparkling Water 500ml</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Price 1 (€)</label>
+        <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('replace-product-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('replace-product-modal')">Replace</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYOUT PREVIEW MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="layout-preview-modal" onclick="if(event.target===this)closeModal('layout-preview-modal')">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-header">
+      <span class="modal-title">Layout Preview</span>
+      <button class="modal-close" onclick="closeModal('layout-preview-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info" style="margin-bottom:14px">Visual overview of the current station planogram. Columns are shown left to right with their fill levels.</p>
+      <div style="display:flex;gap:6px;align-items:flex-end;padding:16px;background:#F8F9FA;border-radius:8px;border:1px solid var(--grey-bdr);overflow-x:auto">
+        <!-- Column bars -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:85%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">01</span>
+          <span style="font-size:10px;color:#888;text-align:center">17/20</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:30%;background:#F57C00;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">02</span>
+          <span style="font-size:10px;color:#888;text-align:center">6/20</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:13%;background:#D32F2F;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">03</span>
+          <span style="font-size:10px;color:#888;text-align:center">2/15</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:75%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">04</span>
+          <span style="font-size:10px;color:#888;text-align:center">9/12</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:40%;background:#F57C00;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">05</span>
+          <span style="font-size:10px;color:#888;text-align:center">4/10</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:96%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">06</span>
+          <span style="font-size:10px;color:#888;text-align:center">23/24</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:12%;background:#D32F2F;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">07</span>
+          <span style="font-size:10px;color:#888;text-align:center">1/8</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:56px">
+          <div style="width:44px;height:120px;background:#E0E0E0;border-radius:4px;overflow:hidden;position:relative;display:flex;align-items:flex-end">
+            <div style="width:100%;height:60%;background:#388E3C;border-radius:0 0 4px 4px"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#555">08</span>
+          <span style="font-size:10px;color:#888;text-align:center">12/20</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:#555">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#388E3C;border-radius:2px;display:inline-block"></span>OK (≥50%)</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#F57C00;border-radius:2px;display:inline-block"></span>Low (20–50%)</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;background:#D32F2F;border-radius:2px;display:inline-block"></span>Critical (&lt;20%)</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-cancel-red" onclick="closeModal('layout-preview-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD COLUMN MODAL ════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="add-column-modal" onclick="if(event.target===this)closeModal('add-column-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Add Column</span>
+      <button class="modal-close" onclick="closeModal('add-column-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Position</label>
+        <select class="modal-select">
+          <option>After column 08 (append)</option>
+          <option>Before column 01</option>
+          <option>After column 01</option>
+          <option>After column 04</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Product</label>
+        <select class="modal-select">
+          <option value="">— Select product —</option>
+          <option>Espresso Single</option>
+          <option>Americano</option>
+          <option>Cappuccino</option>
+          <option>Orange Juice 330ml</option>
+          <option>Still Water 500ml</option>
+          <option>Chocolate Bar</option>
+          <option>Croissant</option>
+          <option>Green Tea</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="modal-field" style="flex:1">
+          <label class="modal-label">Capacity</label>
+          <input class="modal-input" type="number" placeholder="e.g. 20" min="1" max="100">
+        </div>
+        <div class="modal-field" style="flex:1">
+          <label class="modal-label">Price (€)</label>
+          <input class="modal-input" type="number" placeholder="e.g. 1.20" step="0.10" min="0">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('add-column-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('add-column-modal')">Add Column</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVE AS PLANOGRAM MODAL ════════════════════════════════════════════ -->
+<div class="modal-overlay" id="save-planogram-modal" onclick="if(event.target===this)closeModal('save-planogram-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Save as Planogram</span>
+      <button class="modal-close" onclick="closeModal('save-planogram-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Planogram name</label>
+        <input class="modal-input" type="text" placeholder="e.g. Opera Spring 2026" value="">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Description (optional)</label>
+        <textarea class="modal-textarea" placeholder="Notes about this planogram layout…" rows="3"></textarea>
+      </div>
+      <p style="font-size:12px;color:var(--grey-txt);margin-top:4px">Current layout with 8 columns will be saved. You can load it later from <strong>Load Planogram</strong>.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('save-planogram-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('save-planogram-modal')">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOAD PLANOGRAM MODAL ═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="load-planogram-modal" onclick="if(event.target===this)closeModal('load-planogram-modal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Load Planogram</span>
+      <button class="modal-close" onclick="closeModal('load-planogram-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Select planogram</label>
+        <select class="modal-select">
+          <option value="">— Choose saved planogram —</option>
+          <option>Opera (14.01.2026 – Dario Skegro)</option>
+          <option>Classic Summer 2025 (08.06.2025 – Ana Kovač)</option>
+          <option>Standard Q4 2025 (02.10.2025 – Dario Skegro)</option>
+          <option>Promo December (01.12.2025 – SuperAdmin)</option>
+        </select>
+      </div>
+      <div style="background:#FFF8E1;border:1px solid #FFE082;border-radius:6px;padding:10px 12px;font-size:12px;color:#795548;display:flex;gap:8px;align-items:flex-start;margin-top:4px">
+        <span style="font-size:16px;line-height:1.2">⚠</span>
+        <span>Loading a planogram will <strong>replace the current product layout</strong>. Unsaved changes will be lost.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('load-planogram-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('load-planogram-modal')">Load</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PUSH PRODUCT LIST MODAL ════════════════════════════════════════════ -->
+<div class="modal-overlay" id="push-product-modal" onclick="if(event.target===this)closeModal('push-product-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Push product list</span>
+      <button class="modal-close" onclick="closeModal('push-product-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-info">The current product list will be pushed to the machine. The machine will sync immediately upon next connection.</p>
+      <div style="background:#E8F5E9;border:1px solid #A5D6A7;border-radius:6px;padding:10px 14px;font-size:13px;margin-top:4px">
+        <div style="font-weight:600;margin-bottom:4px;color:#2E7D32">Station: <span id="push-station-name">Shelves 1</span></div>
+        <div style="color:#388E3C;font-size:12px">8 columns · Last push: 06.03.2026 12:25 [Dario Skegro]</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('push-product-modal')">Cancel</button>
+      <button class="btn btn-submit-green" onclick="closeModal('push-product-modal')">Push</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE COLUMNS MODAL ═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="delete-columns-modal" onclick="if(event.target===this)closeModal('delete-columns-modal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-title">Delete Columns</span>
+      <button class="modal-close" onclick="closeModal('delete-columns-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:#FFEBEE;border:1px solid #FFCDD2;border-radius:6px;padding:10px 12px;font-size:12px;color:#C62828;display:flex;gap:8px;align-items:flex-start;margin-bottom:12px">
+        <span style="font-size:16px;line-height:1.2">⚠</span>
+        <span>This action <strong>cannot be undone</strong>. Deleted columns will be permanently removed from this station's product list.</span>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Select columns to delete</label>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 01 – Espresso Single</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 02 – Americano</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 03 – Cappuccino</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 04 – Orange Juice</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 05 – Chocolate Bar</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 06 – Still Water</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 07 – Croissant</label>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer"><input type="checkbox"> 08 – Green Tea</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:#fff;border:1px solid var(--grey-bdr);color:var(--dark)" onclick="closeModal('delete-columns-modal')">Cancel</button>
+      <button class="btn btn-cancel-red" onclick="closeModal('delete-columns-modal')">Delete selected</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ══ EVENTS DATA ══════════════════════════════════════════════════════════
 let eventsData = [
@@ -1298,9 +1834,24 @@ function renderEvents() {
 
   // counts (station bar spans)
   document.getElementById('events-total').textContent = rows.length;
-  document.getElementById('count-info').textContent  = eventsData.filter(r => r.type === 'info').length;
-  document.getElementById('count-warn').textContent  = eventsData.filter(r => r.type === 'warn').length;
-  document.getElementById('count-alarm').textContent = eventsData.filter(r => r.type === 'alarm').length;
+  const totalInfo  = eventsData.filter(r => r.type === 'info').length;
+  const totalWarn  = eventsData.filter(r => r.type === 'warn').length;
+  const totalAlarm = eventsData.filter(r => r.type === 'alarm').length;
+  document.getElementById('count-info').textContent  = totalInfo;
+  document.getElementById('count-warn').textContent  = totalWarn;
+  document.getElementById('count-alarm').textContent = totalAlarm;
+  // chip toggle counts (in chip buttons)
+  const cca = document.getElementById('chip-count-alarm');
+  const ccw = document.getElementById('chip-count-warn');
+  const cci = document.getElementById('chip-count-info');
+  if (cca) cca.textContent = totalAlarm;
+  if (ccw) ccw.textContent = totalWarn;
+  if (cci) cci.textContent = totalInfo;
+  // chip toggle active/off state
+  ['alarm','warn','info'].forEach(type => {
+    const el = document.getElementById('chip-' + type);
+    if (el) el.classList.toggle('off', !chipState[type]);
+  });
   const sortArrow = document.getElementById('sort-arrow');
   if (sortArrow) sortArrow.textContent = sortAsc ? '↑' : '↓';
 
@@ -1346,6 +1897,12 @@ function renderRow(r) {
   </tr>`;
 }
 
+// ══ CHIP TOGGLES ══════════════════════════════════════════════════════════
+function toggleChip(type) {
+  chipState[type] = !chipState[type];
+  renderEvents();
+}
+
 // ══ SORT ══════════════════════════════════════════════════════════════════
 function toggleSort() {
   sortAsc = !sortAsc;
@@ -1385,6 +1942,7 @@ function selectPeriod(el, val) {
 // ══ RESET ALL FILTERS ═════════════════════════════════════════════════════
 function resetAllFilters() {
   chipState = { info: true, warn: true, alarm: true };
+  ['alarm','warn','info'].forEach(t => { const el = document.getElementById('chip-'+t); if(el) el.classList.remove('off'); });
   statusFilter = 'all';
   document.querySelectorAll('#dd-status .dropdown-item').forEach(i => i.classList.remove('selected'));
   document.querySelector('#dd-status .dropdown-item').classList.add('selected');
@@ -1458,6 +2016,7 @@ function saveNewEvent() {
 }
 
 // ══ MODAL / MENU HELPERS ══════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function toggleDropdown(id) {
@@ -1516,29 +2075,58 @@ function toggleSidebarCollapse() {
   document.getElementById('ss-icon-expand').style.display   = sidebarCollapsed ? 'block' : 'none';
 }
 
-function selectMarketView(el) {
-  // deactivate all station rows, activate market row
+function selectStation(el, stationId) {
   document.querySelectorAll('.ss-station-row').forEach(r => r.classList.remove('active'));
   document.querySelectorAll('.ss-market-row').forEach(r => r.classList.remove('active'));
   el.classList.add('active');
-  // show market-only tabs (Transactions, Kiosks)
-  document.querySelectorAll('.market-only-tab').forEach(t => t.style.display = '');
-  // if currently on a placeholder tab, stay; otherwise keep current tab active
-  switchTab('events');
+  document.getElementById('products-market-view').style.display = 'none';
+  document.getElementById('products-station-view').style.display = '';
 }
 
-function selectStation(el, stationId) {
-  // deactivate market row and other station rows
-  document.querySelectorAll('.ss-market-row').forEach(r => r.classList.remove('active'));
+function selectMarket(el) {
   document.querySelectorAll('.ss-station-row').forEach(r => r.classList.remove('active'));
   el.classList.add('active');
-  // hide market-only tabs (Transactions, Kiosks)
-  document.querySelectorAll('.market-only-tab').forEach(t => t.style.display = 'none');
-  // if active tab is market-only, fall back to Events
-  const activeTab = document.querySelector('.tab-btn.active');
-  if (activeTab && activeTab.classList.contains('market-only-tab')) {
-    switchTab('events');
-  }
+  document.getElementById('products-market-view').style.display = '';
+  document.getElementById('products-station-view').style.display = 'none';
+}
+
+// ══ PRODUCTS SEARCH ═══════════════════════════════════════════════════════
+function filterProducts() {
+  const q = (document.getElementById('products-search').value || '').toLowerCase();
+  const station = (document.getElementById('station-filter').value || '');
+  const rows = document.querySelectorAll('#products-tbody tr');
+  let visible = 0;
+  rows.forEach(tr => {
+    if (tr.id === 'products-noresult') return;
+    const text = tr.textContent.toLowerCase();
+    const stationCell = tr.dataset.station || '';
+    const matchQ = !q || text.includes(q);
+    const matchStation = !station || stationCell === station;
+    const show = matchQ && matchStation;
+    tr.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  const noRes = document.getElementById('products-noresult');
+  if (noRes) noRes.style.display = visible === 0 ? '' : 'none';
+}
+function clearProductsSearch() {
+  const inp = document.getElementById('products-search');
+  if (inp) inp.value = '';
+  const sel = document.getElementById('station-filter');
+  if (sel) sel.value = '';
+  filterProducts();
+}
+function filterStationProducts() {
+  const q = (document.getElementById('products-search-station').value || '').toLowerCase();
+  const rows = document.querySelectorAll('#products-station-view tbody tr');
+  rows.forEach(tr => {
+    const text = tr.textContent.toLowerCase();
+    tr.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+}
+function clearStationSearch() {
+  const inp = document.getElementById('products-search-station');
+  if (inp) { inp.value = ''; filterStationProducts(); }
 }
 
 // ══ INIT ══════════════════════════════════════════════════════════════════
